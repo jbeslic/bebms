@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Rechnung</title>
 
     <style type="text/css">
@@ -67,6 +67,9 @@
 
         .invoice-box table td.text {
 
+        }
+        .invoice-box table td.barcode {
+            padding-top: 50px;
         }
 
     </style>
@@ -268,7 +271,11 @@
                 1-2018
             </td>
         </tr>
-
+        <tr>
+            <td class="barcode" colspan="5">
+                <img style="width: 58mm; height: 26mm" src="data:image/png;base64,'{{ $data['barcode'] }}">
+            </td>
+        </tr>
 
 
 

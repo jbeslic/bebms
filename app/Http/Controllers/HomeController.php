@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Milon\Barcode\DNS2D;
 use PDF;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,25 @@ class HomeController extends Controller
     public function pdf()
     {
 
-        $data = array();
+        $code = "HRVHUB30\r
+HRK\r
+000000000012355\r
+ZELJKO SENEKOVIC\r
+IVANECKA ULICA 125\r
+42000 VARAZDIN\r
+2DBK d.d.\r
+ALKARSKI PROLAZ 13B\r
+21230 SINJ\r
+HR1210010051863000160\r
+HR01\r
+7269-68949637676-00019\r
+COST\r
+Troskovi za 1. mjesec\r";
 
-        $pdf = PDF::loadView('pdf.invoice', $data);
+        $data = array();
+        $data['barcode'] = DNS2D::getBarcodePNG($code, "PDF417");
+
+        $pdf = PDF::loadView('pdf.invoice', array('data' => $data));
         return $pdf->download('invoice.pdf');
     }
 }
