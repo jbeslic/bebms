@@ -9,9 +9,8 @@
             max-width:800px;
             margin:auto;
             padding:30px;
-            border:1px solid #eee;
             box-shadow:0 0 10px rgba(0, 0, 0, .15);
-            font-size:16px;
+            font-size:10px;
             line-height:24px;
             font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             color:#555;
@@ -23,7 +22,6 @@
         }
 
         .invoice-box table td{
-            padding:5px;
             vertical-align:top;
         }
 
@@ -68,7 +66,7 @@
         }
 
         .invoice-box table td.text {
-            padding: 10px 0;
+
         }
 
     </style>
@@ -80,11 +78,12 @@
         <tr class="top">
 
             <td class="title text" colspan="4">
-                <img src="assets/img/logo_pdf.png" style="width: 200px;">
+                <img src="img/logo_pdf.png" style="width: 200px;">
             </td>
-            <td class="text">
+            <td class="text" colspan="3">
                 <strong>beDev</strong>, obrt za računalne djelatnosti<br/>
-                vl. Josipa Bešlić, Trnjanska cesta 59, 10000 Zagreb<br/>
+                vl. Josipa Bešlić, Trnjanska cesta 59,<br/>
+                10000 Zagreb<br/>
                 OIB: 00460997027<br/>
                 IBAN: HR4023400091160517112 <br/>
 
@@ -95,65 +94,85 @@
 
         <tr class="information">
 
-                        <td colspan="4" class="text">
-                            <strong>PRIMEROS Qualification GmbH</strong>
-                            <br>
-                            Bahnhofstraße 25
-                            <br>
-                            74072 Heilbronn <br/>
+            <td  style="padding-top: 13px" class="text" colspan="4">
+                <strong><span style="color: #86c035;">RAČUN br. – invoice_number </span></strong>
+            </td>
 
+            <td colspan="3" class="text">
+                <strong>Rechnungsempfänger:</strong><br/>
+                company  <br/>
+                person  <br/>
+                street  <br/>
+                city <br/>
 
-                            Tel.: 07131 3903881 <br/>
-                            Fax: 07131 3903882 <br/><br/>
-
-                            Rückfragen zur Rechnung?<br/>
-                            rechnungswesen@primeros.de
-
-
-                        </td>
-
-                        <td class="text">
-                            <strong>Rechnungsempfänger:</strong><br/>
-                            company  <br/>
-                            person  <br/>
-                            street  <br/>
-                            city <br/>
-
-                        </td>
-        </tr>
-
-        <tr>
-            <td  style="padding-top: 13px" class="text" colspan="5">
-                <strong><span style="color: #86c035;">Rechnung Nr. godina – invoice_number </span></strong><br>
-                invoice_date
-                <br>
             </td>
         </tr>
 
         <tr>
-            <td colspan="5" class="text">
+            <td colspan="2" class="text">
+                Mjesto, datum i vrijeme izdavanja:
+            </td>
+            <td colspan="4" class="text">
+                description
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text">
+                Dospijeće plaćanja:
+            </td>
+            <td colspan="4" class="text">
                 description
             </td>
         </tr>
 
         <tr class="heading">
             <td>
-                &nbsp;
+                #
+            </td>
+            <td width="30%">
+                Trgovački naziv dobra - usluge
             </td>
             <td>
-                Menge
-            </td>
-
-            <td>
-                Einzelpreis
+                JM
             </td>
             <td>
-                Mwst.
+                Količina.
             </td>
             <td>
-                Gesamtpreis
+                Cijena
+            </td>
+            <td>
+                Rabat
+            </td>
+            <td>
+                Iznos
             </td>
         </tr>
+
+        <tr class="item">
+            <td>
+                1
+            </td>
+            <td width="30%">
+                Usluga programiranja
+            </td>
+            <td>
+                sat
+            </td>
+            <td>
+                80
+            </td>
+            <td>
+                150,00
+            </td>
+            <td>
+                0%
+            </td>
+            <td>
+                12500,00
+            </td>
+        </tr>
+
 
         {{--@foreach($items as $item)
 
@@ -180,30 +199,73 @@
         @endforeach--}}
 
         <tr>
-            <td colspan="5">USt: befreit nach §4 Nr. 21a, bb UStG
-            </td>
-        </tr>
+            <td colspan="4">
 
+            </td>
+            <td colspan="2">
+                IZNOS
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+
+            </td>
+            <td colspan="2">
+                RABAT
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+
+            </td>
+            <td colspan="2">
+                OSNOVICA
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+
+            </td>
+            <td colspan="2">
+                PDV (25%)
+            </td>
+            <td></td>
+        </tr>
         <tr class="total">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><strong>Gesamtbetrag</strong>
+            <td colspan="4">
+
             </td>
-            <td>
-                <strong>cijena </strong>
+            <td colspan="2">
+                UKUPNI IZNOS
             </td>
+            <td></td>
         </tr>
 
         <tr class="footer">
+            <td colspan="2" class="text">Napomena:</td>
             <td colspan="5" class="text">
-                Herzlichen Dank für Ihren Auftrag. <br/>
-
-                Bitte überweisen Sie den Rechnungsbetrag innerhalb der nächsten 10 Tage. <br/>
-                    IBAN: DE23 6205 0000 0000 1233 89 <br/>
-                    Subjekt: Rechnung Nr. godina  – invoice_number
-
-
+                Oslobođeno PDV-a temeljem članka 90. Zakona o PDV-u
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text">Račun ispostavio:</td>
+            <td colspan="5" class="text">
+                Josipa Bešlić
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text">Način plaćanja:</td>
+            <td colspan="5" class="text">
+                Transakcijski račun
+            </td>
+        </tr>
+        <tr class="footer">
+            <td colspan="2" class="text">Poziv na broj:</td>
+            <td colspan="5" class="text">
+                1-2018
             </td>
         </tr>
 
@@ -213,11 +275,10 @@
 
     </table>
 
-        <p style="position:fixed; bottom:15px; left:75px; color: gray;  font-size: 10px; vertical-align:bottom;">
-            Fidor Bank, München | IBAN: DE25 7002 2200 0020 1157 50 | BIC-/SWIFT-Code: FDDODEMMXXX
-            <br/>
-            Amtsgericht Jena, HRB 513149, UStID Nr.: DE263593825, Geschäftsführer: Christian Meier
-        </p>
+    <p style="position:fixed; bottom:15px; color: gray;  font-size: 10px; vertical-align:bottom; border-top: 1px solid grey; text-align: center;">
+        beDev, obrt za računalne djelatnosti, vl. Josipa Bešlić, Trnjanska cesta 59, 10000 Zagreb,OIB 00460997027 <br />
+        Žiro račun IBAN HR4023400091160517112 otvoren u Privredna banka Zagreb, SWIFT CODE: PBZGHR2X
+    </p>
 </div>
 </body>
 </html>
