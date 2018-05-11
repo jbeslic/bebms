@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Rechnung</title>
+    <title>Invoice</title>
 
     <style type="text/css">
         .invoice-box{
@@ -12,7 +12,7 @@
             box-shadow:0 0 10px rgba(0, 0, 0, .15);
             font-size:10px;
             line-height:24px;
-            font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            font-family:'Helvetica Neue', 'Helvetica', dejavusans, Arial, sans-serif;
             color:#555;
         }
 
@@ -84,7 +84,7 @@
                 <img src="img/logo_pdf.png" style="width: 200px;">
             </td>
             <td class="text" colspan="3">
-                <strong>beDev</strong>, obrt za računalne djelatnosti<br/>
+                <strong>beDev</strong>, obrt za računalne djelatnosti <br/>
                 vl. Josipa Bešlić, Trnjanska cesta 59,<br/>
                 10000 Zagreb<br/>
                 OIB: 00460997027<br/>
