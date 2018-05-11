@@ -12,7 +12,7 @@
             box-shadow:0 0 10px rgba(0, 0, 0, .15);
             font-size:10px;
             line-height:24px;
-            font-family:'Helvetica Neue', 'Helvetica', dejavusans, Arial, sans-serif;
+            font-family: DejaVu Sans, Arial, sans-serif;
             color:#555;
         }
 
