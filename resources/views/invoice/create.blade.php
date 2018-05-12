@@ -28,18 +28,5 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function(){
-      var date_input=$('input[name="invoice_date"]'); //our date input has the name "date"
-      var container=$('.card-body');
-      var options={
-        format: 'dd.mm.yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      console.log(container);
-      date_input.datepicker(options);
-    })
-</script>
+
 @endsection
