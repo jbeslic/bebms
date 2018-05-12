@@ -10,8 +10,8 @@
                 <div class="card-body">
                     {!! Form::open(array('route' => 'company.store')) !!}
 
-                    {{ Form::label('company_name', 'Naziv obrta:') }}
-                    {{ Form::text('company_name', null, array('class'=>'form-control', 'required'=>'')) }}
+                    {{ Form::label('name', 'Naziv obrta:') }}
+                    {{ Form::text('name', null, array('class'=>'form-control', 'required'=>'')) }}
                     {{ Form::label('owner', 'Vlasnik:') }}
                     {{ Form::text('owner', null, array('class'=>'form-control', 'required'=>'')) }}
                     {{ Form::label('address', 'Adresa:') }}

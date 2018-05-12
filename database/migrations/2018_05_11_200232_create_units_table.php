@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModulesTable extends Migration
+class CreateUnitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateModulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('modules', function (Blueprint $table) {
+        Schema::create('units', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id');
-            $table->string('mod_name');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateModulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modules');
+        Schema::dropIfExists('units');
     }
 }

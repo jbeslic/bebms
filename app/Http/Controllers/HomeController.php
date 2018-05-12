@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Company;
-use App\Module;
+use App\Unit;
 use App\Product;
 use App\Remark;
 use Milon\Barcode\DNS2D;
@@ -51,7 +51,7 @@ class HomeController extends Controller
         foreach ($request->product as $key => $product){
             if(in_array($product, Product::pluck('code')->toArray())){
                 $items['product'] = Product::where('code', $product)->first();
-                $items['module'] = Module::find($request->module[$key]);
+                $items['unit'] = Unit::find($request->unit[$key]);
                 $items['amount'] = $request->amount[$key];
                 $items['price_per_unit'] = $request->price[$key];
                 $items['price'] = $items['amount']*$items['price_per_unit'];

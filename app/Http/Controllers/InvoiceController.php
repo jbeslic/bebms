@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Module;
+use App\Unit;
 use App\Product;
 use App\Remark;
 use Illuminate\Http\Request;
@@ -31,10 +31,10 @@ class InvoiceController extends Controller
         $invoice_number = Invoice::whereYear('invoice_date', date("Y"))->count()+1;
         $clients = Client::all(); //\Auth::user()->company_id
         $remarks = Remark::all();
-        $modules = Module::all();
+        $units = Unit::all();
         $products = Product::all();
 
-        return view ('invoice/create')->with(compact('clients', 'remarks', 'modules', 'products', 'invoice_number'));
+        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number'));
     }
 
     /**

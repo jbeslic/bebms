@@ -144,7 +144,7 @@
                     {{ $item['product']->description }}
                 </td>
                 <td>
-                    {{ $item['module']->mod_name }}
+                    {{ $item['unit']->name }}
                 </td>
                 <td>
                     {{ $item['amount'] }}

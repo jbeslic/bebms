@@ -45,10 +45,10 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
-                                {{ Form::label('modules', 'JM:') }}
-                                <select name="module[{{$i}}]" class="form-control">
-                                    @foreach ($modules as $module)
-                                        <option value="{{ $module->id }}">{{ $module->mod_name }}</option>
+                                {{ Form::label('units', 'JM:') }}
+                                <select name="unit[{{$i}}]" class="form-control">
+                                    @foreach ($units as $unit)
+                                        <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

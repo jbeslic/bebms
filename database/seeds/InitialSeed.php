@@ -20,14 +20,15 @@ class InitialSeed extends Seeder
             'password' => bcrypt('admin'),
         ]);
         //
-        DB::table('companies')->insert([
+        DB::table('clients')->insert([
+            'company_id' => 1,
             'name' => 'beDev, obrt za računalne djelatnosti',
             'address' => 'Trnjanska cesta 59',
             'city' => '10000 Zagreb',
             'oib' => '00460997027',
         ]);
-        DB::table('clients')->insert([
-            'company_name' => 'beDev, obrt za računalne djelatnosti',
+        DB::table('companies')->insert([
+            'name' => 'beDev, obrt za računalne djelatnosti',
             'owner' => 'Josipa Bešlić',
             'address' => 'Trnjanska cesta 59, 10000 Zagreb',
             'oib' => '00460997027',
@@ -49,11 +50,11 @@ class InitialSeed extends Seeder
                 'description' => 'roba za inozemne klijente',
                 'output' => 'Oslobođeno PDV-a temeljem članka 90. Zakona o PDV-u'],
         ]);
-        DB::table('modules')->insert([
+        DB::table('units')->insert([
             [   'company_id' => 1,
-                'mod_name' => 'sat'],
+                'name' => 'sat'],
             [   'company_id' => 1,
-                'mod_name' => 'kom'],
+                'name' => 'kom'],
         ]);
         DB::table('products')->insert([
             [   'company_id' => 1,
