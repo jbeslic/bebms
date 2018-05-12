@@ -79,18 +79,21 @@
     <p style="border-top: 1px solid grey;"></p>
 
     <div class="invoice-box">
+
         <table>
             <tr class="information">
 
                 <td colspan="2" style="width: 450px;">
-                    <strong><span style="color: #6ba3ff;">RAČUN br. – invoice_number </span></strong>
+                    <strong><span style="color: #6ba3ff;">RAČUN br. – {{ $data['invoice_number'] }}/1/1 </span></strong>
                 </td>
 
+
+
                 <td>
-                    <strong>company</strong><br/>
-                    street  <br/>
-                    zip code, city  <br/>
-                    OIB  <br/>
+                    <strong>{{ $data['client']->name }}</strong><br/>
+                    {{ $data['client']->address }}  <br/>
+                    {{ $data['client']->city }}  <br/>
+                    {{ $data['client']->oib }}  <br/>
                 </td>
             </tr>
 
@@ -129,54 +132,36 @@
                 </td>
             </tr>
 
-            <tr class="item last">
+
+
+            @foreach($data['items'] as $key => $item)
+
+            <tr class="item @if($loop->last) last @endif">
                 <td>
-                    1
+                    {{ $key+1 }}
                 </td>
                 <td width="30%">
-                    Usluga programiranja
+                    {{ $item['product']->description }}
                 </td>
                 <td>
-                    sat
+                    {{ $item['module']->mod_name }}
                 </td>
                 <td>
-                    80
+                    {{ $item['amount'] }}
                 </td>
                 <td>
-                    150,00
+                    {{ $item['price_per_unit'] }}
                 </td>
                 <td>
                     0%
                 </td>
                 <td>
-                    12500,00
+                    {{ $item['price'] }}
                 </td>
             </tr>
 
+            @endforeach
 
-            {{--@foreach($items as $item)
-
-            <tr class="item @if($loop->last) last @endif">
-                <td width="30%">
-                    item->product_title  <br/>
-                    fullname  <br/>
-                    course_date
-                </td>
-                <td>
-                    items->count()
-                </td>
-                <td>
-                   {{ Price::euroFormat($item->price) }}
-                </td>
-                <td>
-                    {{ Price::numberFormat($item->tax) }}
-                </td>
-                <td>
-                   {{ Price::euroFormat($item->price) }}
-                </td>
-            </tr>
-
-            @endforeach--}}
 
             <tr class="total">
                 <td colspan="4">
@@ -185,7 +170,7 @@
                 <td colspan="2">
                     UKUPNI IZNOS
                 </td>
-                <td></td>
+                <td>{{ $data['total_price'] }}</td>
             </tr>
         </table>
 
@@ -193,13 +178,13 @@
             <tr>
                 <td>Napomena:</td>
                 <td>
-                    Oslobođeno PDV-a temeljem članka 90. Zakona o PDV-u
+                    {{ $data['remark']->output }}
                 </td>
             </tr>
             <tr>
                 <td>Račun ispostavio:</td>
                 <td>
-                    Josipa Bešlić
+                    {{ $data['company']->owner }}
                 </td>
             </tr>
             <tr>
@@ -219,7 +204,7 @@
             <tr>
                 <td>Poziv na broj:</td>
                 <td>
-                    1-2018
+                    {{ $data['invoice_number'] }}-2018
                 </td>
             </tr>
             <tr>
@@ -227,9 +212,7 @@
                     <img style="width: 58mm; height: 26mm" src="data:image/png;base64,'{{ $data['barcode'] }}">
                 </td>
             </tr>
-
-
-
+            
 
         </table>
     </div>

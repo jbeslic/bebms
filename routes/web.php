@@ -22,4 +22,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/pdf', 'HomeController@pdf')->name('pdf');
+Route::post('/pdf', 'HomeController@pdf')->name('pdf');

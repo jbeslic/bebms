@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Module;
+use App\Product;
+use App\Remark;
 use Illuminate\Http\Request;
 use App\Invoice;
 use App\Client;
@@ -25,8 +28,13 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $clients = Client::where('company_id',1)->get(); //\Auth::user()->company_id
-        return view ('invoice/create')->with('clients', $clients);
+        $invoice_number = Invoice::whereYear('invoice_date', date("Y"))->count()+1;
+        $clients = Client::all(); //\Auth::user()->company_id
+        $remarks = Remark::all();
+        $modules = Module::all();
+        $products = Product::all();
+
+        return view ('invoice/create')->with(compact('clients', 'remarks', 'modules', 'products', 'invoice_number'));
     }
 
     /**
