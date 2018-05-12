@@ -83,7 +83,7 @@
     <table cellpadding="0" cellspacing="0">
         <tr class="top">
             <td class="title text" style="width: 500px;" colspan="4">
-                <img src="img/logo_pdf.png" style="width: 200px;">
+                <img src="img/logo_pdf.PNG" style="width: 200px;">
             </td>
             <td class="text" colspan="3">
                 <strong>beDev</strong>, obrt za računalne djelatnosti <br/>
