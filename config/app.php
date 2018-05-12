@@ -154,6 +154,7 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
+
         /*
          * Application Service Providers...
          */
@@ -214,6 +215,8 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
