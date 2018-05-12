@@ -17,7 +17,7 @@ class CreateInvoiceItemsTable extends Migration
             $table->increments('id');
             $table->integer('invoice_id');
             $table->integer('product_id');
-            $table->integer('module_id');
+            $table->integer('unit_id');
             $table->integer('amount');
             $table->integer('price');
             $table->integer('discount');
