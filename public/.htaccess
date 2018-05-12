@@ -2,8 +2,16 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
+	
+	<FilesMatch "\.(jpe?g|png|gif)$">
+		ErrorDocument 404 "/img/no-image-available.gif"
+	</FilesMatch>
 
     RewriteEngine On
+	
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule \.(jpe?g|png|gif)$ /img/no-image-available.gif [L,NC]
 	
 	# Force SSL
     RewriteCond %{HTTPS} off
