@@ -153,6 +153,7 @@ return [
 
         Milon\Barcode\BarcodeServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
 
         /*
