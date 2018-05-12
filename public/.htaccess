@@ -3,10 +3,6 @@
         Options -MultiViews -Indexes
     </IfModule>
 	
-	<FilesMatch "\.(jpe?g|png|gif)$">
-		ErrorDocument 404 "/img/no-image-available.gif"
-	</FilesMatch>
-
     RewriteEngine On
 		
 	# Force SSL
