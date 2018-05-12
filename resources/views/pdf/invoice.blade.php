@@ -7,15 +7,13 @@
     <style type="text/css">
         body {
             font-family: DejaVu Sans, Arial, sans-serif;
-            font-size:10px;
+            font-size:12px;
             color: gray;
         }
         .invoice-box{
             max-width:800px;
             margin:auto;
-            padding:30px;
             box-shadow:0 0 10px rgba(0, 0, 0, .15);
-            line-height:24px;
             color:#555;
         }
 
@@ -27,32 +25,17 @@
         .invoice-box table td{
             vertical-align:top;
         }
-
-        .invoice-box table tr td.right{
-            text-align:right;
-        }
-
-        .invoice-box table tr.top table td{
-            padding-bottom:10px;
-        }
-
-        .invoice-box table tr.top table td.title{
-            font-size:45px;
-            color:#333;
-        }
-
-        .invoice-box table tr.information table td{
-            padding-bottom:20px;
-        }
-
         .invoice-box table tr.heading td{
             background:#eee;
             border-bottom:1px solid #ddd;
             font-weight:bold;
         }
-
-        .invoice-box table tr.details td{
-            padding-bottom:10px;
+        .invoice-box table tr.date_place td{
+            padding-bottom: 30px;
+        }
+        .invoice-box table tr.information td{
+            padding-top: 30px;
+            padding-bottom: 15px;
         }
 
         .invoice-box table tr.item td{
@@ -63,15 +46,13 @@
             border-bottom:none;
         }
 
-        .invoice-box table tr.total td:nth-child(4){
+        .invoice-box table tr.total td{
             border-top:2px solid #eee;
             font-weight:bold;
+            padding-bottom: 30px;
         }
 
-        .invoice-box table td.text {
-
-        }
-        .invoice-box table td.barcode {
+         .invoice-box table td.barcode {
             padding-top: 50px;
         }
 
@@ -82,7 +63,7 @@
 
     <table cellpadding="0" cellspacing="0">
         <tr class="top">
-            <td class="title text" style="width: 500px;" colspan="4">
+            <td class="title text" style="width: 460px;" colspan="4">
                 <img src="img/logo_pdf.PNG" style="width: 200px;">
             </td>
             <td class="text" colspan="3">
@@ -101,11 +82,11 @@
         <table>
             <tr class="information">
 
-                <td  style="padding-top: 13px" class="text" colspan="4">
+                <td colspan="2" style="width: 450px;">
                     <strong><span style="color: #6ba3ff;">RAČUN br. – invoice_number </span></strong>
                 </td>
 
-                <td colspan="3" class="text">
+                <td>
                     <strong>company</strong><br/>
                     street  <br/>
                     zip code, city  <br/>
@@ -113,23 +94,17 @@
                 </td>
             </tr>
 
-            <tr>
-                <td colspan="2" class="text">
+            <tr class="date_place">
+                <td>
                     Mjesto, datum i vrijeme izdavanja:
                 </td>
-                <td colspan="4" class="text">
+                <td colspan="2">
                     description
                 </td>
             </tr>
-            <tr>
-                <td colspan="2" class="text">
-                    Dospijeće plaćanja:
-                </td>
-                <td colspan="4" class="text">
-                    description
-                </td>
-            </tr>
+        </table>
 
+        <table>
             <tr class="heading">
                 <td>
                     #
@@ -154,7 +129,7 @@
                 </td>
             </tr>
 
-            <tr class="item">
+            <tr class="item last">
                 <td>
                     1
                 </td>
@@ -181,7 +156,7 @@
 
             {{--@foreach($items as $item)
 
-            <tr class="item">
+            <tr class="item @if($loop->last) last @endif">
                 <td width="30%">
                     item->product_title  <br/>
                     fullname  <br/>
@@ -203,42 +178,6 @@
 
             @endforeach--}}
 
-            <tr>
-                <td colspan="4">
-
-                </td>
-                <td colspan="2">
-                    IZNOS
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td colspan="4">
-
-                </td>
-                <td colspan="2">
-                    RABAT
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td colspan="4">
-
-                </td>
-                <td colspan="2">
-                    OSNOVICA
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td colspan="4">
-
-                </td>
-                <td colspan="2">
-                    PDV (25%)
-                </td>
-                <td></td>
-            </tr>
             <tr class="total">
                 <td colspan="4">
 
@@ -248,33 +187,43 @@
                 </td>
                 <td></td>
             </tr>
+        </table>
 
-            <tr class="footer">
-                <td colspan="2" class="text">Napomena:</td>
-                <td colspan="5" class="text">
+        <table class="info">
+            <tr>
+                <td>Napomena:</td>
+                <td>
                     Oslobođeno PDV-a temeljem članka 90. Zakona o PDV-u
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="text">Račun ispostavio:</td>
-                <td colspan="5" class="text">
+                <td>Račun ispostavio:</td>
+                <td>
                     Josipa Bešlić
                 </td>
             </tr>
             <tr>
-                <td colspan="2" class="text">Način plaćanja:</td>
-                <td colspan="5" class="text">
+                <td>
+                    Dospijeće plaćanja:
+                </td>
+                <td>
+                    description
+                </td>
+            </tr>
+            <tr>
+                <td>Način plaćanja:</td>
+                <td>
                     Transakcijski račun
                 </td>
             </tr>
-            <tr class="footer">
-                <td colspan="2" class="text">Poziv na broj:</td>
-                <td colspan="5" class="text">
+            <tr>
+                <td>Poziv na broj:</td>
+                <td>
                     1-2018
                 </td>
             </tr>
             <tr>
-                <td class="barcode" colspan="5">
+                <td class="barcode" colspan="2">
                     <img style="width: 58mm; height: 26mm" src="data:image/png;base64,'{{ $data['barcode'] }}">
                 </td>
             </tr>
