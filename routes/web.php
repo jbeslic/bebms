@@ -15,6 +15,8 @@ Route::resource('/client', 'ClientController');
 Route::resource('/invoice', 'InvoiceController');
 Route::resource('/company', 'CompanyController');
 
+Route::get('/invoice/{id}/pdf', 'InvoiceController@createPdf')->name('invoice.pdf');
+
 Route::get('/', function () {
     return view('welcome');
 });

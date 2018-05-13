@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\InvoiceItem;
 use App\Unit;
 use App\Product;
 use App\Remark;
 use Illuminate\Http\Request;
 use App\Invoice;
 use App\Client;
+use App\Company;
+use Milon\Barcode\DNS2D;
+use PDF;
+
 
 class InvoiceController extends Controller
 {
@@ -19,6 +24,9 @@ class InvoiceController extends Controller
     public function index()
     {
         //
+        $invoices = Invoice::all();
+
+        return view('invoice.index')->with('invoices', $invoices);
     }
 
     /**
@@ -46,6 +54,32 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         //
+        $invoice = new Invoice();
+        $invoice->company_id = 1;
+        $invoice->client_id = $request->client;
+        $invoice->invoice_number = $request->invoice_number;
+        $invoice->invoice_date = $request->invoice_date;
+        $invoice->delivery_date = $request->invoice_date; //@todo
+        $invoice->invoice_time = $request->invoice_time;
+        $invoice->payment_deadline = $request->payment_deadline;
+        $invoice->remark_id = $request->remark;
+        $invoice->payment_type = $request->payment_type;
+        $invoice->save();
+
+        foreach ($request->product as $key => $product){
+            if(in_array($product, Product::pluck('code')->toArray())){
+                $invoice_item = new InvoiceItem();
+                $invoice_item->invoice_id = $invoice->id;
+                $invoice_item->product_id = Product::whereCode($product)->first()->id;
+                $invoice_item->unit_id = $request->unit[$key];
+                $invoice_item->amount = $request->amount[$key];
+                $invoice_item->price = $request->price[$key];
+                $invoice_item->discount = 0;
+                $invoice_item->save();
+            }
+        }
+
+        return redirect()->route('invoice.index');
     }
 
     /**
@@ -57,6 +91,14 @@ class InvoiceController extends Controller
     public function show($id)
     {
         //
+
+        $invoice = Invoice::find(1);
+        $invoice->items;
+
+        return view('home');
+
+        dd($invoice->items);
+
     }
 
     /**
@@ -91,5 +133,55 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function createPdf($id)
+    {
+        $invoice = Invoice::find($id);
+
+        $data['company'] = Company::find(1);
+        $data['client'] = Client::find($invoice->client_id);
+        $data['remark'] = Remark::find($invoice->remark_id);
+        $data['invoice_date'] = $invoice->invoice_date;
+        $data['invoice_time'] = $invoice->invoice_time;
+        $data['place'] = 'Zagreb'; //@todo
+        $data['payment_type'] = $invoice->payment_type;
+        $data['payment_deadline'] = $invoice->payment_deadline;
+        $data['items'] = array();
+        $data['invoice_number'] = $invoice->invoice_number;
+        $data['total_price'] = $invoice->totalPrice();
+        foreach ($invoice->items as $key => $item){
+            $items['product'] = $item->product;
+            $items['unit'] = $item->unit;
+            $items['amount'] = $item->amount;
+            $items['price_per_unit'] = $item->price;
+            $items['price'] = $item->total_price;
+
+            $data['items'][] = $items;
+        }
+
+        $value = sprintf( '%015d', $data['total_price'] * 100);
+        $year = date('Y');
+        $code = "HRVHUB30\r
+                HRK\r
+                $value\r
+                {$data['client']->name}\r
+                {$data['client']->address}\r
+                {$data['client']->city}\r
+                {$data['company']->name}\r
+                {$data['client']->address}\r
+                {$data['client']->city}\r
+                {$data['company']->iban}\r
+                HR00\r
+                {$data['invoice_number']}-{$year}\r
+                COST\r
+                Placanje po racunu {$data['invoice_number']}-{$year}\r";
+
+        //dd($code);
+
+        $data['barcode'] = DNS2D::getBarcodePNG($code, "PDF417");
+
+        $pdf = PDF::loadView('pdf.invoice', array('data' => $data));
+        return $pdf->download('invoice-'.$data['invoice_number'].'-'.$year.'.pdf');
     }
 }
