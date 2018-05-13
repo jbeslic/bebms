@@ -39,8 +39,6 @@ class HomeController extends Controller
     public function pdf(Request $request)
     {
         $data = array();
-        //$value = sprintf( '%08d', 1234567 );
-        //dd($request->invoice_number);
         $data['company'] = Company::find(1);
         $data['client'] = Client::find($request->client);
         $data['remark'] = Remark::find($request->remark);
@@ -68,25 +66,25 @@ class HomeController extends Controller
         $value = sprintf( '%015d', $data['total_price'] * 100);
         $year = date('Y');
         $code = "HRVHUB30\r
-HRK\r
-$value\r
-{$data['client']->name}\r
-{$data['client']->address}\r
-{$data['client']->city}\r
-{$data['company']->name}\r
-{$data['client']->address}\r
-{$data['client']->city}\r
-{$data['company']->iban}\r
-HR00\r
-{$data['invoice_number']}-{$year}\r
-COST\r
-Placanje po racunu {$data['invoice_number']}-{$year}\r";
+                HRK\r
+                $value\r
+                {$data['client']->name}\r
+                {$data['client']->address}\r
+                {$data['client']->city}\r
+                {$data['company']->name}\r
+                {$data['client']->address}\r
+                {$data['client']->city}\r
+                {$data['company']->iban}\r
+                HR00\r
+                {$data['invoice_number']}-{$year}\r
+                COST\r
+                Placanje po racunu {$data['invoice_number']}-{$year}\r";
 
         //dd($code);
 
         $data['barcode'] = DNS2D::getBarcodePNG($code, "PDF417");
 
         $pdf = PDF::loadView('pdf.invoice', array('data' => $data));
-        return $pdf->download('invoice.pdf');
+        return $pdf->download('invoice-'.$data['invoice_number'].'-'.$year.'.pdf');
     }
 }
