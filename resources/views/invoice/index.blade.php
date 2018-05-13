@@ -6,9 +6,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Svi računi
+                    Računi
                 </div>
                 <div class="card-body">
+                    <a class="btn btn-info" href="{{ route('invoice.create') }}">{{ __('Novi') }}</a>
                     <table class="table table-hover">
                         <thead>
                         <tr>
