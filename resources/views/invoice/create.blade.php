@@ -20,11 +20,11 @@
                             </div>
 	                		<div class="form-group col-md-2"> <!-- Date input -->
                                 {{ Form::label('invoice_date', 'Datum:') }}
-                                {{ Form::text('invoice_date', $date, array('class'=>'form-control')) }}
+                                {{ Form::date('invoice_date', $datetime , array('class'=>'form-control')) }}
 						    </div>
                             <div class="form-group col-md-2">
                                 {{ Form::label('invoice_time', 'Vrijeme:') }}
-                                {{ Form::time('invoice_time', $time, array('class'=>'form-control')) }}
+                                {{ Form::time('invoice_time', $datetime, array('class'=>'form-control')) }}
                             </div>
                             <div class="form-group col-md-2">
                                 {{ Form::label('place', 'Mjesto:') }}
@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group col-md-3"> <!-- Date input -->
                                 {{ Form::label('payment_deadline', 'Dospijeće plaćanja:') }}
-                                {{ Form::text('payment_deadline', $payment_deadline, array('class'=>'form-control')) }}
+                                {{ Form::date('payment_deadline', $payment_deadline, array('class'=>'form-control')) }}
                             </div>
                         </div>
                         @for($i = 0; $i < 10; $i++)

@@ -30,9 +30,8 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $date = Carbon::now()->format('d.m.Y');
-        $time = Carbon::now();
-        $payment_deadline = Carbon::now()->addDays(10)->format('d.m.Y'); //get hardcoded number of days from conf/settings
+        $datetime = Carbon::now();
+        $payment_deadline = Carbon::now()->addDays(10); //get hardcoded number of days from conf/settings
         $place = Company::where('id',1)->pluck('city');
         $invoice_number = Invoice::whereYear('invoice_date', date("Y"))->count()+1;
         $clients = Client::all(); //\Auth::user()->company_id
@@ -40,7 +39,7 @@ class InvoiceController extends Controller
         $units = Unit::all();
         $products = Product::all();
 
-        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number', 'date', 'time', 'place', 'payment_deadline'));
+        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number', 'datetime', 'place', 'payment_deadline'));
     }
 
     /**
