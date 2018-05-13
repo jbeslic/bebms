@@ -8,6 +8,8 @@ use App\Remark;
 use Illuminate\Http\Request;
 use App\Invoice;
 use App\Client;
+use Carbon\Carbon;
+use App\Company;
 
 class InvoiceController extends Controller
 {
@@ -28,13 +30,16 @@ class InvoiceController extends Controller
      */
     public function create()
     {
+        $time = Carbon::now()->format('H:i');
+        $date = Carbon::now()->format('d.m.Y');
+        $place = Company::where('id',1)->pluck('city');
         $invoice_number = Invoice::whereYear('invoice_date', date("Y"))->count()+1;
         $clients = Client::all(); //\Auth::user()->company_id
         $remarks = Remark::all();
         $units = Unit::all();
         $products = Product::all();
 
-        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number'));
+        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number', 'date', 'time', 'place'));
     }
 
     /**

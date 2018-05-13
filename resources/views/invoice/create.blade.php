@@ -20,15 +20,15 @@
                             </div>
 	                		<div class="form-group col-md-2"> <!-- Date input -->
                                 {{ Form::label('invoice_date', 'Datum:') }}
-                                {{ Form::text('invoice_date', null, array('class'=>'form-control', 'placeholder' => 'DD.MM.YYYY')) }}
+                                {{ Form::text('invoice_date', $date, array('class'=>'form-control')) }}
 						    </div>
-                            <div class="form-group col-md-2"> <!-- Date input -->
+                            <div class="form-group col-md-2">
                                 {{ Form::label('invoice_time', 'Vrijeme:') }}
-                                {{ Form::text('invoice_time', null, array('class'=>'form-control', 'placeholder' => 'HH:MM')) }}
+                                {{ Form::text('invoice_time', $time, array('class'=>'form-control')) }}
                             </div>
                             <div class="form-group col-md-2"> <!-- Date input -->
                                 {{ Form::label('place', 'Mjesto:') }}
-                                {{ Form::text('place', null, array('class'=>'form-control', 'placeholder' => 'Mjesto izdavanja računa')) }}
+                                {{ Form::text('place', $place[0], array('class'=>'form-control')) }}
                             </div>
 	                	</div>
                         <div class="form-row">
