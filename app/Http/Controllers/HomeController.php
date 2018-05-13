@@ -65,20 +65,24 @@ class HomeController extends Controller
             }
         }
 
+        $value = sprintf( '%015d', $data['total_price'] * 100);
+        $year = date('Y');
         $code = "HRVHUB30\r
 HRK\r
-000000000012355\r
-ZELJKO SENEKOVIC\r
-IVANECKA ULICA 125\r
-42000 VARAZDIN\r
-2DBK d.d.\r
-ALKARSKI PROLAZ 13B\r
-21230 SINJ\r
-HR1210010051863000160\r
-HR01\r
-7269-68949637676-00019\r
+$value\r
+{$data['client']->name}\r
+{$data['client']->address}\r
+{$data['client']->city}\r
+{$data['company']->name}\r
+{$data['client']->address}\r
+{$data['client']->city}\r
+{$data['company']->iban}\r
+HR00\r
+{$data['invoice_number']}-{$year}\r
 COST\r
-Troskovi za 1. mjesec\r";
+Placanje po racunu {$data['invoice_number']}-{$year}\r";
+
+        //dd($code);
 
         $data['barcode'] = DNS2D::getBarcodePNG($code, "PDF417");
 
