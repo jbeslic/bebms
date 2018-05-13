@@ -24,13 +24,16 @@ class InitialSeed extends Seeder
             'company_id' => 1,
             'name' => 'beDev, obrt za računalne djelatnosti',
             'address' => 'Trnjanska cesta 59',
-            'city' => '10000 Zagreb',
+            'zip_code' => '10000',
+            'city' => 'Zagreb',
             'oib' => '00460997027',
         ]);
         DB::table('companies')->insert([
             'name' => 'beDev, obrt za računalne djelatnosti',
             'owner' => 'Josipa Bešlić',
-            'address' => 'Trnjanska cesta 59, 10000 Zagreb',
+            'address' => 'Trnjanska cesta 59',
+            'zip_code' => '10000',
+            'city' => 'Zagreb',
             'oib' => '00460997027',
             'iban' => 'HR4023400091160517112',
             'bank_info' => 'Privredna banka Zagreb, SWIFT CODE: PBZGHR2X',

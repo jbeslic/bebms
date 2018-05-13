@@ -92,7 +92,7 @@
                 <td>
                     <strong>{{ $data['client']->name }}</strong><br/>
                     {{ $data['client']->address }}  <br/>
-                    {{ $data['client']->city }}  <br/>
+                    {{ $data['client']->zip_code }} {{ $data['client']->city }}  <br/>
                     {{ $data['client']->oib }}  <br/>
                 </td>
             </tr>

@@ -14,7 +14,7 @@
 	                			{{ Form::label('client', 'Kupac:') }}
                                 <select name="client" class="form-control">
                                     @foreach ($clients as $client)
-                                        <option value="{{ $client->id }}">{{ $client->name }}, Adresa: {{ $client->address }}, Mjesto: {{ $client->city }}, OIB: {{ $client->oib }}</option>
+                                        <option value="{{ $client->id }}">{{ $client->name }}, Adresa: {{ $client->address }}, Mjesto: {{ $client->zip_code }} {{ $client->city }}, OIB: {{ $client->oib }}</option>
                                     @endforeach
                                 </select>
                             </div>
