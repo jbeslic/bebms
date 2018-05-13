@@ -30,8 +30,8 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $time = Carbon::now()->format('H:i');
         $date = Carbon::now()->format('d.m.Y');
+        $time = Carbon::now();
         $payment_deadline = Carbon::now()->addDays(10)->format('d.m.Y'); //get hardcoded number of days from conf/settings
         $place = Company::where('id',1)->pluck('city');
         $invoice_number = Invoice::whereYear('invoice_date', date("Y"))->count()+1;

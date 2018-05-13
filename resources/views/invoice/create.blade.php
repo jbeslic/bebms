@@ -24,9 +24,9 @@
 						    </div>
                             <div class="form-group col-md-2">
                                 {{ Form::label('invoice_time', 'Vrijeme:') }}
-                                {{ Form::text('invoice_time', $time, array('class'=>'form-control')) }}
+                                {{ Form::time('invoice_time', $time, array('class'=>'form-control')) }}
                             </div>
-                            <div class="form-group col-md-2"> <!-- Date input -->
+                            <div class="form-group col-md-2">
                                 {{ Form::label('place', 'Mjesto:') }}
                                 {{ Form::text('place', $place[0], array('class'=>'form-control')) }}
                             </div>
