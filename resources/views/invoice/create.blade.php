@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group col-md-3"> <!-- Date input -->
                                 {{ Form::label('payment_deadline', 'Dospijeće plaćanja:') }}
-                                {{ Form::text('payment_deadline', null, array('class'=>'form-control', 'placeholder' => 'DD.MM.YYYY')) }}
+                                {{ Form::text('payment_deadline', $payment_deadline, array('class'=>'form-control')) }}
                             </div>
                         </div>
                         @for($i = 0; $i < 10; $i++)
