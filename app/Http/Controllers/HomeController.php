@@ -45,6 +45,10 @@ class HomeController extends Controller
         $data['client'] = Client::find($request->client);
         $data['remark'] = Remark::find($request->remark);
         $data['invoice_date'] = $request->invoice_date;
+        $data['invoice_time'] = $request->invoice_time;
+        $data['place'] = $request->place;
+        $data['payment_type'] = $request->payment_type;
+        $data['payment_deadline'] = $request->payment_deadline;
         $data['items'] = array();
         $data['invoice_number'] = $request->invoice_number;
         $data['total_price'] = 0;

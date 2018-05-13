@@ -102,7 +102,7 @@
                     Mjesto, datum i vrijeme izdavanja:
                 </td>
                 <td colspan="2">
-                    description
+                    {{ $data['place'] }}, {{ $data['invoice_date'] }} {{ $data['invoice_time'] }}
                 </td>
             </tr>
         </table>
@@ -192,13 +192,13 @@
                     Dospijeće plaćanja:
                 </td>
                 <td>
-                    description
+                    {{ $data['payment_deadline'] }}
                 </td>
             </tr>
             <tr>
                 <td>Način plaćanja:</td>
                 <td>
-                    Transakcijski račun
+                    {{ $data['payment_type'] }}
                 </td>
             </tr>
             <tr>
