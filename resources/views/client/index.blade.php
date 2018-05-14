@@ -6,31 +6,33 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Klijenti</div>
-
                 <div class="card-body">
-
-                    @foreach($clients as $client)
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <h5>Naziv klijenta:</h5>
-                            <p><strong>{{ $client->name }}</strong></p>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <h5>Adresa:</h5>
-                            <p><strong>{{ $client->address }}</strong></p>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <h5>Mjesto:</h5>
-                            <p><strong>{{ $client->city }}</strong></p>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <h5>OIB:</h5>
-                            <p><strong>{{ $client->oib }}</strong></p>
-                        </div>
-                            {{ Form::button('Uredi', array('class' => 'btn btn-primary')) }}
-                    </div>
-                        <hr>
-                    @endforeach
+                    <a class="btn btn-info" href="{{ route('client.create') }}">Novi klijent</a>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Adresa</th>
+                            <th>Poštanski broj</th>
+                            <th>Mjesto</th>
+                            <th>OIB</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($clients as $client)
+                        <tr>
+                            <td>{{ $client->name }}</td>
+                            <td>{{ $client->address }}</td>
+                            <td>{{ $client->zip_code }}</td>
+                            <td>{{ $client->city }}</td>
+                            <td>{{ $client->oib }}</td>
+                            <td><a class="btn btn-secondary" href="{{ route('client.edit', ['id' => $client->id]) }}">Uredi</a></td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    
                     
                 </div>
             </div>

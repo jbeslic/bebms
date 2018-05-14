@@ -14,7 +14,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::where('company_id', 1); //\Auth::user()->company_id 
+        $clients = Client::where('company_id', 1)->get(); //\Auth::user()->company_id 
         return view('client/index')->with('clients', $clients);
     }
 
@@ -45,6 +45,7 @@ class ClientController extends Controller
         $client->company_id=1; //\Auth::user()->company_id 
         $client->name = $request->name;
         $client->address = $request->address;
+        $client->zip_code = $request->zip_code;
         $client->city = $request->city;
         $client->oib = $request->oib;
 
@@ -72,7 +73,9 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::find($id);
+        $uri = url('client/'.$id);
+        return view ('client.edit')->with(compact('client', 'uri'));
     }
 
     /**
@@ -84,7 +87,15 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = Client::find($id);
+        $client->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'zip_code' => $request->zip_code,
+            'city' => $request->city,
+            'oib' => $request->oib
+        ]);
+        return redirect()->route('client.index');
     }
 
     /**
