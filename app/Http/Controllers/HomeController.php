@@ -10,6 +10,7 @@ use App\Remark;
 use Milon\Barcode\DNS2D;
 use PDF;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -42,11 +43,11 @@ class HomeController extends Controller
         $data['company'] = Company::find(1);
         $data['client'] = Client::find($request->client);
         $data['remark'] = Remark::find($request->remark);
-        $data['invoice_date'] = $request->invoice_date;
+        $data['invoice_date'] = Carbon::parse($request->invoice_date)->format('d.m.Y');
         $data['invoice_time'] = $request->invoice_time;
         $data['place'] = $request->place;
         $data['payment_type'] = $request->payment_type;
-        $data['payment_deadline'] = $request->payment_deadline;
+        $data['payment_deadline'] = Carbon::parse($request->payment_deadline)->format('d.m.Y');
         $data['items'] = array();
         $data['invoice_number'] = $request->invoice_number;
         $data['total_price'] = 0;

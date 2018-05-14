@@ -18,6 +18,7 @@ class CreateClientsTable extends Migration
             $table->integer('company_id');
             $table->string('name');
             $table->string('address');
+            $table->string('zip_code');
             $table->string('city');
             $table->string('oib');
             $table->timestamps();

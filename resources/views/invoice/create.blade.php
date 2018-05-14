@@ -14,21 +14,21 @@
 	                			{{ Form::label('client', 'Kupac:') }}
                                 <select name="client" class="form-control">
                                     @foreach ($clients as $client)
-                                        <option value="{{ $client->id }}">{{ $client->name }}, Adresa: {{ $client->address }}, Mjesto: {{ $client->city }}, OIB: {{ $client->oib }}</option>
+                                        <option value="{{ $client->id }}">{{ $client->name }}, Adresa: {{ $client->address }}, Mjesto: {{ $client->zip_code }} {{ $client->city }}, OIB: {{ $client->oib }}</option>
                                     @endforeach
                                 </select>
                             </div>
 	                		<div class="form-group col-md-2"> <!-- Date input -->
                                 {{ Form::label('invoice_date', 'Datum:') }}
-                                {{ Form::text('invoice_date', null, array('class'=>'form-control', 'placeholder' => 'DD.MM.YYYY')) }}
+                                {{ Form::date('invoice_date', $datetime , array('class'=>'form-control')) }}
 						    </div>
-                            <div class="form-group col-md-2"> <!-- Date input -->
+                            <div class="form-group col-md-2">
                                 {{ Form::label('invoice_time', 'Vrijeme:') }}
-                                {{ Form::text('invoice_time', null, array('class'=>'form-control', 'placeholder' => 'HH:MM')) }}
+                                {{ Form::time('invoice_time', $datetime, array('class'=>'form-control')) }}
                             </div>
-                            <div class="form-group col-md-2"> <!-- Date input -->
+                            <div class="form-group col-md-2">
                                 {{ Form::label('place', 'Mjesto:') }}
-                                {{ Form::text('place', null, array('class'=>'form-control', 'placeholder' => 'Mjesto izdavanja računa')) }}
+                                {{ Form::text('place', $place[0], array('class'=>'form-control')) }}
                             </div>
 	                	</div>
                         <div class="form-row">
@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group col-md-3"> <!-- Date input -->
                                 {{ Form::label('payment_deadline', 'Dospijeće plaćanja:') }}
-                                {{ Form::text('payment_deadline', null, array('class'=>'form-control', 'placeholder' => 'DD.MM.YYYY')) }}
+                                {{ Form::date('payment_deadline', $payment_deadline, array('class'=>'form-control')) }}
                             </div>
                         </div>
                         @for($i = 0; $i < 10; $i++)

@@ -18,6 +18,8 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('owner');
             $table->string('address');
+            $table->string('zip_code');
+            $table->string('city');
             $table->string('oib');
             $table->string('iban');
             $table->string('bank_info');

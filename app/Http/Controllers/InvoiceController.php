@@ -12,8 +12,7 @@ use App\Client;
 use App\Company;
 use Milon\Barcode\DNS2D;
 use PDF;
-
-
+use Carbon\Carbon;
 class InvoiceController extends Controller
 {
     /**
@@ -36,13 +35,16 @@ class InvoiceController extends Controller
      */
     public function create()
     {
+        $datetime = Carbon::now();
+        $payment_deadline = Carbon::now()->addDays(10); //get hardcoded number of days from conf/settings
+        $place = Company::where('id',1)->pluck('city');
         $invoice_number = Invoice::whereYear('invoice_date', date("Y"))->count()+1;
         $clients = Client::all(); //\Auth::user()->company_id
         $remarks = Remark::all();
         $units = Unit::all();
         $products = Product::all();
 
-        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number'));
+        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number', 'datetime', 'place', 'payment_deadline'));
     }
 
     /**
