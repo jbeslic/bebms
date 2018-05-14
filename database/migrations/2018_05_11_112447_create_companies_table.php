@@ -24,6 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('iban');
             $table->string('bank_info');
             $table->string('activity');
+            $table->string('logo_path')->nullable();
             $table->timestamps();
         });
     }
