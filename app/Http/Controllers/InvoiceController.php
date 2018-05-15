@@ -68,7 +68,16 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, array(
+            'amount.*' => 'nullable|numeric',
+            'price.*' => 'nullable|numeric',
+            'invoice_date' => 'required',
+            'invoice_time' => 'required',
+            'place' => 'required|max:30',
+            'payment_deadline' => 'required',
+        ));
+
         $invoice = new Invoice();
 
         $invoice->company_id = Auth::user()->is_admin ? $request->company : Auth::user()->company_id;
@@ -85,14 +94,16 @@ class InvoiceController extends Controller
 
         foreach ($request->product as $key => $product){
             if(in_array($product, Product::pluck('code')->toArray())){
-                $invoice_item = new InvoiceItem();
-                $invoice_item->invoice_id = $invoice->id;
-                $invoice_item->product_id = Product::whereCode($product)->first()->id;
-                $invoice_item->unit_id = $request->unit[$key];
-                $invoice_item->amount = $request->amount[$key];
-                $invoice_item->price = $request->price[$key];
-                $invoice_item->discount = 0;
-                $invoice_item->save();
+                if($request->amount[$key]&&$request->price[$key]){
+                    $invoice_item = new InvoiceItem();
+                    $invoice_item->invoice_id = $invoice->id;
+                    $invoice_item->product_id = Product::whereCode($product)->first()->id;
+                    $invoice_item->unit_id = $request->unit[$key];
+                    $invoice_item->amount = $request->amount[$key];
+                    $invoice_item->price = $request->price[$key];
+                    $invoice_item->discount = 0;
+                    $invoice_item->save();
+                }
             }
         }
 
