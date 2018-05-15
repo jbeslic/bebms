@@ -21,7 +21,7 @@
                 				<h5>Djelatnost:</h5><p><strong>{{ $company->activity }}</strong></p>
                 			</div>
                 			<div class="form-group col-md-4">
- 								<img src="{{ $company->logo_path }}" class="img-fluid img-thumbnail" height="200" width="200" alt="Company logo!">
+ 								<img src="{{ asset('storage/'.$company->logo_path) }}" class="img-fluid img-thumbnail" height="200" width="200" alt="Company logo!">
  							</div>
  						</div>
  						<div class="form-row">

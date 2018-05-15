@@ -57,9 +57,7 @@ class CompanyController extends Controller
             ]);
 
             Storage::putFile('public', $request->file('logo'));
-            $url = Storage::url($request->file('logo')->hashName());
-
-
+            
             $company = new Company;
             $company->name = $request->name;
             $company->owner = $request->owner;
@@ -70,7 +68,7 @@ class CompanyController extends Controller
             $company->iban = $request->iban;
             $company->bank_info = $request->bank_info;
             $company->activity = $request->activity;
-            $company->logo_path = env('APP_URL') . $url;
+            $company->logo_path = $request->file('logo')->hashName();
             $company->save();
         }
         return redirect()->route('company.index');
@@ -119,11 +117,11 @@ class CompanyController extends Controller
         $company = Company::find($id);
 
         if($request->file('logo')==null){
-            $url=$company->logo_path;
+            $path=$company->logo_path;
         }
         else{
             Storage::putFile('public', $request->file('logo'));
-            $url = env('APP_URL').Storage::url($request->file('logo')->hashName());
+            $path = $request->file('logo')->hashName();
         };
             
         $company->update([
@@ -136,7 +134,7 @@ class CompanyController extends Controller
             'iban' => $request->iban,
             'bank_info' => $request->bank_info,
             'activity' => $request->activity,
-            'logo_path' => $url
+            'logo_path' => $path
         ]);
         return redirect()->route('company.index');
     }
