@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::resource('/product', 'ProductController');
 Route::resource('/client', 'ClientController');
 Route::resource('/invoice', 'InvoiceController');
 Route::resource('/company', 'CompanyController');

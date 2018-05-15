@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -13,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::where('company_id', 1)->get();
+        return view ('product/index')->with(compact('products'));
     }
 
     /**
@@ -23,7 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product/create');
     }
 
     /**
@@ -34,7 +36,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product;
+        $product->company_id = 1;
+        $product->code = $request->code;
+        $product->description = $request->description;
+        $product->save();
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -56,7 +64,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $uri = url('product/'.$id);
+        return view('product/edit')->with(compact('product', 'uri'));
     }
 
     /**
@@ -68,7 +78,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $product->update([
+            'code' => $request->code,
+            'description' => $request->description
+        ]);
+        return redirect()->route('product.index');
     }
 
     /**
@@ -79,6 +94,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::where('id', $id)->where('company_id', 1)->delete();
+        return redirect()->route('product.index');
     }
 }
