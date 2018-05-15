@@ -156,7 +156,7 @@ class InvoiceController extends Controller
     {
         $invoice = Invoice::find($id);
 
-        $data['company'] = Company::find(1);
+        $data['company'] = Company::find($invoice->company_id);
         $data['client'] = Client::find($invoice->client_id);
         $data['remark'] = Remark::find($invoice->remark_id);
         $data['invoice_date'] = Carbon::parse($invoice->invoice_date)->format('d.m.Y');
@@ -182,19 +182,19 @@ class InvoiceController extends Controller
         $value = sprintf( '%015d', $data['total_price'] * 100);
         $year = date('Y');
         $code = "HRVHUB30\r
-                HRK\r
-                $value\r
-                {$data['client']->name}\r
-                {$data['client']->address}\r
-                {$data['client']->city}\r
-                {$data['company']->name}\r
-                {$data['client']->address}\r
-                {$data['client']->city}\r
-                {$data['company']->iban}\r
-                HR00\r
-                {$data['invoice_number']}-{$year}\r
-                COST\r
-                Placanje po racunu {$data['invoice_number']}-{$year}\r";
+HRK\r
+$value\r
+{$data['client']->name}\r
+{$data['client']->address}\r
+{$data['client']->zip_code} {$data['client']->city}\r
+{$data['company']->name}\r
+{$data['company']->address}\r
+{$data['company']->zip_code} {$data['company']->city}\r
+{$data['company']->iban}\r
+HR00\r
+{$data['invoice_number']}-{$year}\r
+COST\r
+Placanje po racunu {$data['invoice_number']}-{$year}\r"; //important to stay formated as this
 
         //dd($code);
 
