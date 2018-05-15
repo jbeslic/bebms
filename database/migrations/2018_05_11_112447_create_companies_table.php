@@ -15,6 +15,7 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('type')->default('PO');  //PO - pravna osoba, FO - fizička osoba
             $table->string('name');
             $table->string('owner');
             $table->string('address');

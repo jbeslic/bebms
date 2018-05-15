@@ -102,7 +102,7 @@
                     Mjesto, datum i vrijeme izdavanja:
                 </td>
                 <td colspan="2">
-                    {{ $data['place'] }}, {{ $data['invoice_date'] }} {{ $data['invoice_time'] }}
+                    {{ $data['place'] }}, {{ $data['invoice_date'] }} u {{ $data['invoice_time'] }}
                 </td>
             </tr>
         </table>
@@ -150,13 +150,13 @@
                     {{ $item['amount'] }}
                 </td>
                 <td>
-                    {{ $item['price_per_unit'] }}
+                    {{ number_format($item['price_per_unit'], 2, ',', '.') }}
                 </td>
                 <td>
                     0%
                 </td>
-                <td>
-                    {{ $item['price'] }}
+                <td style="text-align: right;">
+                    {{ number_format($item['price'], 2, ',', '.') }}
                 </td>
             </tr>
 
@@ -170,7 +170,7 @@
                 <td colspan="2">
                     UKUPNI IZNOS
                 </td>
-                <td>{{ $data['total_price'] }}</td>
+                <td style="text-align: right;">{{ number_format($data['total_price'], 2, ',', '.') }}</td>
             </tr>
         </table>
 
