@@ -52,7 +52,7 @@
                                 {{ Form::date('payment_deadline', $payment_deadline, array('class'=>'form-control')) }}
                             </div>
                         </div>
-                        @for($i = 0; $i < 10; $i++)
+                        @for($i = 0; $i < 5; $i++)
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 {{ Form::label('products', 'Stavke:') }}

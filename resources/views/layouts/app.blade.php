@@ -55,6 +55,9 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('company.index') }}">Tvrtka</a>
+                                    <a class="dropdown-item" href="{{ route('client.index') }}">Klijenti</a>
+                                    <a class="dropdown-item" href="{{ route('invoice.index') }}">Računi</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
