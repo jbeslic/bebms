@@ -7,6 +7,10 @@ use App\Product;
 
 class ProductController extends Controller
 {
+    public function __construct()
++    {
++        $this->middleware('auth');
++    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::where('company_id', 1)->get();
+        $products = Product::where('company_id', Auth::user()->company_id)->get();
         return view ('product/index')->with(compact('products'));
     }
 
@@ -37,7 +41,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product;
-        $product->company_id = 1;
+        $product->company_id = Auth::user()->company_id;
         $product->code = $request->code;
         $product->description = $request->description;
         $product->save();
@@ -94,7 +98,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Product::where('id', $id)->where('company_id', 1)->delete();
+        Product::where('id', $id)->where('company_id', Auth::user()->company_id)->delete();
         return redirect()->route('product.index');
     }
 }
