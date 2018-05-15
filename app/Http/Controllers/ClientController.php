@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Client;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -12,7 +13,7 @@ class ClientController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +21,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::where('company_id', 1)->get(); //\Auth::user()->company_id 
+        $clients = Client::where('company_id', Auth::user()->company_id)->get();
         return view('client/index')->with('clients', $clients);
     }
 
@@ -48,7 +49,7 @@ class ClientController extends Controller
         ));
 
         $client = new Client;
-        $client->company_id=1; //\Auth::user()->company_id 
+        $client->company_id = Auth::user()->company_id; //\Auth::user()->company_id
         $client->name = $request->name;
         $client->address = $request->address;
         $client->zip_code = $request->zip_code;

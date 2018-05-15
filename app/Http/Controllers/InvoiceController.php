@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Invoice;
 use App\Client;
 use App\Company;
+use Illuminate\Support\Facades\Auth;
 use Milon\Barcode\DNS2D;
 use PDF;
 use Carbon\Carbon;
@@ -29,7 +30,12 @@ class InvoiceController extends Controller
     public function index()
     {
         //
-        $invoices = Invoice::all();
+        if(Auth::user()->is_admin){
+            $invoices = Invoice::all()->orderBy('company_id');
+        }
+        else {
+            $invoices = Invoice::where('company_id', Auth::user()->company_id)->get();
+        }
 
         return view('invoice.index')->with('invoices', $invoices);
     }

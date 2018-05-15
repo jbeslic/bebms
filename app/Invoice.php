@@ -20,4 +20,9 @@ class Invoice extends Model
     {
         return $this->belongsTo('App\Client');
     }
+
+    public function company()
+    {
+        return $this->belongsTo('App\Company');
+    }
 }

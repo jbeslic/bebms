@@ -14,6 +14,9 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
+                            @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+                            <th scope="col">Company</th>
+                            @endif
                             <th scope="col">Client</th>
                             <th scope="col">Date</th>
                             <th scope="col">Price</th>
@@ -24,6 +27,9 @@
                         @foreach($invoices as $invoice)
                         <tr>
                             <th scope="row">{{ $invoice->invoice_number }}</th>
+                            @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+                                <td>{{ $invoice->company->name }}</td>
+                            @endif
                             <td>{{ $invoice->client->name }}</td>
                             <td>{{ $invoice->invoice_date }}</td>
                             <td>{{ $invoice->totalPrice() }}</td>

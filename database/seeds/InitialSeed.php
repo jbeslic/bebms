@@ -16,8 +16,9 @@ class InitialSeed extends Seeder
         DB::table('users')->insert([
             'name' => 'Admin',
             'company_id' => 1,
-            'email' => 'josipa.beslic@gmail.com',
+            'email' => 'admin@bedev.hr',
             'password' => bcrypt('admin'),
+            'is_admin' => 1,
         ]);
         //
         DB::table('clients')->insert([
@@ -37,7 +38,7 @@ class InitialSeed extends Seeder
             'oib' => '00460997027',
             'iban' => 'HR4023400091160517112',
             'bank_info' => 'Privredna banka Zagreb, SWIFT CODE: PBZGHR2X',
-            'activity' => 'RAČUNALNE DJELATNOSTI',
+            'activity' => 'RAČUNALNO PROGRAMIRANJE',
         ]);
         DB::table('remarks')->insert([
             [   'company_id' => 1,
