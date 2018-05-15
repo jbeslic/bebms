@@ -24,6 +24,7 @@ class CreateInvoicesTable extends Migration
             $table->date('payment_deadline');
             $table->integer('remark_id');
             $table->string('payment_type');
+            $table->string('city');
             $table->timestamps();
         });
     }

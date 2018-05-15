@@ -10,11 +10,18 @@ use Illuminate\Http\Request;
 use App\Invoice;
 use App\Client;
 use App\Company;
+use Illuminate\Support\Facades\Auth;
 use Milon\Barcode\DNS2D;
 use PDF;
 use Carbon\Carbon;
 class InvoiceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +30,12 @@ class InvoiceController extends Controller
     public function index()
     {
         //
-        $invoices = Invoice::all();
+        if(Auth::user()->is_admin){
+            $invoices = Invoice::orderBy('company_id')->get();
+        }
+        else {
+            $invoices = Invoice::where('company_id', Auth::user()->company_id)->get();
+        }
 
         return view('invoice.index')->with('invoices', $invoices);
     }
@@ -37,14 +49,15 @@ class InvoiceController extends Controller
     {
         $datetime = Carbon::now();
         $payment_deadline = Carbon::now()->addDays(10); //get hardcoded number of days from conf/settings
-        $place = Company::where('id',1)->pluck('city');
-        $invoice_number = Invoice::whereYear('invoice_date', date("Y"))->count()+1;
-        $clients = Client::all(); //\Auth::user()->company_id
+        $place = Company::where('id', Auth::user()->company_id)->pluck('city');
+        //$invoice_number = Invoice::whereYear('invoice_date', date("Y"))->count()+1;
+        $companies = Company::all();
+        $clients = Auth::user()->is_admin ? Client::all() : Client::where('company_id', Auth::user()->company_id)->get();
         $remarks = Remark::all();
         $units = Unit::all();
         $products = Product::all();
 
-        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number', 'datetime', 'place', 'payment_deadline'));
+        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number', 'datetime', 'place', 'payment_deadline', 'companies'));
     }
 
     /**
@@ -57,15 +70,17 @@ class InvoiceController extends Controller
     {
         //
         $invoice = new Invoice();
-        $invoice->company_id = 1;
+
+        $invoice->company_id = Auth::user()->is_admin ? $request->company : Auth::user()->company_id;
         $invoice->client_id = $request->client;
-        $invoice->invoice_number = $request->invoice_number;
+        $invoice->invoice_number = Invoice::whereYear('invoice_date', date("Y"))->where('company_id', $invoice->company_id)->count()+1;
         $invoice->invoice_date = $request->invoice_date;
         $invoice->delivery_date = $request->invoice_date; //@todo
         $invoice->invoice_time = $request->invoice_time;
         $invoice->payment_deadline = $request->payment_deadline;
         $invoice->remark_id = $request->remark;
         $invoice->payment_type = $request->payment_type;
+        $invoice->city = $request->place;
         $invoice->save();
 
         foreach ($request->product as $key => $product){
@@ -141,14 +156,14 @@ class InvoiceController extends Controller
     {
         $invoice = Invoice::find($id);
 
-        $data['company'] = Company::find(1);
+        $data['company'] = Company::find($invoice->company_id);
         $data['client'] = Client::find($invoice->client_id);
         $data['remark'] = Remark::find($invoice->remark_id);
-        $data['invoice_date'] = $invoice->invoice_date;
+        $data['invoice_date'] = Carbon::parse($invoice->invoice_date)->format('d.m.Y');
         $data['invoice_time'] = $invoice->invoice_time;
-        $data['place'] = 'Zagreb'; //@todo
+        $data['place'] = $invoice->city;
         $data['payment_type'] = $invoice->payment_type;
-        $data['payment_deadline'] = $invoice->payment_deadline;
+        $data['payment_deadline'] = Carbon::parse($invoice->payment_deadline)->format('d.m.Y');
         $data['items'] = array();
         $data['invoice_number'] = $invoice->invoice_number;
         $data['total_price'] = $invoice->totalPrice();
@@ -162,22 +177,24 @@ class InvoiceController extends Controller
             $data['items'][] = $items;
         }
 
+
+
         $value = sprintf( '%015d', $data['total_price'] * 100);
         $year = date('Y');
         $code = "HRVHUB30\r
-                HRK\r
-                $value\r
-                {$data['client']->name}\r
-                {$data['client']->address}\r
-                {$data['client']->city}\r
-                {$data['company']->name}\r
-                {$data['client']->address}\r
-                {$data['client']->city}\r
-                {$data['company']->iban}\r
-                HR00\r
-                {$data['invoice_number']}-{$year}\r
-                COST\r
-                Placanje po racunu {$data['invoice_number']}-{$year}\r";
+HRK\r
+$value\r
+{$data['client']->name}\r
+{$data['client']->address}\r
+{$data['client']->zip_code} {$data['client']->city}\r
+{$data['company']->name}\r
+{$data['company']->address}\r
+{$data['company']->zip_code} {$data['company']->city}\r
+{$data['company']->iban}\r
+HR00\r
+{$data['invoice_number']}-{$year}\r
+COST\r
+Placanje po racunu {$data['invoice_number']}-{$year}\r"; //important to stay formated as this
 
         //dd($code);
 

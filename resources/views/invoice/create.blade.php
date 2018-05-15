@@ -5,16 +5,25 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Novi račun {{ $invoice_number }}/01/01</div>
+                <div class="card-header">Novi račun</div>
                 {!! Form::open(array('route' => 'invoice.store')) !!}
-                {{ Form::hidden('invoice_number', $invoice_number) }}
                 	<div class="card-body">
 	                	<div class="form-row">
+                            @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+                            <div class="form-group col-md-12">
+                                {{ Form::label('company', 'Tvrtka:') }}
+                                <select name="company" class="form-control">
+                                    @foreach ($companies as $company)
+                                        <option value="{{ $company->id }}">{{ $company->name }}, {{ $company->address }}, {{ $company->zip_code }} {{ $company->city }}, OIB: {{ $company->oib }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @endif
 	                		<div class="form-group col-md-6">
 	                			{{ Form::label('client', 'Kupac:') }}
                                 <select name="client" class="form-control">
                                     @foreach ($clients as $client)
-                                        <option value="{{ $client->id }}">{{ $client->name }}, Adresa: {{ $client->address }}, Mjesto: {{ $client->zip_code }} {{ $client->city }}, OIB: {{ $client->oib }}</option>
+                                        <option value="{{ $client->id }}">{{ $client->name }}, {{ $client->address }}, {{ $client->zip_code }} {{ $client->city }}, OIB: {{ $client->oib }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -52,7 +61,7 @@
                                 {{ Form::date('payment_deadline', $payment_deadline, array('class'=>'form-control')) }}
                             </div>
                         </div>
-                        @for($i = 0; $i < 10; $i++)
+                        @for($i = 0; $i < 5; $i++)
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 {{ Form::label('products', 'Stavke:') }}

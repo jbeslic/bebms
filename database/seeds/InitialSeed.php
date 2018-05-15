@@ -14,21 +14,40 @@ class InitialSeed extends Seeder
     {
         //
         DB::table('users')->insert([
+            [
             'name' => 'Admin',
             'company_id' => 1,
-            'email' => 'josipa.beslic@gmail.com',
+            'email' => 'admin@bedev.hr',
             'password' => bcrypt('admin'),
+            'is_admin' => 1,
+            ], [
+            'name' => 'User',
+            'company_id' => 1,
+            'email' => 'user@bedev.hr',
+            'password' => bcrypt('user'),
+            'is_admin' => 0,
+            ]
         ]);
         //
         DB::table('clients')->insert([
+            [
             'company_id' => 1,
             'name' => 'beDev, obrt za računalne djelatnosti',
             'address' => 'Trnjanska cesta 59',
             'zip_code' => '10000',
             'city' => 'Zagreb',
             'oib' => '00460997027',
+            ], [
+            'company_id' => 1,
+            'name' => 'TNT Studio d.o.o.',
+            'address' => 'Sv. Mateja 19',
+            'zip_code' => '10000',
+            'city' => 'Zagreb',
+            'oib' => '32314900695',
+            ]
         ]);
         DB::table('companies')->insert([
+            [
             'name' => 'beDev, obrt za računalne djelatnosti',
             'owner' => 'Josipa Bešlić',
             'address' => 'Trnjanska cesta 59',
@@ -37,7 +56,20 @@ class InitialSeed extends Seeder
             'oib' => '00460997027',
             'iban' => 'HR4023400091160517112',
             'bank_info' => 'Privredna banka Zagreb, SWIFT CODE: PBZGHR2X',
-            'activity' => 'RAČUNALNE DJELATNOSTI',
+            'activity' => 'RAČUNALNO PROGRAMIRANJE',
+            'type' => 'FO',
+            ], [
+            'name' => 'beDev d.o.o.',
+            'owner' => 'Josipa Bešlić',
+            'address' => 'Trnjanska cesta 59',
+            'zip_code' => '10000',
+            'city' => 'Zagreb',
+            'oib' => '00460997027',
+            'iban' => 'HR4023400091160517112',
+            'bank_info' => 'Privredna banka Zagreb, SWIFT CODE: PBZGHR2X',
+            'activity' => 'RAČUNALNO PROGRAMIRANJE',
+            'type' => 'PO',
+            ]
         ]);
         DB::table('remarks')->insert([
             [   'company_id' => 1,
