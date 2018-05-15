@@ -5,9 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Novi račun {{ $invoice_number }}/01/01</div>
+                <div class="card-header">Novi račun</div>
                 {!! Form::open(array('route' => 'invoice.store')) !!}
-                {{ Form::hidden('invoice_number', $invoice_number) }}
                 	<div class="card-body">
 	                	<div class="form-row">
                             @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
