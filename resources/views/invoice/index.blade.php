@@ -31,8 +31,8 @@
                                 <td>{{ $invoice->company->name }}</td>
                             @endif
                             <td>{{ $invoice->client->name }}</td>
-                            <td>{{ $invoice->invoice_date }}</td>
-                            <td>{{ $invoice->totalPrice() }}</td>
+                            <td>{{ \Carbon\Carbon::parse($invoice->invoice_date)->format('d.m.Y') }}</td>
+                            <td>{{ number_format($invoice->totalPrice(), 2, ',', '.') }}</td>
                             <td><a class="btn btn-success" href="{{ route('invoice.pdf', ['id' => $invoice->id]) }}">{{ __('Print') }}</a></td>
                         </tr>
                         @endforeach
