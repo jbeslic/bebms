@@ -67,11 +67,11 @@
                 <img src="img/logo_pdf.PNG" style="width: 200px;">
             </td>
             <td class="text" colspan="3">
-                <strong>beDev</strong>, obrt za računalne djelatnosti <br/>
-                vl. Josipa Bešlić, Trnjanska cesta 59,<br/>
-                10000 Zagreb<br/>
-                OIB: 00460997027<br/>
-                IBAN: HR4023400091160517112 <br/>
+                <strong>{{ $data['company']->name }}</strong> <br/>
+                @if($data['company']->type == 'FO') vl.{{ $data['company']->owner }},@endif {{ $data['company']->address }},<br/>
+                {{ $data['company']->zip_code }} {{ $data['company']->city }}<br/>
+                OIB: {{ $data['company']->oib }}<br/>
+                IBAN: {{ $data['company']->iban }} <br/>
 
             </td>
         </tr>
@@ -217,8 +217,8 @@
         </table>
     </div>
     <p style="position:fixed; bottom:15px; color: gray;  font-size: 10px; vertical-align:bottom; border-top: 1px solid grey; text-align: center;">
-        beDev, obrt za računalne djelatnosti, vl. Josipa Bešlić, Trnjanska cesta 59, 10000 Zagreb,OIB 00460997027 <br />
-        Žiro račun IBAN HR4023400091160517112 otvoren u Privredna banka Zagreb, SWIFT CODE: PBZGHR2X
+        {{ $data['company']->name }}, @if($data['company']->type == 'FO') vl.{{ $data['company']->owner }},@endif {{ $data['company']->address }}, {{ $data['company']->zip_code }} {{ $data['company']->city }},OIB {{ $data['company']->oib }} <br />
+        Žiro račun IBAN {{ $data['company']->iban }} otvoren u {{ $data['company']->bank_info }}
     </p>
 
 </body>

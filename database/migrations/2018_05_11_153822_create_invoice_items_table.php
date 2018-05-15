@@ -18,7 +18,7 @@ class CreateInvoiceItemsTable extends Migration
             $table->integer('invoice_id');
             $table->integer('product_id');
             $table->integer('unit_id');
-            $table->integer('amount');
+            $table->float('amount');
             $table->float('price');
             $table->integer('discount');
             $table->timestamps();
