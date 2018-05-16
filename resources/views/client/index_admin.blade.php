@@ -11,6 +11,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+                            <th>Klijent pripada:</th>
                             <th>Naziv</th>
                             <th>Adresa</th>
                             <th>Poštanski broj</th>
@@ -22,6 +23,7 @@
                         <tbody>
                         @foreach($clients as $client)
                         <tr>
+                            <td>{{ $client->company_name}}
                             <td>{{ $client->name }}</td>
                             <td>{{ $client->address }}</td>
                             <td>{{ $client->zip_code }}</td>

@@ -98,7 +98,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Product::where('id', $id)->where('company_id', Auth::user()->company_id)->delete();
+        Product::where('id', $id)->delete();
         return redirect()->route('product.index');
     }
 }

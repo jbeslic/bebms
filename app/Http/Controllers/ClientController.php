@@ -21,6 +21,11 @@ class ClientController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->is_admin){
+            $clients = Client::join('companies', 'clients.company_id', '=', 'companies.id')->orderBy('company_id')->get(['clients.*', 'companies.name as company_name']);
+            return view('client/index_admin')->with('clients', $clients);
+        }
+
         $clients = Client::where('company_id', Auth::user()->company_id)->get();
         return view('client/index')->with('clients', $clients);
     }
@@ -102,6 +107,7 @@ class ClientController extends Controller
             'city' => $request->city,
             'oib' => $request->oib
         ]);
+ 
         return redirect()->route('client.index');
     }
 
@@ -113,6 +119,7 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Client::where('id', $id)->delete();
+        return redirect()->route('client.index');
     }
 }
