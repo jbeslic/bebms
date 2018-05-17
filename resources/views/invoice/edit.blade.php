@@ -123,9 +123,9 @@
                             <div class="form-group col-md-1">
                                 {{ Form::label('is_paid', 'Plaćeno:') }}
                                 @if($invoice->is_paid)
-                                    {{ Form::checkbox('paid', 1 , true, array('class'=>'form-control')) }}
+                                    {{ Form::checkbox('is_paid', 1 , true, array('class'=>'form-control')) }}
                                 @else
-                                    {{ Form::checkbox('paid', 1 , null, array('class'=>'form-control')) }}
+                                    {{ Form::checkbox('is_paid', 1 , null, array('class'=>'form-control')) }}
                                 @endif    
                             </div>
                             <div class="form-group col-md-2">

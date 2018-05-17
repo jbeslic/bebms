@@ -160,7 +160,51 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, array(
+            'amount.*' => 'nullable|numeric',
+            'price.*' => 'nullable|numeric',
+            'invoice_date' => 'required',
+            'invoice_time' => 'required',
+            'city' => 'required|max:30',
+            'payment_deadline' => 'required',
+        ));
+
+        $invoice = Invoice::find($id);
+        $is_paid = $request->is_paid?1:0;
+        $invoice->update([
+            'client_id' => $request->client,
+            'invoice_date' => $request->invoice_date,
+            'invoice_time' => $request->invoice_time,
+            'payment_deadline' => $request->payment_deadline,
+            'remark_id' => $request->remark,
+            'payment_type' => $request->payment_type,
+            'city' => $request->city,
+            'is_paid' => $is_paid,
+            'paid' =>$request->paid
+        ]);
+
+        $items = InvoiceItem::where('invoice_id', $id)->get();
+        foreach($items as $item){
+            $item->delete();
+        }
+
+        foreach ($request->product as $key => $product){
+            if(in_array($product, Product::pluck('code')->toArray())){
+                if($request->amount[$key]&&$request->price[$key]){
+                    $invoice_item = new InvoiceItem();
+                    $invoice_item->invoice_id = $invoice->id;
+                    $invoice_item->product_id = Product::whereCode($product)->first()->id;
+                    $invoice_item->unit_id = $request->unit[$key];
+                    $invoice_item->amount = $request->amount[$key];
+                    $invoice_item->price = $request->price[$key];
+                    $invoice_item->discount = 0;
+                    $invoice_item->save();
+                }
+            }
+        }
+
+        return redirect()->route('invoice.index');
+
     }
 
     /**
