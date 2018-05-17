@@ -8,8 +8,9 @@
                 <div class="card-header">Novi račun</div>
                 {!! Form::open(array('route' => 'invoice.store')) !!}
                 	<div class="card-body">
-	                	<div class="form-row">
-                            @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+	                	
+                        @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+                        <div class="form-row">
                             <div class="form-group col-md-12">
                                 {{ Form::label('company', 'Tvrtka:') }}
                                 <select name="company" class="form-control">
@@ -18,7 +19,9 @@
                                     @endforeach
                                 </select>
                             </div>
-                            @endif
+                        </div>
+                        @endif
+                        <div class="form-row">
 	                		<div class="form-group col-md-6">
 	                			{{ Form::label('client', 'Kupac:') }}
                                 <select name="client" class="form-control">
@@ -36,8 +39,8 @@
                                 {{ Form::time('invoice_time', $datetime, array('class'=>'form-control')) }}
                             </div>
                             <div class="form-group col-md-2">
-                                {{ Form::label('place', 'Mjesto:') }}
-                                {{ Form::text('place', $place[0], array('class'=>'form-control')) }}
+                                {{ Form::label('city', 'Mjesto:') }}
+                                {{ Form::text('city', $city[0], array('class'=>'form-control')) }}
                             </div>
 	                	</div>
                         <div class="form-row">
@@ -82,11 +85,11 @@
                             </div>
                             <div class="form-group col-md-2">
                                 {{ Form::label('amount', 'Količina:') }}
-                                {{ Form::text('amount', null, array('class'=>'form-control', 'placeholder' => '20', 'name' => 'amount['.$i.']')) }}
+                                {{ Form::text('amount', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'amount['.$i.']')) }}
                             </div>
                             <div class="form-group col-md-2">
                                 {{ Form::label('price', 'Cijena:') }}
-                                {{ Form::text('price', null, array('class'=>'form-control', 'placeholder' => '20', 'name' => 'price['.$i.']')) }}
+                                {{ Form::text('price', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'price['.$i.']')) }}
                             </div>
                         </div>
                         @endfor

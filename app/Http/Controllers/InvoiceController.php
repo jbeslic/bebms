@@ -49,15 +49,15 @@ class InvoiceController extends Controller
     {
         $datetime = Carbon::now();
         $payment_deadline = Carbon::now()->addDays(10); //get hardcoded number of days from conf/settings
-        $place = Company::where('id', Auth::user()->company_id)->pluck('city');
+        $city = Company::where('id', Auth::user()->company_id)->pluck('city');
         //$invoice_number = Invoice::whereYear('invoice_date', date("Y"))->count()+1;
         $companies = Company::all();
         $clients = Auth::user()->is_admin ? Client::all() : Client::where('company_id', Auth::user()->company_id)->get();
-        $remarks = Remark::all();
-        $units = Unit::all();
-        $products = Product::all();
+        $remarks = Auth::user()->is_admin ? Remark::all() : Remark::where('company_id', Auth::user()->company_id)->get();
+        $units = Auth::user()->is_admin ? Unit::all() : Unit::where('company_id', Auth::user()->company_id)->get();
+        $products = Auth::user()->is_admin ? Product::all() : Product::where('company_id', Auth::user()->company_id)->get();
 
-        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number', 'datetime', 'place', 'payment_deadline', 'companies'));
+        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number', 'datetime', 'city', 'payment_deadline', 'companies'));
     }
 
     /**
@@ -74,7 +74,7 @@ class InvoiceController extends Controller
             'price.*' => 'nullable|numeric',
             'invoice_date' => 'required',
             'invoice_time' => 'required',
-            'place' => 'required|max:30',
+            'city' => 'required|max:30',
             'payment_deadline' => 'required',
         ));
 
@@ -89,7 +89,7 @@ class InvoiceController extends Controller
         $invoice->payment_deadline = $request->payment_deadline;
         $invoice->remark_id = $request->remark;
         $invoice->payment_type = $request->payment_type;
-        $invoice->city = $request->place;
+        $invoice->city = $request->city;
         $invoice->save();
 
         foreach ($request->product as $key => $product){
@@ -138,6 +138,7 @@ class InvoiceController extends Controller
     public function edit($id)
     {
         $invoice = Invoice::find($id);
+        $companies = Company::all();
         $items = InvoiceItem::where('invoice_id', $id)->get();
         $clients = Client::where('company_id', Auth::user()->company_id)->get();
         $remarks = Remark::where('company_id', Auth::user()->company_id)->get();
@@ -145,7 +146,7 @@ class InvoiceController extends Controller
         $units = Unit::where('company_id', Auth::user()->company_id)->get();
         $uri = url('invoice/'.$id);
 
-        return view('invoice/edit')->with(compact('invoice', 'items', 'clients', 'remarks', 'products', 'units', 'uri'));
+        return view('invoice/edit')->with(compact('invoice', 'companies', 'items', 'clients', 'remarks', 'products', 'units', 'uri'));
 
         //$items = InvoiceItem::where('invoice_id',$id)->join('products', 'invoice_items.product_id', '=', 'products.id')->join('units', 'invoice_item.unit_id', '=', 'units.id')->get(['invoice_items.*', 'products.code', 'products.description','unit.name']);
 
@@ -170,8 +171,8 @@ class InvoiceController extends Controller
         ));
 
         $invoice = Invoice::find($id);
-        $is_paid = $request->is_paid?1:0;
         $invoice->update([
+            'company_id' => Auth::user()->is_admin? $request->company : Auth::user()->company_id,
             'client_id' => $request->client,
             'invoice_date' => $request->invoice_date,
             'invoice_time' => $request->invoice_time,
@@ -179,8 +180,8 @@ class InvoiceController extends Controller
             'remark_id' => $request->remark,
             'payment_type' => $request->payment_type,
             'city' => $request->city,
-            'is_paid' => $is_paid,
-            'paid' =>$request->paid
+            'is_paid' => $request->is_paid ? 1 : 0,
+            'paid' =>$request->is_paid ? $request->paid : null,
         ]);
 
         $items = InvoiceItem::where('invoice_id', $id)->get();

@@ -8,6 +8,23 @@
                 <div class="card-header">Uredi račun br.{{$invoice->invoice_number}}</div>
                 {!! Form::open(array('url' => $uri, 'method' => 'PUT')) !!}
                 	<div class="card-body">
+                        @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                {{ Form::label('company', 'Tvrtka:') }}
+                                <select name="company" class="form-control">
+                                    @foreach ($companies as $company)
+                                        @if($company->id == $invoice->company_id)
+                                            <option value="{{ $company->id }}" selected>
+                                        @else
+                                            <option value="{{ $company->id }}">
+                                        @endif        
+                                        {{ $company->name }}, {{ $company->address }}, {{ $company->zip_code }} {{ $company->city }}, OIB: {{ $company->oib }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @endif
 	                	<div class="form-row">
 	                		<div class="form-group col-md-6">
 	                			{{ Form::label('client', 'Kupac:') }}
