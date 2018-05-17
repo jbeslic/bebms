@@ -137,7 +137,18 @@ class InvoiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $invoice = Invoice::find($id);
+        $items = InvoiceItem::where('invoice_id', $id)->get();
+        $clients = Client::where('company_id', Auth::user()->company_id)->get();
+        $remarks = Remark::where('company_id', Auth::user()->company_id)->get();
+        $products = Product::where('company_id', Auth::user()->company_id)->get();
+        $units = Unit::where('company_id', Auth::user()->company_id)->get();
+        $uri = url('invoice/'.$id);
+
+        return view('invoice/edit')->with(compact('invoice', 'items', 'clients', 'remarks', 'products', 'units', 'uri'));
+
+        //$items = InvoiceItem::where('invoice_id',$id)->join('products', 'invoice_items.product_id', '=', 'products.id')->join('units', 'invoice_item.unit_id', '=', 'units.id')->get(['invoice_items.*', 'products.code', 'products.description','unit.name']);
+
     }
 
     /**

@@ -23,7 +23,7 @@
                         <tbody>
                         @foreach($clients as $client)
                         <tr>
-                            <td>{{ $client->company_name}}
+                            <td>{{ substr($client->company_name, 0, 12).'...' }}
                             <td>{{ $client->name }}</td>
                             <td>{{ $client->address }}</td>
                             <td>{{ $client->zip_code }}</td>

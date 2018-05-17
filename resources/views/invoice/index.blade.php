@@ -20,7 +20,9 @@
                             <th scope="col">Client</th>
                             <th scope="col">Date</th>
                             <th scope="col">Price</th>
+                            <th scope="col">Plaćeno</th>
                             <th scope="col">PDF</th>
+                            <th scope="col">Akcija</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,7 +35,15 @@
                             <td>{{ $invoice->client->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($invoice->invoice_date)->format('d.m.Y') }}</td>
                             <td>{{ number_format($invoice->totalPrice(), 2, ',', '.') }}</td>
+                            <td>
+                                @if($invoice->is_paid)
+                                    DA
+                                @else
+                                    NE
+                                @endif
+                            </td>
                             <td><a class="btn btn-success" href="{{ route('invoice.pdf', ['id' => $invoice->id]) }}">{{ __('Print') }}</a></td>
+                            <td><a class="btn btn-secondary" href="{{ route('invoice.edit', ['id' => $invoice->id]) }}">Uredi</a></td>
                         </tr>
                         @endforeach
                         </tbody>

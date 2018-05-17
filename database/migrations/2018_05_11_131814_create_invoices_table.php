@@ -25,6 +25,8 @@ class CreateInvoicesTable extends Migration
             $table->integer('remark_id');
             $table->string('payment_type');
             $table->string('city');
+            $table->boolean('is_paid')->default(0);
+            $table->date('paid')->nullable()->default(null);
             $table->timestamps();
         });
     }
