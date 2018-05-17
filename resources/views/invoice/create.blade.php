@@ -8,7 +8,6 @@
                 <div class="card-header">Novi račun</div>
                 {!! Form::open(array('route' => 'invoice.store')) !!}
                 	<div class="card-body">
-	                	
                         @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
                         <div class="form-row">
                             <div class="form-group col-md-12">

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Company;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'company/create';
 
     /**
      * Create a new controller instance.
@@ -63,7 +64,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $company = new Company;
+        $company->name = '';
+        $company->owner = '';
+        $company->address = '';
+        $company->zip_code = '';
+        $company->city = '';
+        $company->oib = '';
+        $company->iban = '';
+        $company->bank_info = '';
+        $company->activity = '';
+        $company->logo_path = null;
+        $company->save();
+        $company = Company::orderBy('id', 'desc')->first(); 
+
         return User::create([
+            'company_id' => $company->id,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),

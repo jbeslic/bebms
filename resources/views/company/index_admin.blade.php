@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        	<a class="btn btn-info" href="{{ route('company.create') }}">Nova tvrtka</a>
 			@foreach($companies as $company)
 				<div class="card">
 					<div class="card-header">
@@ -28,8 +29,13 @@
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="form-group col-md-4 col-md-offset-8">
-								<a class="btn btn-info" href="{{ route('company.edit', ['id' => $company->id]) }}">Uredi</a>
+							<div class="form-group col-md-2">
+								<a class="btn btn-secondary" href="{{ route('company.edit', ['id' => $company->id]) }}">Uredi</a>
+							</div>
+							<div class="form-group col-md-2">
+								{!! Form::open(["route"=>["company.destroy", $company->id], "method" => "DELETE"]); !!}
+                                {!! Form::submit("Obriši ", array("class"=>"btn btn-danger")); !!}
+                                {!! Form::close(); !!}
 							</div>
 						</div>
 					</div>

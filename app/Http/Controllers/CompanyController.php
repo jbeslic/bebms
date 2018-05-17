@@ -38,8 +38,12 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('company/create');
+    {  
+        if(Auth::user()->is_admin){
+            return view('company/create');
+        }
+
+        return redirect()->route('company.edit', Auth::user()->company_id);
     }
 
     /**
@@ -51,26 +55,31 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
 
-        if(Auth::user()->is_admin) {
-            $this->validate($request, [
-                'logo' => 'image|mimes:jpeg,png,jpg,gif'
-            ]);
+        $this->validate($request, [
+            'logo' => 'image|mimes:jpeg,png,jpg,gif'
+        ]);
 
-            Storage::putFile('public', $request->file('logo'));
-            
-            $company = new Company;
-            $company->name = $request->name;
-            $company->owner = $request->owner;
-            $company->address = $request->address;
-            $company->zip_code = $request->zip_code;
-            $company->city = $request->city;
-            $company->oib = $request->oib;
-            $company->iban = $request->iban;
-            $company->bank_info = $request->bank_info;
-            $company->activity = $request->activity;
-            $company->logo_path = $request->file('logo')->hashName();
-            $company->save();
+        if($request->file('logo') == null){
+            $path = null;
         }
+        else{
+            Storage::putFile('public', $request->file('logo'));
+            $path = $request->file('logo')->hashName();
+        };
+        
+        $company = new Company;
+        $company->name = $request->name;
+        $company->owner = $request->owner;
+        $company->address = $request->address;
+        $company->zip_code = $request->zip_code;
+        $company->city = $request->city;
+        $company->oib = $request->oib;
+        $company->iban = $request->iban;
+        $company->bank_info = $request->bank_info;
+        $company->activity = $request->activity;
+        $company->logo_path = $path;
+        $company->save();
+        
         return redirect()->route('company.index');
     }
 
@@ -147,6 +156,10 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Auth::user()->company_id != $id){
+            Company::where('id', $id)->delete();
+        }
+        
+        return redirect()->route('company.index');
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Klijenti</div>
                 <div class="card-body">
@@ -23,7 +23,7 @@
                         <tbody>
                         @foreach($clients as $client)
                         <tr>
-                            <td>{{ substr($client->company_name, 0, 12).'...' }}
+                            <td>{{ $client->company_name }}
                             <td>{{ $client->name }}</td>
                             <td>{{ $client->address }}</td>
                             <td>{{ $client->zip_code }}</td>
