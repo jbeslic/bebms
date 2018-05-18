@@ -15,14 +15,14 @@
                         <tr>
                             <th scope="col">#</th>
                             @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
-                            <th scope="col">Company</th>
+                            <th scope="col">Tvrtka</th>
                             @endif
-                            <th scope="col">Client</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Plaćeno</th>
-                            <th scope="col">PDF</th>
-                            <th scope="col">Akcija</th>
+                            <th scope="col">Klijent</th>
+                            <th scope="col">Datum</th>
+                            <th scope="col">Cijena</th>
+                            <th scope="col" style="text-align:center">Plaćeno</th>
+                            <th scope="col" style="text-align:center">PDF</th>
+                            <th scope="col" colspan="2" style="text-align:center">Akcija</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,15 +35,18 @@
                             <td>{{ $invoice->client->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($invoice->invoice_date)->format('d.m.Y') }}</td>
                             <td>{{ number_format($invoice->totalPrice(), 2, ',', '.') }}</td>
-                            <td>
+                            <td align="center">
                                 @if($invoice->is_paid)
                                     DA
                                 @else
                                     NE
                                 @endif
                             </td>
-                            <td><a class="btn btn-success" href="{{ route('invoice.pdf', ['id' => $invoice->id]) }}">{{ __('Print') }}</a></td>
+                            <td align="center"><a class="btn btn-success" href="{{ route('invoice.pdf', ['id' => $invoice->id]) }}">{{ __('Print') }}</a></td>
                             <td><a class="btn btn-secondary" href="{{ route('invoice.edit', ['id' => $invoice->id]) }}">Uredi</a></td>
+                            <td>{!! Form::open(["route"=>["invoice.destroy", $invoice->id], "method" => "DELETE"]); !!}
+                                {!! Form::submit("Obriši ", array("class"=>"btn btn-danger")); !!}
+                                {!! Form::close(); !!}</td>
                         </tr>
                         @endforeach
                         </tbody>
