@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Client;
+use App\Company;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
@@ -37,6 +38,11 @@ class ClientController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->is_admin){
+            $companies = Company::all();
+            return view('client/create')->with(compact('companies'));
+        }
+
         return view('client/create');
     }
 
@@ -54,7 +60,7 @@ class ClientController extends Controller
         ));
 
         $client = new Client;
-        $client->company_id = Auth::user()->company_id; //\Auth::user()->company_id
+        $client->company_id = Auth::user()->is_admin ? $request->company: Auth::user()->company_id;
         $client->name = $request->name;
         $client->address = $request->address;
         $client->zip_code = $request->zip_code;

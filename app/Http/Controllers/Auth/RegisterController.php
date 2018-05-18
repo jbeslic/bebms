@@ -76,7 +76,7 @@ class RegisterController extends Controller
         $company->activity = '';
         $company->logo_path = null;
         $company->save();
-        $company = Company::orderBy('id', 'desc')->first(); 
+        $company = Company::orderBy('id', 'desc')->first(); //security?
 
         return User::create([
             'company_id' => $company->id,

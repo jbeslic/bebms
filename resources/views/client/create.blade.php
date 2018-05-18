@@ -8,7 +8,19 @@
                 <div class="card-header">Novi klijent</div>
 
                 <div class="card-body">
-                   {!! Form::open(array('route' => 'client.store')) !!}
+                    {!! Form::open(array('route' => 'client.store')) !!}
+                    @if(\Illuminate\Support\Facades\Auth::user()->is_admin)
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                {{ Form::label('company', 'Tvrtka:') }}
+                                <select name="company" class="form-control">
+                                    @foreach ($companies as $company)
+                                        <option value="{{ $company->id }}">{{ $company->name }}, {{ $company->address }}, {{ $company->zip_code }} {{ $company->city }}, OIB: {{ $company->oib }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             {{ Form::label('name', 'Naziv klijenta:') }}
