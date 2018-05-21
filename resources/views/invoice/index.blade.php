@@ -19,7 +19,7 @@
                             @endif
                             <th scope="col">Klijent</th>
                             <th scope="col">Datum</th>
-                            <th scope="col">Cijena</th>
+                            <th scope="col">Iznos</th>
                             <th scope="col" style="text-align:center">Plaćeno</th>
                             <th scope="col" style="text-align:center">PDF</th>
                             <th scope="col" colspan="2" style="text-align:center">Akcija</th>

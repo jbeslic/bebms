@@ -219,7 +219,6 @@ class InvoiceController extends Controller
         $invoice = Invoice::find($id);
         $invoice->items()->delete();
         $invoice->delete();
-        //Invoice::where('id', $id)->delete();
         return redirect()->route('invoice.index');
 
     }
