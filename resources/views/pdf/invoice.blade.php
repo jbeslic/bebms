@@ -170,7 +170,7 @@
                 <td colspan="2">
                     UKUPNI IZNOS
                 </td>
-                <td style="text-align: right;">{{ number_format($data['total_price'], 2, ',', '.') }}</td>
+                <td style="text-align: right;">{{ number_format($data['total_price'], 2, ',', '.') }} kn</td>
             </tr>
         </table>
 
