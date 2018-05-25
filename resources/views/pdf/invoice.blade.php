@@ -64,7 +64,7 @@
     <table cellpadding="0" cellspacing="0">
         <tr class="top">
             <td class="title text" style="width: 460px;" colspan="4">
-                <img src="img/logo_pdf.PNG" style="width: 200px;">
+                <img src="{{ asset('storage/'.$company->logo_path) }}" style="width: 200px;">
             </td>
             <td class="text" colspan="3">
                 <strong>{{ $data['company']->name }}</strong> <br/>
@@ -84,7 +84,7 @@
             <tr class="information">
 
                 <td colspan="2" style="width: 450px;">
-                    <strong><span style="color: #6ba3ff;">RAČUN br. – {{ $data['invoice_number'] }}/1/1 </span></strong>
+                    <strong><span style="color: #FF6E0B;">RAČUN br. – {{ $data['invoice_number'] }}/1/1 </span></strong>
                 </td>
 
 
