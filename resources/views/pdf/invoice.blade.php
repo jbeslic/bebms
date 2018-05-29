@@ -93,7 +93,7 @@
                     <strong>{{ $data['client']->name }}</strong><br/>
                     {{ $data['client']->address }}  <br/>
                     {{ $data['client']->zip_code }} {{ $data['client']->city }}  <br/>
-                    {{ $data['client']->oib }}  <br/>
+                    OIB: {{ $data['client']->oib }}  <br/>
                 </td>
             </tr>
 
