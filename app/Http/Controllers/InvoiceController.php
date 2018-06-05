@@ -124,9 +124,6 @@ class InvoiceController extends Controller
         $invoice->items;
 
         return view('home');
-
-        dd($invoice->items);
-
     }
 
     /**

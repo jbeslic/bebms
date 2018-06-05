@@ -14,7 +14,8 @@ Route::resource('/product', 'ProductController');
 Route::resource('/client', 'ClientController');
 Route::resource('/invoice', 'InvoiceController');
 Route::resource('/company', 'CompanyController');
-
+Route::resource('/memo', 'MemoController');
+Route::get('/memo/{id}/pdf', 'MemoController@createPdf')->name('memo.pdf');
 Route::get('/invoice/{id}/pdf', 'InvoiceController@createPdf')->name('invoice.pdf');
 
 Route::get('/', function () {
