@@ -35,7 +35,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12"> <!-- content -->
                                 {{ Form::label('Content', 'Content:') }}
-                                {{ Form::textarea('data_content', $memo->content, array('class'=>'form-control')) }}
+                                {{ Form::textarea('data_content', $memo->content, array('class'=>'form-control', 'id'=>'data_content')) }}
                             </div>
                         </div>
 
@@ -48,5 +48,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var ckview = document.getElementById("data_content");
+        CKEDITOR.replace( 'data_content' );
+    </script>
 
 @endsection

@@ -98,7 +98,7 @@
         </table>
 
         <div>
-            {{ $data['content'] }}
+            {!! $data['content'] !!}
         </div>
 
 
