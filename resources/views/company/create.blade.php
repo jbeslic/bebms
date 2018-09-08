@@ -11,7 +11,7 @@
                     {!! Form::open(array('route' => 'company.store', 'enctype' => 'multipart/form-data')) !!}
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            {{ Form::label('name', 'Naziv obrta:') }}
+                            {{ Form::label('name', 'Naziv tvrtke:') }}
                             {{ Form::text('name', null, array('class'=>'form-control', 'required'=>'')) }}
                         </div>
                         <div class="form-group col-md-6">
