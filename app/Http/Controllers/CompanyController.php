@@ -78,6 +78,7 @@ class CompanyController extends Controller
         $company->bank_info = $request->bank_info;
         $company->activity = $request->activity;
         $company->logo_path = $path;
+        $company->color = $request->color;
         $company->save();
         
         return redirect()->route('company.index');
@@ -119,6 +120,7 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $this->validate($request, [
             'logo' => 'image|mimes:jpeg,png,jpg,gif'
         ]);
@@ -143,6 +145,7 @@ class CompanyController extends Controller
             'iban' => $request->iban,
             'bank_info' => $request->bank_info,
             'activity' => $request->activity,
+            'color' => $request->color,
             'logo_path' => $path
         ]);
         return redirect()->route('company.index');

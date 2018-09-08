@@ -58,6 +58,10 @@
                             {{ Form::label('logo', 'Logo:') }}
                             {{ Form::file('logo', ['class' => 'form-control']) }}
                         </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('color', 'Boja:') }}
+                            {{ Form::text('color', $company->color, array('class'=>'form-control', 'required'=>'')) }}
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">

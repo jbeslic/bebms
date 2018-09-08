@@ -21,7 +21,8 @@
                 				<h5>Djelatnost:</h5><p><strong>{{ $company->activity }}</strong></p>
                 			</div>
                 			<div class="form-group col-md-4">
- 								<img src="{{ asset('storage/'.$company->logo_path) }}" class="img-fluid img-thumbnail" height="200" width="200" alt="Company logo!">
+								<p><img src="{{ asset('storage/'.$company->logo_path) }}" class="img-fluid img-thumbnail" height="200" width="200" alt="Company logo!"></p>
+								<h5>Boja:</h5><p style="color: #{{ $company->color }};"><strong>{{ $company->color }}</strong></p>
  							</div>
  						</div>
  						<div class="form-row">

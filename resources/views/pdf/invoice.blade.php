@@ -84,7 +84,7 @@
             <tr class="information">
 
                 <td colspan="2" style="width: 450px;">
-                    <strong><span style="color: #FF6E0B;">RAČUN br. – {{ $data['invoice_number'] }}/1/1 </span></strong>
+                    <strong><span style="color: #{{ $data['company']->color }};">RAČUN br. – {{ $data['invoice_number'] }}/1/1 </span></strong>
                 </td>
 
 
