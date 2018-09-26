@@ -97,7 +97,7 @@ class InvoiceController extends Controller
                 if($request->amount[$key]&&$request->price[$key]){
                     $invoice_item = new InvoiceItem();
                     $invoice_item->invoice_id = $invoice->id;
-                    $invoice_item->product_id = Product::whereCode($product)->first()->id;
+                    $invoice_item->product_id = Product::whereCode($product)->whereCompanyId(Auth::user()->company_id)->first()->id;
                     $invoice_item->unit_id = $request->unit[$key];
                     $invoice_item->amount = $request->amount[$key];
                     $invoice_item->price = $request->price[$key];
@@ -134,13 +134,14 @@ class InvoiceController extends Controller
      */
     public function edit($id)
     {
+        $company_id = Auth::user()->company_id;
         $invoice = Invoice::find($id);
         $companies = Company::all();
         $items = InvoiceItem::where('invoice_id', $id)->get();
-        $clients = Client::where('company_id', Auth::user()->company_id)->get();
-        $remarks = Remark::where('company_id', Auth::user()->company_id)->get();
-        $products = Product::where('company_id', Auth::user()->company_id)->get();
-        $units = Unit::where('company_id', Auth::user()->company_id)->get();
+        $clients = Client::where('company_id', $company_id)->get();
+        $remarks = Remark::where('company_id', $company_id)->get();
+        $products = Product::where('company_id', $company_id)->get();
+        $units = Unit::where('company_id', $company_id)->get();
         $uri = url('invoice/'.$id);
 
         return view('invoice/edit')->with(compact('invoice', 'companies', 'items', 'clients', 'remarks', 'products', 'units', 'uri'));
@@ -191,7 +192,7 @@ class InvoiceController extends Controller
                 if($request->amount[$key]&&$request->price[$key]){
                     $invoice_item = new InvoiceItem();
                     $invoice_item->invoice_id = $invoice->id;
-                    $invoice_item->product_id = Product::whereCode($product)->first()->id;
+                    $invoice_item->product_id = Product::whereCode($product)->whereCompanyId(Auth::user()->company_id)->first()->id;
                     $invoice_item->unit_id = $request->unit[$key];
                     $invoice_item->amount = $request->amount[$key];
                     $invoice_item->price = $request->price[$key];
