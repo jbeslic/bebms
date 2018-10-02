@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
+
+    protected $fillable = [
+        'company_id','client_id', 'invoice_date', 'invoice_time', 'payment_deadline', 'remark_id', 'payment_type', 'city', 'is_paid', 'paid'
+    ];
+
     public function items()
     {
     	return $this->hasMany('App\InvoiceItem');
@@ -26,8 +31,9 @@ class Invoice extends Model
         return $this->belongsTo('App\Company');
     }
 
-    protected $fillable = [
-        'company_id','client_id', 'invoice_date', 'invoice_time', 'payment_deadline', 'remark_id', 'payment_type', 'city', 'is_paid', 'paid'
-    ];
+    public function getTotalPriceAttribute()
+    {
+        return $this->totalPrice();
+    }
 
 }

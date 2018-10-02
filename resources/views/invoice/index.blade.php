@@ -34,7 +34,7 @@
                             @endif
                             <td>{{ $invoice->client->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($invoice->invoice_date)->format('d.m.Y') }}</td>
-                            <td>{{ number_format($invoice->totalPrice(), 2, ',', '.') }}</td>
+                            <td>{{ number_format($invoice->total_price, 2, ',', '.') }}</td>
                             <td align="center">
                                 @if($invoice->is_paid)
                                     DA
@@ -50,6 +50,12 @@
                         </tr>
                         @endforeach
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <th scope="col" colspan="3">Ukupno</th>
+                            <th scope="col" colspan="2">{{ number_format($invoices->sum('total_price'), 2, ',', '.') }}</th>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
