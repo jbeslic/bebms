@@ -91,6 +91,17 @@
                 ADRESA PREBIVALIŠTA/ UOBIČAJENOG BORAVIŠTA
             </td>
         </tr>
+        <tr>
+            <td>
+                {{ $data['company']->owner }}
+            </td>
+            <td>
+                {{ $data['company']->oib }}
+            </td>
+            <td>
+                {{ $data['company']->address }}, {{ $data['company']->zip_code }} {{ $data['company']->city }}
+            </td>
+        </tr>
     </table>
 
     <table>
@@ -104,7 +115,7 @@
                 1. NAZIV I VRSTA DJELATNOSTI
             </td>
             <td>
-                OIB
+                {{ $data['company']->name }}
             </td>
 
         </tr>
@@ -113,7 +124,7 @@
                 2. BROJ ZAPOSLENIH NA DAN 31.12.
             </td>
             <td>
-                OIB
+                1
             </td>
 
         </tr>
@@ -178,10 +189,10 @@
                 0,00
             </td>
             <td>
-                4
+                {{  number_format($data['invoice'][1], 2, ',', '.') }}
             </td>
             <td>
-                5 (3+4)
+                {{  number_format($data['invoice'][1], 2, ',', '.') }}
             </td>
             <td>
                 0,00
@@ -199,10 +210,10 @@
                 0,00
             </td>
             <td>
-                4
+                {{  number_format($data['invoice'][2], 2, ',', '.') }}
             </td>
             <td>
-                5 (3+4)
+                {{ number_format($data['invoice'][2], 2, ',', '.') }}
             </td>
             <td>
                 0,00
@@ -220,10 +231,10 @@
                 0,00
             </td>
             <td>
-                4
+                {{  number_format($data['invoice'][3], 2, ',', '.') }}
             </td>
             <td>
-                5 (3+4)
+                {{  number_format($data['invoice'][3], 2, ',', '.') }}
             </td>
             <td>
                 0,00
@@ -241,10 +252,10 @@
                 0,00
             </td>
             <td>
-                4
+                {{  number_format($data['invoice'][4], 2, ',', '.') }}
             </td>
             <td>
-                5 (3+4)
+                {{  number_format($data['invoice'][4], 2, ',', '.') }}
             </td>
             <td>
                 0,00
@@ -262,10 +273,10 @@
                 0,00
             </td>
             <td>
-                4
+                {{  number_format($data['invoice']['sum'], 2, ',', '.') }}
             </td>
             <td>
-                5 (3+4)
+                {{  number_format($data['invoice']['sum'], 2, ',', '.') }}
             </td>
             <td>
                 0,00

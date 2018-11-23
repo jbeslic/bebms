@@ -11,6 +11,8 @@ class Invoice extends Model
         'company_id','client_id', 'invoice_date', 'invoice_time', 'payment_deadline', 'remark_id', 'payment_type', 'city', 'is_paid', 'paid', 'invoice_number', 'delivery_date'
     ];
 
+    protected $appends = ['total_price'];
+
     public function items()
     {
     	return $this->hasMany('App\InvoiceItem');
@@ -34,6 +36,10 @@ class Invoice extends Model
     public function getTotalPriceAttribute()
     {
         return $this->totalPrice();
+    }
+    public function setTotalPriceAttribute()
+    {
+        $this->attributes['total_price'] = $this->totalPrice();
     }
 
 }
