@@ -182,7 +182,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Račun ispostavio:</td>
+                <td>Ponudu ispostavio:</td>
                 <td>
                     {{ $data['company']->owner }}
                 </td>
