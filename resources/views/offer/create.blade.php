@@ -30,12 +30,12 @@
                                 </select>
                             </div>
 	                		<div class="form-group col-md-2"> <!-- Date input -->
-                                {{ Form::label('invoice_date', 'Datum:') }}
-                                {{ Form::date('invoice_date', $datetime , array('class'=>'form-control')) }}
+                                {{ Form::label('offer_date', 'Datum:') }}
+                                {{ Form::date('offer_date', $datetime , array('class'=>'form-control')) }}
 						    </div>
                             <div class="form-group col-md-2">
-                                {{ Form::label('invoice_time', 'Vrijeme:') }}
-                                {{ Form::time('invoice_time', $datetime, array('class'=>'form-control')) }}
+                                {{ Form::label('offer_time', 'Vrijeme:') }}
+                                {{ Form::time('offer_time', $datetime, array('class'=>'form-control')) }}
                             </div>
                             <div class="form-group col-md-2">
                                 {{ Form::label('city', 'Mjesto:') }}

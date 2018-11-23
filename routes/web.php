@@ -19,7 +19,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('/memo', 'MemoController');
     Route::get('/memo/{id}/pdf', 'MemoController@createPdf')->name('memo.pdf');
     Route::get('/invoice/{id}/pdf', 'InvoiceController@createPdf')->name('invoice.pdf');
-    Route::get('/offer/{id}/pdf', 'InvoiceController@createPdf')->name('offer.pdf');
+    Route::get('/offer/{id}/pdf', 'OfferController@createPdf')->name('offer.pdf');
+    Route::get('/offer/{id}/invoice', 'OfferController@createInvoice')->name('offer.invoice');
     Route::get('/po-sd/{year}/pdf', 'TaxController@posd')->name('tax.pdf');
 });
 

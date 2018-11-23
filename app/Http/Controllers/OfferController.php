@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Invoice;
 use App\OfferItem;
 use App\Unit;
 use App\Product;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Milon\Barcode\DNS2D;
 use PDF;
 use Carbon\Carbon;
+use function Sodium\crypto_box_publickey_from_secretkey;
+
 class OfferController extends Controller
 {
 
@@ -68,7 +71,6 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
-
 
         $this->validate($request, array(
             'amount.*' => 'nullable|numeric',
@@ -273,4 +275,24 @@ Placanje po ponudi {$data['offer_number']}-{$year}\r"; //important to stay forma
         $pdf = PDF::loadView('pdf.offer', array('data' => $data));
         return $pdf->download('offer-'.$data['offer_number'].'-'.$year.'.pdf');
     }
+
+    public function createInvoice($id)
+    {
+        $offer = Offer::find($id);
+        $invoice = new Invoice();
+
+        $data = $offer->toArray();
+        $data['invoice_number'] = Invoice::whereYear('invoice_date', date("Y"))->where('company_id', $offer->company_id)->count()+1;
+        $data['invoice_date'] = $offer->offer_date;
+        $data['invoice_time'] = $offer->offer_time;
+
+        $invoice->create($data);
+
+
+        return redirect()->route('invoice.index');
+
+
+    }
+
 }
+
