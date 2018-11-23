@@ -14,7 +14,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('/product', 'ProductController');
     Route::resource('/client', 'ClientController');
     Route::resource('/invoice', 'InvoiceController');
-    Route::resource('/offer', 'InvoiceController');
+    Route::resource('/offer', 'OfferController');
     Route::resource('/company', 'CompanyController');
     Route::resource('/memo', 'MemoController');
     Route::get('/memo/{id}/pdf', 'MemoController@createPdf')->name('memo.pdf');

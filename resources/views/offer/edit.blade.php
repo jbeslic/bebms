@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Uredi račun br.{{$offer->offer_number}}</div>
+                <div class="card-header">Uredi ponudu br.{{$offer->offer_number}}</div>
                 {!! Form::open(array('url' => $uri, 'method' => 'PUT')) !!}
                 	<div class="card-body">
                         @if(\Illuminate\Support\Facades\Auth::user()->is_admin)

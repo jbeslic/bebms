@@ -19,7 +19,7 @@ class TaxController extends Controller
         $this->middleware('auth');
     }
 
-    
+
     public function posd($year)
     {
 

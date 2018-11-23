@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Računi
+                    Ponude
                 </div>
                 <div class="card-body">
                     <a class="btn btn-info" href="{{ route('offer.create') }}">{{ __('Novi') }}</a>

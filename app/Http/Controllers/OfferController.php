@@ -69,6 +69,7 @@ class OfferController extends Controller
     public function store(Request $request)
     {
 
+
         $this->validate($request, array(
             'amount.*' => 'nullable|numeric',
             'price.*' => 'nullable|numeric',

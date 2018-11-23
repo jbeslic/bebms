@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Novi račun</div>
+                <div class="card-header">Nova ponuda</div>
                 {!! Form::open(array('route' => 'offer.store')) !!}
                 	<div class="card-body">
                         @if(\Illuminate\Support\Facades\Auth::user()->is_admin)

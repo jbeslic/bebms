@@ -8,7 +8,7 @@ class Offer extends Model
 {
 
     protected $fillable = [
-        'company_id','client_id', 'invoice_date', 'invoice_time', 'payment_deadline', 'remark_id', 'payment_type', 'city', 'is_paid', 'paid'
+        'company_id','client_id', 'offer_date', 'offer_time', 'payment_deadline', 'remark_id', 'payment_type', 'city', 'is_paid', 'paid'
     ];
 
     public function items()
