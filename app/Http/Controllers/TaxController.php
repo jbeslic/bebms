@@ -38,7 +38,7 @@ class TaxController extends Controller
 
 
         $pdf = PDF::loadView('pdf.posd', array('data' => $data))->setPaper('a4', 'landscape');
-        return $pdf->download('PO-SD-'.$year.'.pdf');
+        return $pdf->stream('PO-SD-'.$year.'.pdf');
     }
 
 }

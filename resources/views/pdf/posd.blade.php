@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Invoice</title>
+    <title>Obrazac PO-SD</title>
 
     <style type="text/css">
         body {
@@ -10,77 +10,46 @@
             font-size:12px;
             color: black;
         }
-        .offer-box{
-            max-width:800px;
-            margin:auto;
-            box-shadow:0 0 10px rgba(0, 0, 0, .15);
-            color:#555;
+        table {
+            border: 1 solid;
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        td {
+            border: 1 solid;
+            padding: 5px 15px;
+        }
+        table.no-border, .no-border td {
+            border: none;
         }
 
-        .offer-box table{
-            width:100%;
-            text-align:left;
-        }
-
-        .offer-box table td{
-            vertical-align:top;
-        }
-        .offer-box table tr.heading td{
-            background:#eee;
-            border-bottom:1px solid #ddd;
-            font-weight:bold;
-        }
-        .offer-box table tr.date_place td{
-            padding-bottom: 30px;
-        }
-        .offer-box table tr.information td{
-            padding-top: 30px;
-            padding-bottom: 15px;
-        }
-
-        .offer-box table tr.item td{
-            border-bottom:1px solid #eee;
-        }
-
-        .offer-box table tr.item.last td{
-            border-bottom:none;
-        }
-
-        .offer-box table tr.total td{
-            border-top:2px solid #eee;
-            font-weight:bold;
-            padding-bottom: 30px;
-        }
-
-         .offer-box table td.barcode {
-            padding-top: 50px;
-        }
 
     </style>
 </head>
 
 <body>
 
-    <table>
+    <table class="no-border">
         <tr>
-            <td>
+            <td style="text-align: right; font-weight: bold;">
                 Obrazac PO-SD
             </td>
         </tr>
         <tr>
-            <td>
+            <td style="padding: 0 150px; text-align: center; font-weight: bold;">
                 IZVJEŠĆE O PAUŠALNOM DOHOTKU OD SAMOSTALNE DJELATNOSTI I UPLAĆENOM PAUŠALNOM POREZU NA DOHODAK I PRIREZU POREZA NA DOHODAK U 2018. GODINI
             </td>
         </tr>
     </table>
 
     <table>
-        <tr>
-            <td colspan="3">
+        <tr style="font-weight: bold; background-color: #d1d1d1;">
+            <td colspan="3" >
                 I. PODACI O POREZNOM OBVEZNIKU/NOSITELJU ZAJEDNIČKE DJELATNOSTI
             </td>
         </tr>
-        <tr>
+        <tr style="font-weight: bold; background-color: #d1d1d1;">
             <td>
                 IME I PREZIME
             </td>
@@ -105,13 +74,13 @@
     </table>
 
     <table>
-        <tr>
+        <tr style="font-weight: bold; background-color: #d1d1d1;">
             <td colspan="2">
                 II. PODACI O DJELATNOSTI
             </td>
         </tr>
-        <tr>
-            <td>
+        <tr >
+            <td style="font-weight: bold; background-color: #d1d1d1; width: 35%;">
                 1. NAZIV I VRSTA DJELATNOSTI
             </td>
             <td>
@@ -120,7 +89,7 @@
 
         </tr>
         <tr>
-            <td>
+            <td style="font-weight: bold; background-color: #d1d1d1; width: 35%;">
                 2. BROJ ZAPOSLENIH NA DAN 31.12.
             </td>
             <td>
@@ -131,12 +100,12 @@
     </table>
 
     <table>
-        <tr>
+        <tr style="font-weight: bold; background-color: #d1d1d1;">
             <td colspan="6">
                 III. PODACI O OSTVARENIM PRIMICIMA I UPLAĆENOM PAUŠALNOM POREZU NA DOHODAK I PRIREZU POREZA NA DOHODAK
             </td>
         </tr>
-        <tr>
+        <tr style="font-weight: bold; background-color: #d1d1d1; text-align: center;">
             <td>
                 POREZNO RAZDOBLJE (KVARTALI)
             </td>
@@ -157,7 +126,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr style="text-align: center;">
             <td>
                 1
             </td>
@@ -178,8 +147,8 @@
             </td>
         </tr>
 
-        <tr>
-            <td>
+        <tr style="text-align: right;">
+            <td style="font-weight: bold; background-color: #d1d1d1;">
                 1.1.-31.3.
             </td>
             <td>
@@ -199,8 +168,8 @@
             </td>
         </tr>
 
-        <tr>
-            <td>
+        <tr style="text-align: right;">
+            <td style="font-weight: bold; background-color: #d1d1d1;">
                 1.4.-30.6.
             </td>
             <td>
@@ -220,8 +189,8 @@
             </td>
         </tr>
 
-        <tr>
-            <td>
+        <tr style="text-align: right;">
+            <td style="font-weight: bold; background-color: #d1d1d1;">
                 1.7.-30.9.
             </td>
             <td>
@@ -241,8 +210,8 @@
             </td>
         </tr>
 
-        <tr>
-            <td>
+        <tr style="text-align: right;">
+            <td style="font-weight: bold; background-color: #d1d1d1;">
                 1.10.-31.12.
             </td>
             <td>
@@ -262,8 +231,8 @@
             </td>
         </tr>
 
-        <tr>
-            <td>
+        <tr style="font-weight: bold; text-align: right;">
+            <td style="background-color: #d1d1d1;">
                 UKUPNO
             </td>
             <td>
@@ -285,7 +254,19 @@
 
     </table>
 
+    <table class="no-border" style="margin-top: 90px;">
+        <tr>
+            <td style="border-top: 1 solid; width: 33%; text-align: center;">
+                NADNEVAK
+            </td>
+            <td style="width: 33%;">
 
+            </td>
+            <td style="border-top: 1 solid; width: 33%; text-align: center;">
+                POTPIS
+            </td>
+        </tr>
+    </table>
 
 
 </body>
