@@ -60,6 +60,7 @@
                                     <a class="dropdown-item" href="{{ route('client.index') }}">Klijenti</a>
                                     <a class="dropdown-item" href="{{ route('invoice.index') }}">Računi</a>
 									<a class="dropdown-item" href="{{ route('memo.index') }}">Dopisi</a>
+                                    <a class="dropdown-item" href="{{ route('tax.index') }}">Porezi</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

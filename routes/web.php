@@ -17,6 +17,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('/offer', 'OfferController');
     Route::resource('/company', 'CompanyController');
     Route::resource('/memo', 'MemoController');
+    Route::resource('/tax', 'TaxController');
     Route::get('/memo/{id}/pdf', 'MemoController@createPdf')->name('memo.pdf');
     Route::get('/invoice/{id}/pdf', 'InvoiceController@createPdf')->name('invoice.pdf');
     Route::get('/offer/{id}/pdf', 'OfferController@createPdf')->name('offer.pdf');
