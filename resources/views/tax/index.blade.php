@@ -9,6 +9,7 @@
                     Porez
                 </div>
                 <div class="card-body">
+                    <div><a class="btn btn-primary pull-right" href="{{ route('tax.pdf', [2018]) }}">{{ __('PO-SD 2018') }}</a></div>
                     <a class="btn btn-info" href="{{ route('tax.create') }}">{{ __('Novi') }}</a>
                     <table class="table table-hover">
                         <thead>
