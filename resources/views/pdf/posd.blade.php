@@ -164,7 +164,7 @@
                 {{  number_format($data['invoice'][1], 2, ',', '.') }}
             </td>
             <td>
-                0,00
+                {{  number_format($data['tax'][1], 2, ',', '.') }}
             </td>
         </tr>
 
@@ -185,7 +185,7 @@
                 {{ number_format($data['invoice'][2], 2, ',', '.') }}
             </td>
             <td>
-                0,00
+                {{ number_format($data['tax'][2], 2, ',', '.') }}
             </td>
         </tr>
 
@@ -206,7 +206,7 @@
                 {{  number_format($data['invoice'][3], 2, ',', '.') }}
             </td>
             <td>
-                0,00
+                {{  number_format($data['tax'][3], 2, ',', '.') }}
             </td>
         </tr>
 
@@ -227,7 +227,7 @@
                 {{  number_format($data['invoice'][4], 2, ',', '.') }}
             </td>
             <td>
-                0,00
+                {{  number_format($data['tax'][4], 2, ',', '.') }}
             </td>
         </tr>
 
@@ -248,7 +248,7 @@
                 {{  number_format($data['invoice']['sum'], 2, ',', '.') }}
             </td>
             <td>
-                0,00
+                {{  number_format($data['tax']['sum'], 2, ',', '.') }}
             </td>
         </tr>
 
