@@ -101,7 +101,8 @@ class InvoiceController extends Controller
                     $invoice_item->unit_id = $request->unit[$key];
                     $invoice_item->amount = $request->amount[$key];
                     $invoice_item->price = $request->price[$key];
-                    $invoice_item->discount = 0;
+                    $invoice_item->discount = $request->discount[$key];
+                    $invoice_item->description = $request->description[$key];
                     $invoice_item->save();
                 }
             }
@@ -196,7 +197,8 @@ class InvoiceController extends Controller
                     $invoice_item->unit_id = $request->unit[$key];
                     $invoice_item->amount = $request->amount[$key];
                     $invoice_item->price = $request->price[$key];
-                    $invoice_item->discount = 0;
+                    $invoice_item->discount = $request->discount[$key];
+                    $invoice_item->description = $request->description[$key];
                     $invoice_item->save();
                 }
             }

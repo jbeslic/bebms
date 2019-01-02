@@ -85,7 +85,7 @@
                         </div>
                         @for($i = 0; $i < 5; $i++)
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 {{ Form::label('products', 'Stavke:') }}
                                 <select name="product[{{$i}}]" class="form-control">
                                     <option value="0">Izaberi...</option>
@@ -133,6 +133,18 @@
                                 @else
                                     {{ Form::text('price', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'price['.$i.']')) }}
                                 @endif        
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ Form::label('discount', 'Popust:') }}
+                                {{ Form::text('discount', $items[$i]->discount ?? null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'discount['.$i.']')) }}
+
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                {{ Form::label('description', 'Opis:') }}
+                                {{ Form::textarea('description', $items[$i]->desrciption ?? null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'description['.$i.']')) }}
                             </div>
                         </div>
                         @endfor
