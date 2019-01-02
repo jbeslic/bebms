@@ -98,7 +98,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 {{ Form::label('description', 'Opis:') }}
-                                {{ Form::textarea('description', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'description['.$i.']')) }}
+                                {{ Form::textarea('description', null, array('class'=>'form-control', 'rows' => 2, 'placeholder' => '0', 'name' => 'description['.$i.']')) }}
                             </div>
                         </div>
                         @endfor
