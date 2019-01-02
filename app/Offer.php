@@ -4,18 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Invoice extends Model
+class Offer extends Model
 {
 
     protected $fillable = [
-        'company_id','client_id', 'invoice_date', 'invoice_time', 'payment_deadline', 'remark_id', 'payment_type', 'city', 'is_paid', 'paid', 'invoice_number', 'delivery_date'
+        'company_id','client_id', 'offer_date', 'offer_time', 'payment_deadline', 'remark_id', 'payment_type', 'city', 'is_paid', 'paid'
     ];
-
-    protected $appends = ['total_price'];
 
     public function items()
     {
-    	return $this->hasMany('App\InvoiceItem');
+    	return $this->hasMany('App\OfferItem');
     }
 
     public function totalPrice()
@@ -36,10 +34,6 @@ class Invoice extends Model
     public function getTotalPriceAttribute()
     {
         return $this->totalPrice();
-    }
-    public function setTotalPriceAttribute()
-    {
-        $this->attributes['total_price'] = $this->totalPrice();
     }
 
 }
