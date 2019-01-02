@@ -119,7 +119,7 @@
                     JM
                 </td>
                 <td>
-                    Količina.
+                    Količina
                 </td>
                 <td>
                     Cijena
