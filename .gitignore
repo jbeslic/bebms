@@ -12,3 +12,5 @@ npm-debug.log
 yarn-error.log
 .env
 /storage/backup/beDev-Billing-Management-System
+storage/backup/2018-09-26-17-14-17.zip
+storage/backup/db-dumps/mysql-bebms.sql.gz
