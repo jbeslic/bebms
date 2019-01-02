@@ -270,6 +270,7 @@ COST\r
 Placanje po racunu {$data['invoice_number']}-{$year}\r"; //important to stay formated as this
 
         //dd($code);
+        $data['year'] = $year;
 
         $data['barcode'] = DNS2D::getBarcodePNG($code, "PDF417");
 

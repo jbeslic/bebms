@@ -204,7 +204,7 @@
             <tr>
                 <td>Poziv na broj:</td>
                 <td>
-                    {{ $data['invoice_number'] }}-2018
+                    {{ $data['invoice_number'] }}-{{ $data['year'] }}
                 </td>
             </tr>
             <tr>
