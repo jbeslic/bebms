@@ -101,7 +101,8 @@ class InvoiceController extends Controller
                     $invoice_item->unit_id = $request->unit[$key];
                     $invoice_item->amount = $request->amount[$key];
                     $invoice_item->price = $request->price[$key];
-                    $invoice_item->discount = 0;
+                    $invoice_item->discount = $request->discount[$key];
+                    $invoice_item->description = $request->description[$key];
                     $invoice_item->save();
                 }
             }
@@ -196,7 +197,8 @@ class InvoiceController extends Controller
                     $invoice_item->unit_id = $request->unit[$key];
                     $invoice_item->amount = $request->amount[$key];
                     $invoice_item->price = $request->price[$key];
-                    $invoice_item->discount = 0;
+                    $invoice_item->discount = $request->discount[$key];
+                    $invoice_item->description = $request->description[$key];
                     $invoice_item->save();
                 }
             }
@@ -239,6 +241,8 @@ class InvoiceController extends Controller
         foreach ($invoice->items as $key => $item){
             $items['product'] = $item->product;
             $items['unit'] = $item->unit;
+            $items['discount'] = $item->discount;
+            $items['description'] = $item->description;
             $items['amount'] = $item->amount;
             $items['price_per_unit'] = $item->price;
             $items['price'] = $item->total_price;
@@ -266,6 +270,7 @@ COST\r
 Placanje po racunu {$data['invoice_number']}-{$year}\r"; //important to stay formated as this
 
         //dd($code);
+        $data['year'] = $year;
 
         $data['barcode'] = DNS2D::getBarcodePNG($code, "PDF417");
 

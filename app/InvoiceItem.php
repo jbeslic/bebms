@@ -21,7 +21,7 @@ class InvoiceItem extends Model
 
     public function getTotalPriceAttribute()
     {
-        return $this->price*$this->amount;
+        return $this->price*(1-$this->discount/100)*$this->amount;
     }
 
 

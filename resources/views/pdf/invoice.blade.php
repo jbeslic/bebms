@@ -119,7 +119,7 @@
                     JM
                 </td>
                 <td>
-                    Količina.
+                    Količina
                 </td>
                 <td>
                     Cijena
@@ -141,7 +141,7 @@
                     {{ $key+1 }}
                 </td>
                 <td width="30%">
-                    {{ $item['product']->description }}
+                    {{ $item['product']->description }} - {{ $item['description'] }}
                 </td>
                 <td>
                     {{ $item['unit']->name }}
@@ -153,7 +153,7 @@
                     {{ number_format($item['price_per_unit'], 2, ',', '.') }}
                 </td>
                 <td>
-                    0%
+                    {{ $item['discount'] }}%
                 </td>
                 <td style="text-align: right;">
                     {{ number_format($item['price'], 2, ',', '.') }}
@@ -204,7 +204,7 @@
             <tr>
                 <td>Poziv na broj:</td>
                 <td>
-                    {{ $data['invoice_number'] }}-2018
+                    {{ $data['invoice_number'] }}-{{ $data['year'] }}
                 </td>
             </tr>
             <tr>

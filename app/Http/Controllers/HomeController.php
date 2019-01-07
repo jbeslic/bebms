@@ -39,9 +39,9 @@ class HomeController extends Controller
         }
 
 
-        $invoices = Invoice::where('company_id', Auth::user()->company_id)->get();
+        //$invoices = Invoice::where('company_id', Auth::user()->company_id)->get();
 
-        dd($invoices->sum('total_price'));
+        //dd($invoices->sum('total_price'));
 
 
 
