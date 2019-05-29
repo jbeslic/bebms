@@ -53,7 +53,7 @@
                             </div>
 	                	</div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
                                 {{ Form::label('remark', 'Napomena:') }}
                                 <select name="remark" class="form-control">
                                     @foreach ($remarks as $remark)
@@ -65,6 +65,17 @@
                                             {{ $remark->description }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group col-md-1">
+                                {{ Form::label('currency', 'Valuta:') }}
+                                <select name="currency" class="form-control">
+                                    <option value="HRK">HRK</option>
+                                    <option value="EUR" @if($invoice->currency == 'EUR') selected @endif>EURO</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ Form::label('hnb_middle_exchange', 'HNB srednji:') }}
+                                {{ Form::text('hnb_middle_exchange', $invoice->hnb_middle_exchange, array('class'=>'form-control')) }}
                             </div>
                             <div class="form-group col-md-3">
                                 {{ Form::label('payment_type', 'Način plaćanja:') }}

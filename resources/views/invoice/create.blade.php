@@ -43,12 +43,19 @@
                             </div>
 	                	</div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 {{ Form::label('remark', 'Napomena:') }}
                                 <select name="remark" class="form-control">
                                     @foreach ($remarks as $remark)
                                         <option value="{{ $remark->id }}">{{ $remark->description }}</option>
                                     @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ Form::label('remark', 'Valuta:') }}
+                                <select name="currency" class="form-control">
+                                    <option value="HRK">HRK</option>
+                                    <option value="EUR">EURO</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">

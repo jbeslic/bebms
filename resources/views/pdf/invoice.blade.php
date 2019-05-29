@@ -70,7 +70,7 @@
                 <strong>{{ $data['company']->name }}</strong> <br/>
                 @if($data['company']->type == 'FO') vl.{{ $data['company']->owner }},@endif {{ $data['company']->address }},<br/>
                 {{ $data['company']->zip_code }} {{ $data['company']->city }}<br/>
-                OIB: {{ $data['company']->oib }}<br/>
+                VAT/OIB: HR{{ $data['company']->oib }}<br/>
                 IBAN: {{ $data['company']->iban }} <br/>
 
             </td>
@@ -84,7 +84,13 @@
             <tr class="information">
 
                 <td colspan="2" style="width: 450px;">
-                    <strong><span style="color: #{{ $data['company']->color }};">RAČUN br. – {{ $data['invoice_number'] }}/1/1 </span></strong>
+                    <strong>
+                        <span style="color: #{{ $data['company']->color }};">
+                            RAČUN br. – {{ $data['invoice_number'] }}/1/1 <br/>
+                            (INVOICE #)
+                        </span>
+
+                    </strong>
                 </td>
 
 
@@ -93,13 +99,14 @@
                     <strong>{{ $data['client']->name }}</strong><br/>
                     {{ $data['client']->address }}  <br/>
                     {{ $data['client']->zip_code }} {{ $data['client']->city }}  <br/>
-                    OIB: {{ $data['client']->oib }}  <br/>
+                    VAT/OIB: {{ $data['client']->oib }}  <br/>
                 </td>
             </tr>
 
             <tr class="date_place">
                 <td>
-                    Mjesto, datum i vrijeme izdavanja:
+                    Mjesto, datum i vrijeme izdavanja: <br/>
+                    (Place, date and time)
                 </td>
                 <td colspan="2">
                     {{ $data['place'] }}, {{ $data['invoice_date'] }} u {{ $data['invoice_time'] }}
@@ -113,22 +120,28 @@
                     #
                 </td>
                 <td width="30%">
-                    Trgovački naziv dobra - usluge
+                    Trgovački naziv dobra - usluge <br/>
+                    (Description)
                 </td>
                 <td>
-                    JM
+                    JM <br/>
+                    (UM)
                 </td>
                 <td>
-                    Količina
+                    Količina<br/>
+                    (Quantity)
                 </td>
                 <td>
-                    Cijena
+                    Cijena<br/>
+                    (Price)
                 </td>
                 <td>
-                    Rabat
+                    Rabat<br/>
+                    (Discount)
                 </td>
                 <td>
-                    Iznos
+                    Iznos<br/>
+                    (Total)
                 </td>
             </tr>
 
@@ -168,13 +181,28 @@
 
                 </td>
                 <td colspan="2">
-                    UKUPNI IZNOS
+                    UKUPNI IZNOS<br/>
+                    (TOTAL)
                 </td>
-                <td style="text-align: right;">{{ number_format($data['total_price'], 2, ',', '.') }} kn</td>
+                <td style="text-align: right;">{{ number_format($data['total_price'], 2, ',', '.') }} {{ $data['currency'] }}</td>
             </tr>
         </table>
 
         <table class="info">
+            @if($data['currency'] == 'EUR')
+            <tr>
+                <td>Tecaj HNB:</td>
+                <td>
+                    {{ $data['hnb_middle_exchange'] }}
+                </td>
+            </tr>
+            <tr>
+                <td>Ukupno:</td>
+                <td>
+                    {{ number_format($data['total_price_HRK'], 2, ',', '.') }} HRK
+                </td>
+            </tr>
+            @endif
             <tr>
                 <td>Napomena:</td>
                 <td>

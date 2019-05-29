@@ -47,6 +47,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
+
         $datetime = Carbon::now();
         $payment_deadline = Carbon::now()->addDays(10); //get hardcoded number of days from conf/settings
         $city = Company::where('id', Auth::user()->company_id)->pluck('city');
@@ -90,6 +91,17 @@ class InvoiceController extends Controller
         $invoice->remark_id = $request->remark;
         $invoice->payment_type = $request->payment_type;
         $invoice->city = $request->city;
+        $invoice->currency = $request->currency;
+
+        if($request->currency == 'EUR'){
+            $client = new \GuzzleHttp\Client();
+            $req = $client->get('http://api.hnb.hr/tecajn/v1?valuta=EUR');
+            $response = $req->getBody();
+            $data = json_decode($response, true);
+
+            $invoice->hnb_middle_exchange = $data[0]["Srednji za devize"];
+        }
+
         $invoice->save();
 
         foreach ($request->product as $key => $product){
@@ -179,8 +191,10 @@ class InvoiceController extends Controller
             'remark_id' => $request->remark,
             'payment_type' => $request->payment_type,
             'city' => $request->city,
+            'currency' => $request->currency,
+            'hnb_middle_exchange' => $request->hnb_middle_exchange,
             'is_paid' => $request->is_paid ? 1 : 0,
-            'paid' =>$request->is_paid ? $request->paid : null,
+            'paid' => $request->is_paid ? $request->paid : null,
         ]);
 
         $items = InvoiceItem::where('invoice_id', $id)->get();
@@ -233,11 +247,19 @@ class InvoiceController extends Controller
         $data['invoice_date'] = Carbon::parse($invoice->invoice_date)->format('d.m.Y');
         $data['invoice_time'] = $invoice->invoice_time;
         $data['place'] = $invoice->city;
+        $data['currency'] = $invoice->currency;
+        $data['hnb_middle_exchange'] = $invoice->hnb_middle_exchange;
         $data['payment_type'] = $invoice->payment_type;
         $data['payment_deadline'] = Carbon::parse($invoice->payment_deadline)->format('d.m.Y');
         $data['items'] = array();
         $data['invoice_number'] = $invoice->invoice_number;
         $data['total_price'] = $invoice->totalPrice();
+
+        if($invoice->currency == 'EUR'){
+            $data['hnb_middle_exchange'] = str_replace(',', '.', $data['hnb_middle_exchange']);
+            $data['total_price_HRK'] = $data['total_price']*((float) $data['hnb_middle_exchange']);
+        }
+
         foreach ($invoice->items as $key => $item){
             $items['product'] = $item->product;
             $items['unit'] = $item->unit;
