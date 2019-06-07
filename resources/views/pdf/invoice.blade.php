@@ -237,7 +237,9 @@
             </tr>
             <tr>
                 <td class="barcode" colspan="2">
-                    <img style="width: 58mm; height: 26mm" src="data:image/png;base64,'{{ $data['barcode'] }}">
+                    @if($data['currency'] != 'EUR')
+                        <img style="width: 58mm; height: 26mm" src="data:image/png;base64,'{{ $data['barcode'] }}">
+                    @endif
                 </td>
             </tr>
             
