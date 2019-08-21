@@ -252,7 +252,7 @@ class OfferController extends Controller
 
 
         $value = sprintf( '%015d', $data['total_price'] * 100);
-        $year = date('Y');
+        $year = Carbon::parse($offer->offer_date)->format('Y');
         $code = "HRVHUB30\r
 HRK\r
 $value\r
