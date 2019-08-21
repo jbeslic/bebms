@@ -93,6 +93,16 @@ class OfferController extends Controller
         $offer->remark_id = $request->remark;
         $offer->payment_type = $request->payment_type;
         $offer->city = $request->city;
+        $offer->currency = $request->currency;
+
+        if($request->currency == 'EUR'){
+            $client = new \GuzzleHttp\Client();
+            $req = $client->get('http://api.hnb.hr/tecajn/v1?valuta=EUR');
+            $response = $req->getBody();
+            $data = json_decode($response, true);
+
+            $offer->hnb_middle_exchange = $data[0]["Srednji za devize"];
+        }
         $offer->save();
 
         foreach ($request->product as $key => $product){
@@ -104,7 +114,8 @@ class OfferController extends Controller
                     $offer_item->unit_id = $request->unit[$key];
                     $offer_item->amount = $request->amount[$key];
                     $offer_item->price = $request->price[$key];
-                    $offer_item->discount = 0;
+                    $offer_item->discount = $request->discount[$key];
+                    $offer_item->description = $request->description[$key];
                     $offer_item->save();
                 }
             }
@@ -181,6 +192,8 @@ class OfferController extends Controller
             'remark_id' => $request->remark,
             'payment_type' => $request->payment_type,
             'city' => $request->city,
+            'currency' => $request->currency,
+            'hnb_middle_exchange' => $request->hnb_middle_exchange,
             'is_paid' => $request->is_paid ? 1 : 0,
             'paid' =>$request->is_paid ? $request->paid : null,
         ]);
@@ -199,7 +212,8 @@ class OfferController extends Controller
                     $offer_item->unit_id = $request->unit[$key];
                     $offer_item->amount = $request->amount[$key];
                     $offer_item->price = $request->price[$key];
-                    $offer_item->discount = 0;
+                    $offer_item->discount = $request->discount[$key];
+                    $offer_item->description = $request->description[$key];
                     $offer_item->save();
                 }
             }
