@@ -245,6 +245,7 @@ class OfferController extends Controller
             $items['amount'] = $item->amount;
             $items['price_per_unit'] = $item->price;
             $items['price'] = $item->total_price;
+            $items['description'] = $item->description;
 
             $data['items'][] = $items;
         }
