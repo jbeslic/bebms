@@ -177,14 +177,14 @@
 
 
         <tr class="total">
-            <td colspan="4">
+            <td colspan="3">
 
             </td>
             <td colspan="2">
                 UKUPNI IZNOS<br/>
                 (TOTAL)
             </td>
-            <td style="text-align: right;">{{ number_format($data['total_price'], 2, ',', '.') }} {{ $data['currency'] }}</td>
+            <td colspan="2" style="text-align: right;">{{ number_format($data['total_price'], 2, ',', '.') }} {{ $data['currency'] }}</td>
         </tr>
     </table>
 
