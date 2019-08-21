@@ -53,7 +53,7 @@
                             </div>
 	                	</div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
                                 {{ Form::label('remark', 'Napomena:') }}
                                 <select name="remark" class="form-control">
                                     @foreach ($remarks as $remark)
@@ -65,6 +65,17 @@
                                             {{ $remark->description }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group col-md-1">
+                                {{ Form::label('currency', 'Valuta:') }}
+                                <select name="currency" class="form-control">
+                                    <option value="HRK">HRK</option>
+                                    <option value="EUR" @if($offer->currency == 'EUR') selected @endif>EURO</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ Form::label('hnb_middle_exchange', 'HNB srednji:') }}
+                                {{ Form::text('hnb_middle_exchange', $offer->hnb_middle_exchange, array('class'=>'form-control')) }}
                             </div>
                             <div class="form-group col-md-3">
                                 {{ Form::label('payment_type', 'Način plaćanja:') }}
@@ -85,7 +96,7 @@
                         </div>
                         @for($i = 0; $i < 5; $i++)
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 {{ Form::label('products', 'Stavke:') }}
                                 <select name="product[{{$i}}]" class="form-control">
                                     <option value="0">Izaberi...</option>
@@ -133,6 +144,18 @@
                                 @else
                                     {{ Form::text('price', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'price['.$i.']')) }}
                                 @endif        
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ Form::label('discount', 'Popust:') }}
+                                {{ Form::text('discount', $items[$i]->discount ?? null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'discount['.$i.']')) }}
+
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                {{ Form::label('description', 'Opis:') }}
+                                {{ Form::textarea('description', $items[$i]->description ?? null, array('class'=>'form-control', 'rows' => 2, 'placeholder' => '0', 'name' => 'description['.$i.']')) }}
                             </div>
                         </div>
                         @endfor

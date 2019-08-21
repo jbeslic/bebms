@@ -43,12 +43,19 @@
                             </div>
 	                	</div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 {{ Form::label('remark', 'Napomena:') }}
                                 <select name="remark" class="form-control">
                                     @foreach ($remarks as $remark)
                                         <option value="{{ $remark->id }}">{{ $remark->description }}</option>
                                     @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ Form::label('remark', 'Valuta:') }}
+                                <select name="currency" class="form-control">
+                                    <option value="HRK">HRK</option>
+                                    <option value="EUR">EURO</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
@@ -65,7 +72,7 @@
                         </div>
                         @for($i = 0; $i < 5; $i++)
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 {{ Form::label('products', 'Stavke:') }}
                                 <select name="product[{{$i}}]" class="form-control">
                                     <option value="0" selected>Izaberi...</option>
@@ -89,6 +96,16 @@
                             <div class="form-group col-md-2">
                                 {{ Form::label('price', 'Cijena:') }}
                                 {{ Form::text('price', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'price['.$i.']')) }}
+                            </div>
+                            <div class="form-group col-md-2">
+                                {{ Form::label('discount', 'Popust:') }}
+                                {{ Form::text('discount', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'discount['.$i.']')) }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                {{ Form::label('description', 'Opis:') }}
+                                {{ Form::textarea('description', null, array('class'=>'form-control', 'rows' => 2, 'placeholder' => '0', 'name' => 'description['.$i.']')) }}
                             </div>
                         </div>
                         @endfor
