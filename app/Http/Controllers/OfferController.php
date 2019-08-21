@@ -239,6 +239,12 @@ class OfferController extends Controller
         $data['items'] = array();
         $data['offer_number'] = $offer->offer_number;
         $data['total_price'] = $offer->totalPrice();
+
+        if($offer->currency == 'EUR'){
+            $data['hnb_middle_exchange'] = str_replace(',', '.', $data['hnb_middle_exchange']);
+            $data['total_price_HRK'] = $data['total_price']*((float) $data['hnb_middle_exchange']);
+        }
+
         foreach ($offer->items as $key => $item){
             $items['product'] = $item->product;
             $items['unit'] = $item->unit;
