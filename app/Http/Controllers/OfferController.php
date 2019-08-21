@@ -234,6 +234,8 @@ class OfferController extends Controller
         $data['offer_date'] = Carbon::parse($offer->offer_date)->format('d.m.Y');
         $data['offer_time'] = $offer->offer_time;
         $data['place'] = $offer->city;
+        $data['currency'] = $invoice->currency;
+        $data['hnb_middle_exchange'] = $invoice->hnb_middle_exchange;
         $data['payment_type'] = $offer->payment_type;
         $data['payment_deadline'] = Carbon::parse($offer->payment_deadline)->format('d.m.Y');
         $data['items'] = array();
