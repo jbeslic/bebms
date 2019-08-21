@@ -242,10 +242,11 @@ class OfferController extends Controller
         foreach ($offer->items as $key => $item){
             $items['product'] = $item->product;
             $items['unit'] = $item->unit;
+            $items['discount'] = $item->discount;
+            $items['description'] = $item->description;
             $items['amount'] = $item->amount;
             $items['price_per_unit'] = $item->price;
             $items['price'] = $item->total_price;
-            $items['description'] = $item->description;
 
             $data['items'][] = $items;
         }
