@@ -27,14 +27,15 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $year = $request->year ?? date('Y');
         if(Auth::user()->is_admin){
-            $invoices = Invoice::orderBy('company_id')->get();
+            $invoices = Invoice::orderBy('company_id')->whereYear('invoice_date', $year)->get();
         }
         else {
-            $invoices = Invoice::where('company_id', Auth::user()->company_id)->get();
+            $invoices = Invoice::where('company_id', Auth::user()->company_id)->whereYear('invoice_date', $year)->get();
         }
 
         return view('invoice.index')->with('invoices', $invoices);
