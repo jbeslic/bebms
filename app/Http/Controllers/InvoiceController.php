@@ -262,6 +262,7 @@ class InvoiceController extends Controller
         }
 
         foreach ($invoice->items as $key => $item){
+            $items['price'] = $item->total_price;
             if($invoice->currency == 'EUR'){
                 $items['price'] = $item->total_price/$data['hnb_middle_exchange'];
             }
@@ -271,8 +272,7 @@ class InvoiceController extends Controller
             $items['description'] = $item->description;
             $items['amount'] = $item->amount;
             $items['price_per_unit'] = $item->price;
-            $items['price'] = $item->total_price;
-
+            
             $data['items'][] = $items;
         }
 
