@@ -100,7 +100,7 @@ class InvoiceController extends Controller
             $response = $req->getBody();
             $data = json_decode($response, true);
 
-            $invoice->hnb_middle_exchange = str_replace(',', '.', str_replace('.', '', $data[0]["Srednji za devize"]);
+            $invoice->hnb_middle_exchange = str_replace(',', '.', str_replace('.', '', $data[0]["Srednji za devize"]));
         }
 
         $invoice->save();
