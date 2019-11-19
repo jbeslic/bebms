@@ -257,8 +257,8 @@ class InvoiceController extends Controller
         $data['total_price'] = $invoice->totalPrice();
 
         if($invoice->currency == 'EUR'){
-            $data['total_price'] = $invoice->totalPrice()/$data['hnb_middle_exchange'];
             $data['total_price_HRK'] = $data['total_price'];
+            $data['total_price'] = $invoice->totalPrice()/$data['hnb_middle_exchange'];
         }
 
         foreach ($invoice->items as $key => $item){
