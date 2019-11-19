@@ -8,20 +8,21 @@ class Invoice extends Model
 {
 
     protected $fillable = [
-        'company_id','client_id', 'invoice_date', 'invoice_time', 'payment_deadline', 'remark_id', 'payment_type', 'city', 'is_paid', 'paid', 'invoice_number', 'delivery_date'
+        'company_id',
+        'client_id',
+        'invoice_date',
+        'invoice_time',
+        'payment_deadline',
+        'remark_id',
+        'payment_type',
+        'city',
+        'is_paid',
+        'paid',
+        'invoice_number',
+        'delivery_date'
     ];
 
     protected $appends = ['total_price'];
-
-    public function items()
-    {
-    	return $this->hasMany('App\InvoiceItem');
-    }
-
-    public function totalPrice()
-    {
-        return $this->items()->get()->sum('total_price');
-    }
 
     public function client()
     {
@@ -37,6 +38,17 @@ class Invoice extends Model
     {
         return $this->totalPrice();
     }
+
+    public function totalPrice()
+    {
+        return $this->items()->get()->sum('total_price');
+    }
+
+    public function items()
+    {
+    	return $this->hasMany('App\InvoiceItem');
+    }
+
     public function setTotalPriceAttribute()
     {
         $this->attributes['total_price'] = $this->totalPrice();

@@ -21,7 +21,12 @@ class InvoiceItem extends Model
 
     public function getTotalPriceAttribute()
     {
-        return $this->price*(1-$this->discount/100)*$this->amount;
+        $exchange_rate = 1;
+        $invoice = $this->invoice();
+        if($invoice->currency == 'EUR'){
+            $exchange_rate = $invoice->hnb_middle_exchange;
+        }
+        return $this->price*(1-$this->discount/100)*$this->amount*$exchange_rate;
     }
 
 
