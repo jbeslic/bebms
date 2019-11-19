@@ -100,7 +100,7 @@ class InvoiceController extends Controller
             $response = $req->getBody();
             $data = json_decode($response, true);
 
-            $invoice->hnb_middle_exchange = $data[0]["Srednji za devize"];
+            $invoice->hnb_middle_exchange = str_replace(',', '.', str_replace('.', '', $data[0]["Srednji za devize"]);
         }
 
         $invoice->save();
@@ -257,8 +257,8 @@ class InvoiceController extends Controller
         $data['total_price'] = $invoice->totalPrice();
 
         if($invoice->currency == 'EUR'){
-            $data['hnb_middle_exchange'] = str_replace(',', '.', $data['hnb_middle_exchange']);
-            $data['total_price_HRK'] = $data['total_price']*((float) $data['hnb_middle_exchange']);
+            $data['total_price'] = $invoice->totalPrice()/$data['hnb_middle_exchange'];
+            $data['total_price_HRK'] = $data['total_price'];
         }
 
         foreach ($invoice->items as $key => $item){
