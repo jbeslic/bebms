@@ -19,7 +19,13 @@ class Invoice extends Model
         'is_paid',
         'paid',
         'invoice_number',
-        'delivery_date'
+        'delivery_date',
+        'currency',
+        'hnb_middle_exchange',
+    ];
+
+    protected $casts = [
+        'hnb_middle_exchange' => 'float',
     ];
 
     protected $appends = ['total_price'];
