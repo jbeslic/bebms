@@ -154,7 +154,8 @@
                     {{ $key+1 }}
                 </td>
                 <td width="30%">
-                    {{ $item['product']->description }} - {{ $item['description'] }}
+                    {{ $item['product']->description }} - <br>
+                    {!! $item['description'] !!}
                 </td>
                 <td>
                     {{ $item['unit']->name }}
