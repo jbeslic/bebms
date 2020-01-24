@@ -154,7 +154,7 @@
                     {{ $key+1 }}
                 </td>
                 <td width="30%">
-                    {{ $item['product']->description }} - <br>
+                    {{ $item['product']->description }}
                     {!! $item['description'] !!}
                 </td>
                 <td>
@@ -236,13 +236,13 @@
                 {{ $data['offer_number'] }}-{{ $data['year'] }}
             </td>
         </tr>
-        <tr>
+        {{--<tr>
             <td class="barcode" colspan="2">
                 @if($data['currency'] != 'EUR')
                     <img style="width: 58mm; height: 26mm" src="data:image/png;base64,'{{ $data['barcode'] }}">
                 @endif
             </td>
-        </tr>
+        </tr>--}}
 
 
     </table>

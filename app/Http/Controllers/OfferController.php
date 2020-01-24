@@ -294,7 +294,7 @@ Placanje po ponudi {$data['offer_number']}-{$year}\r"; //important to stay forma
 
         //dd($code);
         $data['year'] = $year;
-        $data['barcode'] = DNS2D::getBarcodePNG($code, "PDF417");
+        //$data['barcode'] = DNS2D::getBarcodePNG($code, "PDF417");
 
         $pdf = PDF::loadView('pdf.offer', array('data' => $data));
         return $pdf->download('offer-'.$data['offer_number'].'-'.$year.'.pdf');
