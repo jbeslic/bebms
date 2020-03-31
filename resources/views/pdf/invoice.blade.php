@@ -136,7 +136,7 @@
                     (Price)
                 </td>
                 <td>
-                    Rabat<br/>
+                    Popust<br/>
                     (Discount)
                 </td>
                 <td>
@@ -170,7 +170,7 @@
                     {{ $item['discount'] }}%
                 </td>
                 <td style="text-align: right;">
-                    {{ number_format($item['price'], 2, ',', '.') }}
+                    {{ number_format($item['total_price'], 2, ',', '.') }}
                 </td>
             </tr>
 
@@ -181,6 +181,11 @@
                 <td colspan="3">
 
                 </td>
+                <td colspan="2">
+                    UKUPNI POPUST<br/>
+                    (TOTAL DISCOUNT)
+                </td>
+                <td colspan="2" style="text-align: right;">{{ number_format($data['discount_price'], 2, ',', '.') }} {{ $data['currency'] }}</td>
                 <td colspan="2">
                     UKUPNI IZNOS<br/>
                     (TOTAL)

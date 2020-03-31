@@ -254,15 +254,17 @@ class InvoiceController extends Controller
         $data['payment_deadline'] = Carbon::parse($invoice->payment_deadline)->format('d.m.Y');
         $data['items'] = array();
         $data['invoice_number'] = $invoice->invoice_number;
-        $data['total_price'] = $invoice->totalPrice();
+        $data['total_price'] = $invoice->total_price;
+        $data['discount_price'] = $invoice->discount_price;
 
         if($invoice->currency == 'EUR'){
             $data['total_price_HRK'] = $data['total_price'];
-            $data['total_price'] = $invoice->totalPrice()/$data['hnb_middle_exchange'];
+            $data['total_price'] = $invoice->total_price/$data['hnb_middle_exchange'];
         }
 
         foreach ($invoice->items as $key => $item){
-            $items['price'] = $item->total_price;
+            $items['price'] = $item->price;
+            $items['total_price'] = $item->total_price;
             if($invoice->currency == 'EUR'){
                 $items['price'] = $item->total_price/$data['hnb_middle_exchange'];
             }

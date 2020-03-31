@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class InvoiceItem extends Model
 {
+    protected $appends = [
+        'total_price',
+        'discount_price',
+        ];
+
     public function invoice()
     {
         return $this->belongsTo('App\Invoice');
@@ -27,6 +32,11 @@ class InvoiceItem extends Model
             $exchange_rate = $invoice->hnb_middle_exchange;
         }
         return $this->price*(1-$this->discount/100)*$this->amount*$exchange_rate;
+    }
+
+    public function getDiscountPriceAttribute()
+    {
+        return $this->price - $this->total_price;
     }
 
 

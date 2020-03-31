@@ -28,7 +28,10 @@ class Invoice extends Model
         'hnb_middle_exchange' => 'float',
     ];
 
-    protected $appends = ['total_price'];
+    protected $appends = [
+        'total_price',
+        'discount_price',
+        ];
 
     public function client()
     {
@@ -40,14 +43,9 @@ class Invoice extends Model
         return $this->belongsTo('App\Company');
     }
 
-    public function getTotalPriceAttribute()
+    public function setTotalPriceAttribute()
     {
-        return $this->totalPrice();
-    }
-
-    public function totalPrice()
-    {
-        return $this->items()->get()->sum('total_price');
+        $this->attributes['total_price'] = $this->items->sum('total_price');
     }
 
     public function items()
@@ -55,9 +53,9 @@ class Invoice extends Model
     	return $this->hasMany('App\InvoiceItem');
     }
 
-    public function setTotalPriceAttribute()
+    public function setDiscountPriceAttribute()
     {
-        $this->attributes['total_price'] = $this->totalPrice();
+        $this->attributes['discount_price'] = $this->items->sum('discount_price');
     }
 
 }
