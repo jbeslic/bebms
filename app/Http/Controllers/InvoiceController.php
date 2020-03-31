@@ -246,19 +246,13 @@ class InvoiceController extends Controller
         $data['items'] = array();
         $data['invoice_number'] = $invoice->invoice_number;
         $data['total_price'] = $invoice->total_price;
+        $data['total_hrk_price'] = $invoice->total_hrk_price;
         $data['discount_price'] = $invoice->discount_price;
-
-        if($invoice->currency == 'EUR'){
-            $data['total_price_HRK'] = $data['total_price'];
-            $data['total_price'] = $invoice->total_price/$data['hnb_middle_exchange'];
-        }
 
         foreach ($invoice->items as $key => $item){
             $items['price'] = $item->price;
             $items['total_price'] = $item->total_price;
-            if($invoice->currency == 'EUR'){
-                $items['price'] = $item->total_price/$data['hnb_middle_exchange'];
-            }
+            $items['total_hrk_price'] = $item->total_hrk_price;
             $items['unit'] = $item->unit;
             $items['discount'] = $item->discount;
             $items['description'] = $item->description;
@@ -270,7 +264,7 @@ class InvoiceController extends Controller
 
 
 
-        $value = sprintf( '%015d', $data['total_price'] * 100);
+        $value = sprintf( '%015d', $data['total_hrk_price'] * 100);
         $year = date('Y');
         $code = "HRVHUB30\r
 HRK\r

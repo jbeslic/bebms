@@ -46,8 +46,10 @@
             border-bottom:none;
         }
 
-        .invoice-box table tr.total td{
+        .invoice-box table tr.total-discount td{
             border-top:2px solid #eee;
+        }
+        .invoice-box table tr.total td{
             font-weight:bold;
             padding-bottom: 30px;
         }
@@ -154,7 +156,6 @@
                     {{ $key+1 }}
                 </td>
                 <td width="30%">
-                    {{ $item['product']->description }} - <br>
                     {!! $item['description'] !!}
                 </td>
                 <td>
@@ -176,8 +177,7 @@
 
             @endforeach
 
-
-            <tr class="total">
+            <tr class="total-discount">
                 <td colspan="3">
 
                 </td>
@@ -186,6 +186,11 @@
                     (TOTAL DISCOUNT)
                 </td>
                 <td colspan="2" style="text-align: right;">{{ number_format($data['discount_price'], 2, ',', '.') }} {{ $data['currency'] }}</td>
+            </tr>
+            <tr class="total">
+                <td colspan="3">
+
+                </td>
                 <td colspan="2">
                     UKUPNI IZNOS<br/>
                     (TOTAL)
@@ -205,7 +210,7 @@
             <tr>
                 <td>Ukupno:</td>
                 <td>
-                    {{ number_format($data['total_price_HRK'], 2, ',', '.') }} HRK
+                    {{ number_format($data['total_hrk_price'], 2, ',', '.') }} HRK
                 </td>
             </tr>
             @endif

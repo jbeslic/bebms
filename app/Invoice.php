@@ -29,6 +29,7 @@ class Invoice extends Model
     ];
 
     protected $appends = [
+        'total_hrk_price',
         'total_price',
         'discount_price',
         ];
@@ -43,19 +44,24 @@ class Invoice extends Model
         return $this->belongsTo('App\Company');
     }
 
-    public function setTotalPriceAttribute()
-    {
-        $this->attributes['total_price'] = $this->items->sum('total_price');
-    }
-
     public function items()
     {
     	return $this->hasMany('App\InvoiceItem');
     }
 
-    public function setDiscountPriceAttribute()
+    public function getDiscountPriceAttribute()
     {
-        $this->attributes['discount_price'] = $this->items->sum('discount_price');
+       return $this->items->sum('discount_price');
+    }
+
+    public function getTotalPriceAttribute()
+    {
+        return $this->items->sum('total_price');
+    }
+
+    public function getTotalHrkPriceAttribute()
+    {
+        return $this->items->sum('total_hrk_price');
     }
 
 }
