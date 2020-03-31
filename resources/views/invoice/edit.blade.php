@@ -96,24 +96,7 @@
                         </div>
                         @for($i = 0; $i < 5; $i++)
                         <div class="form-row">
-                            <div class="form-group col-md-4">
-                                {{ Form::label('products', 'Stavke:') }}
-                                <select name="product[{{$i}}]" class="form-control">
-                                    <option value="0">Izaberi...</option>
-                                    @foreach ($products as $product)
-                                        @if($i<count($items))
-                                            @if($items[$i]->product_id==$product->id)
-                                                <option value="{{ $product->code }}" selected>{{ $product->description }}</option>
-                                            @else
-                                                <option value="{{ $product->code }}">{{ $product->description }}</option>
-                                            @endif
-                                        @else
-                                            <option value="{{ $product->code }}">{{ $product->description }}</option>
-                                        @endif     
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {{ Form::label('units', 'JM:') }}
                                 <select name="unit[{{$i}}]" class="form-control">
                                     @foreach ($units as $unit)
@@ -129,7 +112,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {{ Form::label('amount', 'Količina:') }}
                                 @if($i<count($items))
                                     {{ Form::text('amount', $items[$i]->amount, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'amount['.$i.']')) }}
@@ -137,7 +120,7 @@
                                     {{ Form::text('amount', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'amount['.$i.']')) }}
                                 @endif        
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {{ Form::label('price', 'Cijena:') }}
                                 @if($i<count($items))
                                     {{ Form::text('price', $items[$i]->price, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'price['.$i.']')) }}
@@ -145,7 +128,7 @@
                                     {{ Form::text('price', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'price['.$i.']')) }}
                                 @endif        
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {{ Form::label('discount', 'Popust:') }}
                                 {{ Form::text('discount', $items[$i]->discount ?? null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'discount['.$i.']')) }}
 

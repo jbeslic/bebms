@@ -72,16 +72,7 @@
                         </div>
                         @for($i = 0; $i < 5; $i++)
                         <div class="form-row">
-                            <div class="form-group col-md-4">
-                                {{ Form::label('products', 'Stavke:') }}
-                                <select name="product[{{$i}}]" class="form-control">
-                                    <option value="0" selected>Izaberi...</option>
-                                    @foreach ($products as $product)
-                                        <option value="{{ $product->code }}">{{ $product->description }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {{ Form::label('units', 'JM:') }}
                                 <select name="unit[{{$i}}]" class="form-control">
                                     @foreach ($units as $unit)
@@ -89,15 +80,15 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {{ Form::label('amount', 'Količina:') }}
                                 {{ Form::text('amount', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'amount['.$i.']')) }}
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {{ Form::label('price', 'Cijena:') }}
                                 {{ Form::text('price', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'price['.$i.']')) }}
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-3">
                                 {{ Form::label('discount', 'Popust:') }}
                                 {{ Form::text('discount', null, array('class'=>'form-control', 'placeholder' => '0', 'name' => 'discount['.$i.']')) }}
                             </div>

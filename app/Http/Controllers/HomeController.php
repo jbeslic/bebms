@@ -6,7 +6,6 @@ use App\Client;
 use App\Company;
 use App\Invoice;
 use App\Unit;
-use App\Product;
 use App\Remark;
 use Illuminate\Support\Facades\Auth;
 use Milon\Barcode\DNS2D;

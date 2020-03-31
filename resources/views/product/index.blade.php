@@ -21,7 +21,7 @@
                         <tr>
                             <td>{{ $product->code }}</td>
                             <td>{{ $product->description }}</td>
-                            <td><a class="btn btn-secondary" href="{{ route('product.edit', ['id' => $product->id]) }}">Uredi</a></td>
+                            <td><a class="btn btn-secondary" href="{{ route('product.edit', [$product->id]) }}">Uredi</a></td>
                             <td>
                                 {!! Form::open(["route"=>["product.destroy", $product->id], "method" => "DELETE"]); !!}
                                 {!! Form::submit("Obriši ", array("class"=>"btn btn-warning")); !!}

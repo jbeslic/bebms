@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\InvoiceItem;
 use App\Unit;
-use App\Product;
 use App\Remark;
 use Illuminate\Http\Request;
 use App\Invoice;
@@ -57,9 +56,8 @@ class InvoiceController extends Controller
         $clients = Auth::user()->is_admin ? Client::all() : Client::where('company_id', Auth::user()->company_id)->get();
         $remarks = Auth::user()->is_admin ? Remark::all() : Remark::where('company_id', Auth::user()->company_id)->get();
         $units = Auth::user()->is_admin ? Unit::all() : Unit::where('company_id', Auth::user()->company_id)->get();
-        $products = Auth::user()->is_admin ? Product::all() : Product::where('company_id', Auth::user()->company_id)->get();
 
-        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'products', 'invoice_number', 'datetime', 'city', 'payment_deadline', 'companies'));
+        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'invoice_number', 'datetime', 'city', 'payment_deadline', 'companies'));
     }
 
     /**
@@ -105,19 +103,16 @@ class InvoiceController extends Controller
 
         $invoice->save();
 
-        foreach ($request->product as $key => $product){
-            if(in_array($product, Product::pluck('code')->toArray())){
-                if($request->amount[$key]&&$request->price[$key]){
-                    $invoice_item = new InvoiceItem();
-                    $invoice_item->invoice_id = $invoice->id;
-                    $invoice_item->product_id = Product::whereCode($product)->whereCompanyId(Auth::user()->company_id)->first()->id;
-                    $invoice_item->unit_id = $request->unit[$key];
-                    $invoice_item->amount = $request->amount[$key];
-                    $invoice_item->price = $request->price[$key];
-                    $invoice_item->discount = $request->discount[$key];
-                    $invoice_item->description = $request->description[$key];
-                    $invoice_item->save();
-                }
+        foreach ($request->description as $key => $description){
+            if($request->amount[$key]&&$request->price[$key]){
+                $invoice_item = new InvoiceItem();
+                $invoice_item->invoice_id = $invoice->id;
+                $invoice_item->unit_id = $request->unit[$key];
+                $invoice_item->amount = $request->amount[$key];
+                $invoice_item->price = $request->price[$key];
+                $invoice_item->discount = $request->discount[$key];
+                $invoice_item->description = $request->description[$key];
+                $invoice_item->save();
             }
         }
 
@@ -154,11 +149,10 @@ class InvoiceController extends Controller
         $items = InvoiceItem::where('invoice_id', $id)->get();
         $clients = Client::where('company_id', $company_id)->get();
         $remarks = Remark::where('company_id', $company_id)->get();
-        $products = Product::where('company_id', $company_id)->get();
         $units = Unit::where('company_id', $company_id)->get();
         $uri = url('invoice/'.$id);
 
-        return view('invoice/edit')->with(compact('invoice', 'companies', 'items', 'clients', 'remarks', 'products', 'units', 'uri'));
+        return view('invoice/edit')->with(compact('invoice', 'companies', 'items', 'clients', 'remarks', 'units', 'uri'));
 
         //$items = InvoiceItem::where('invoice_id',$id)->join('products', 'invoice_items.product_id', '=', 'products.id')->join('units', 'invoice_item.unit_id', '=', 'units.id')->get(['invoice_items.*', 'products.code', 'products.description','unit.name']);
 
@@ -203,19 +197,16 @@ class InvoiceController extends Controller
             $item->delete();
         }
 
-        foreach ($request->product as $key => $product){
-            if(in_array($product, Product::pluck('code')->toArray())){
-                if($request->amount[$key]&&$request->price[$key]){
-                    $invoice_item = new InvoiceItem();
-                    $invoice_item->invoice_id = $invoice->id;
-                    $invoice_item->product_id = Product::whereCode($product)->whereCompanyId(Auth::user()->company_id)->first()->id;
-                    $invoice_item->unit_id = $request->unit[$key];
-                    $invoice_item->amount = $request->amount[$key];
-                    $invoice_item->price = $request->price[$key];
-                    $invoice_item->discount = $request->discount[$key];
-                    $invoice_item->description = $request->description[$key];
-                    $invoice_item->save();
-                }
+        foreach ($request->description as $key => $description){
+            if($request->amount[$key]&&$request->price[$key]){
+                $invoice_item = new InvoiceItem();
+                $invoice_item->invoice_id = $invoice->id;
+                $invoice_item->unit_id = $request->unit[$key];
+                $invoice_item->amount = $request->amount[$key];
+                $invoice_item->price = $request->price[$key];
+                $invoice_item->discount = $request->discount[$key];
+                $invoice_item->description = $request->description[$key];
+                $invoice_item->save();
             }
         }
 
@@ -268,7 +259,6 @@ class InvoiceController extends Controller
             if($invoice->currency == 'EUR'){
                 $items['price'] = $item->total_price/$data['hnb_middle_exchange'];
             }
-            $items['product'] = $item->product;
             $items['unit'] = $item->unit;
             $items['discount'] = $item->discount;
             $items['description'] = $item->description;

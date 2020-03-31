@@ -6,17 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class OfferItem extends Model
 {
+    protected $table = 'offer_items';
+
     public function invoice()
     {
-        return $this->belongsTo('App\Offer');
+        return $this->belongsTo(Offer::class);
     }
-    public function product()
-    {
-        return $this->belongsTo('App\Product');
-    }
+
     public function unit()
     {
-        return $this->belongsTo('App\Unit');
+        return $this->belongsTo(Unit::class);
     }
 
     public function getTotalPriceAttribute()

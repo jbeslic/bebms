@@ -30,8 +30,8 @@
                             @endif
                             <td>{{ $memo->client->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($memo->created_at)->format('d.m.Y') }}</td>
-                            <td align="center"><a class="btn btn-success" href="{{ route('memo.pdf', ['id' => $memo->id]) }}">{{ __('Print') }}</a></td>
-                            <td><a class="btn btn-secondary" href="{{ route('memo.edit', ['id' => $memo->id]) }}">Uredi</a></td>
+                            <td align="center"><a class="btn btn-success" href="{{ route('memo.pdf', [$memo->id]) }}">{{ __('Print') }}</a></td>
+                            <td><a class="btn btn-secondary" href="{{ route('memo.edit', [$memo->id]) }}">Uredi</a></td>
                             <td>{!! Form::open(["route"=>["memo.destroy", $memo->id], "method" => "DELETE"]); !!}
                                 {!! Form::submit("Obriši ", array("class"=>"btn btn-danger")); !!}
                                 {!! Form::close(); !!}</td>

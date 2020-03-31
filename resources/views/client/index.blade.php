@@ -27,7 +27,7 @@
                             <td>{{ $client->zip_code }}</td>
                             <td>{{ $client->city }}</td>
                             <td>{{ $client->oib }}</td>
-                            <td><a class="btn btn-secondary" href="{{ route('client.edit', ['id' => $client->id]) }}">Uredi</a></td>
+                            <td><a class="btn btn-secondary" href="{{ route('client.edit', [$client->id]) }}">Uredi</a></td>
                             <td>
                                 {!! Form::open(["route"=>["client.destroy", $client->id], "method" => "DELETE"]); !!}
                                 {!! Form::submit("Obriši ", array("class"=>"btn btn-warning")); !!}

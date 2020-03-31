@@ -31,7 +31,7 @@
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-2">
-								<a class="btn btn-secondary" href="{{ route('company.edit', ['id' => $company->id]) }}">Uredi</a>
+								<a class="btn btn-secondary" href="{{ route('company.edit', [$company->id]) }}">Uredi</a>
 							</div>
 							<div class="form-group col-md-2">
 								{!! Form::open(["route"=>["company.destroy", $company->id], "method" => "DELETE"]); !!}

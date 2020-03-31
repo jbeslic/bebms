@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Invoice;
 use App\OfferItem;
 use App\Unit;
-use App\Product;
 use App\Remark;
 use Illuminate\Http\Request;
 use App\Offer;
@@ -58,9 +57,8 @@ class OfferController extends Controller
         $clients = Auth::user()->is_admin ? Client::all() : Client::where('company_id', Auth::user()->company_id)->get();
         $remarks = Auth::user()->is_admin ? Remark::all() : Remark::where('company_id', Auth::user()->company_id)->get();
         $units = Auth::user()->is_admin ? Unit::all() : Unit::where('company_id', Auth::user()->company_id)->get();
-        $products = Auth::user()->is_admin ? Product::all() : Product::where('company_id', Auth::user()->company_id)->get();
 
-        return view ('offer/create')->with(compact('clients', 'remarks', 'units', 'products', 'offer_number', 'datetime', 'city', 'payment_deadline', 'companies'));
+        return view ('offer/create')->with(compact('clients', 'remarks', 'units', 'offer_number', 'datetime', 'city', 'payment_deadline', 'companies'));
     }
 
     /**
@@ -105,19 +103,16 @@ class OfferController extends Controller
         }
         $offer->save();
 
-        foreach ($request->product as $key => $product){
-            if(in_array($product, Product::pluck('code')->toArray())){
-                if($request->amount[$key]&&$request->price[$key]){
-                    $offer_item = new OfferItem();
-                    $offer_item->offer_id = $offer->id;
-                    $offer_item->product_id = Product::whereCode($product)->whereCompanyId(Auth::user()->company_id)->first()->id;
-                    $offer_item->unit_id = $request->unit[$key];
-                    $offer_item->amount = $request->amount[$key];
-                    $offer_item->price = $request->price[$key];
-                    $offer_item->discount = $request->discount[$key];
-                    $offer_item->description = $request->description[$key];
-                    $offer_item->save();
-                }
+        foreach ($request->description as $key => $description){
+            if($request->amount[$key]&&$request->price[$key]){
+                $offer_item = new OfferItem();
+                $offer_item->offer_id = $offer->id;
+                $offer_item->unit_id = $request->unit[$key];
+                $offer_item->amount = $request->amount[$key];
+                $offer_item->price = $request->price[$key];
+                $offer_item->discount = $request->discount[$key];
+                $offer_item->description = $request->description[$key];
+                $offer_item->save();
             }
         }
 
@@ -154,11 +149,10 @@ class OfferController extends Controller
         $items = OfferItem::where('offer_id', $id)->get();
         $clients = Client::where('company_id', $company_id)->get();
         $remarks = Remark::where('company_id', $company_id)->get();
-        $products = Product::where('company_id', $company_id)->get();
         $units = Unit::where('company_id', $company_id)->get();
         $uri = url('offer/'.$id);
 
-        return view('offer/edit')->with(compact('offer', 'companies', 'items', 'clients', 'remarks', 'products', 'units', 'uri'));
+        return view('offer/edit')->with(compact('offer', 'companies', 'items', 'clients', 'remarks', 'units', 'uri'));
 
         //$items = OfferItem::where('offer_id',$id)->join('products', 'offer_items.product_id', '=', 'products.id')->join('units', 'offer_item.unit_id', '=', 'units.id')->get(['offer_items.*', 'products.code', 'products.description','unit.name']);
 
@@ -203,19 +197,16 @@ class OfferController extends Controller
             $item->delete();
         }
 
-        foreach ($request->product as $key => $product){
-            if(in_array($product, Product::pluck('code')->toArray())){
-                if($request->amount[$key]&&$request->price[$key]){
-                    $offer_item = new OfferItem();
-                    $offer_item->offer_id = $offer->id;
-                    $offer_item->product_id = Product::whereCode($product)->whereCompanyId(Auth::user()->company_id)->first()->id;
-                    $offer_item->unit_id = $request->unit[$key];
-                    $offer_item->amount = $request->amount[$key];
-                    $offer_item->price = $request->price[$key];
-                    $offer_item->discount = $request->discount[$key];
-                    $offer_item->description = $request->description[$key];
-                    $offer_item->save();
-                }
+        foreach ($request->description as $key => $description){
+            if($request->amount[$key]&&$request->price[$key]){
+                $offer_item = new OfferItem();
+                $offer_item->offer_id = $offer->id;
+                $offer_item->unit_id = $request->unit[$key];
+                $offer_item->amount = $request->amount[$key];
+                $offer_item->price = $request->price[$key];
+                $offer_item->discount = $request->discount[$key];
+                $offer_item->description = $request->description[$key];
+                $offer_item->save();
             }
         }
 

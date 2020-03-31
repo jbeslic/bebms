@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class InvoiceItem extends Model
 {
+
+    protected $table = 'invoice_items';
+
     protected $appends = [
         'total_price',
         'discount_price',
@@ -13,15 +16,12 @@ class InvoiceItem extends Model
 
     public function invoice()
     {
-        return $this->belongsTo('App\Invoice');
+        return $this->belongsTo(Offer::class);
     }
-    public function product()
-    {
-        return $this->belongsTo('App\Product');
-    }
+
     public function unit()
     {
-        return $this->belongsTo('App\Unit');
+        return $this->belongsTo(Unit::class);
     }
 
     public function getTotalPriceAttribute()

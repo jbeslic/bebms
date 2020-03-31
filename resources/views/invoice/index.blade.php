@@ -42,8 +42,8 @@
                                     NE
                                 @endif
                             </td>
-                            <td align="center"><a class="btn btn-success" href="{{ route('invoice.pdf', ['id' => $invoice->id]) }}">{{ __('Print') }}</a></td>
-                            <td><a class="btn btn-secondary" href="{{ route('invoice.edit', ['id' => $invoice->id]) }}">Uredi</a></td>
+                            <td align="center"><a class="btn btn-success" href="{{ route('invoice.pdf', [$invoice->id]) }}">{{ __('Print') }}</a></td>
+                            <td><a class="btn btn-secondary" href="{{ route('invoice.edit', [$invoice->id]) }}">Uredi</a></td>
                             <td>{!! Form::open(["route"=>["invoice.destroy", $invoice->id], "method" => "DELETE"]); !!}
                                 {!! Form::submit("Obriši ", array("class"=>"btn btn-danger")); !!}
                                 {!! Form::close(); !!}</td>

@@ -27,7 +27,7 @@
  						</div>
  						<div class="form-row">
  							<div class="form-group col-md-4 col-md-offset-8">
- 								<a class="btn btn-info" href="{{ route('company.edit', ['id' => $company->id]) }}">Uredi</a>
+ 								<a class="btn btn-info" href="{{ route('company.edit', [$company->id]) }}">Uredi</a>
  							</div>
  						</div>
                 	</div>

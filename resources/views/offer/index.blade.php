@@ -42,8 +42,8 @@
                                     NE
                                 @endif
                             </td>
-                            <td align="center"><a class="btn btn-success" href="{{ route('offer.pdf', ['id' => $offer->id]) }}">{{ __('Print') }}</a></td>
-                            <td><a class="btn btn-secondary" href="{{ route('offer.edit', ['id' => $offer->id]) }}">Uredi</a></td>
+                            <td align="center"><a class="btn btn-success" href="{{ route('offer.pdf', [$offer->id]) }}">{{ __('Print') }}</a></td>
+                            <td><a class="btn btn-secondary" href="{{ route('offer.edit', [$offer->id]) }}">Uredi</a></td>
                             <td>{!! Form::open(["route"=>["offer.destroy", $offer->id], "method" => "DELETE"]); !!}
                                 {!! Form::submit("Obriši ", array("class"=>"btn btn-danger")); !!}
                                 {!! Form::close(); !!}</td>
