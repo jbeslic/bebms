@@ -57,7 +57,7 @@ class InvoiceController extends Controller
         $remarks = Auth::user()->is_admin ? Remark::all() : Remark::where('company_id', Auth::user()->company_id)->get();
         $units = Auth::user()->is_admin ? Unit::all() : Unit::where('company_id', Auth::user()->company_id)->get();
 
-        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'invoice_number', 'datetime', 'city', 'payment_deadline', 'companies'));
+        return view ('invoice/create')->with(compact('clients', 'remarks', 'units', 'datetime', 'city', 'payment_deadline', 'companies'));
     }
 
     /**
