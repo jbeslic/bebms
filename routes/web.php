@@ -25,6 +25,9 @@ Route::group(['middleware'=>'auth'], function(){
 });
 
 Route::get('/', function () {
+
+    if(auth()->user()) return redirect(route('company.index'));
+
     return redirect('https://www.bedev.hr/');
 });
 
