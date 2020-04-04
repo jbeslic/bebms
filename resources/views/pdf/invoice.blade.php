@@ -202,7 +202,7 @@
         <table class="info">
             @if($data['currency'] == 'EUR')
             <tr>
-                <td>Tecaj HNB:</td>
+                <td>Tečaj HNB:</td>
                 <td>
                     {{ $data['hnb_middle_exchange'] }}
                 </td>
