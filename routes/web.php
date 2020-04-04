@@ -25,10 +25,8 @@ Route::group(['middleware'=>'auth'], function(){
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('https://www.bedev.hr/');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/pdf', 'HomeController@pdf')->name('pdf');
