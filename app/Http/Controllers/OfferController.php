@@ -52,13 +52,12 @@ class OfferController extends Controller
         $datetime = Carbon::now();
         $payment_deadline = Carbon::now()->addDays(10); //get hardcoded number of days from conf/settings
         $city = Company::where('id', Auth::user()->company_id)->pluck('city');
-        //$offer_number = Offer::whereYear('offer_date', date("Y"))->count()+1;
         $companies = Company::all();
         $clients = Auth::user()->is_admin ? Client::all() : Client::where('company_id', Auth::user()->company_id)->get();
         $remarks = Auth::user()->is_admin ? Remark::all() : Remark::where('company_id', Auth::user()->company_id)->get();
         $units = Auth::user()->is_admin ? Unit::all() : Unit::where('company_id', Auth::user()->company_id)->get();
 
-        return view ('offer/create')->with(compact('clients', 'remarks', 'units', 'offer_number', 'datetime', 'city', 'payment_deadline', 'companies'));
+        return view ('offer/create')->with(compact('clients', 'remarks', 'units', 'datetime', 'city', 'payment_deadline', 'companies'));
     }
 
     /**

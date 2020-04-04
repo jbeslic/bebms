@@ -51,7 +51,6 @@ class InvoiceController extends Controller
         $datetime = Carbon::now();
         $payment_deadline = Carbon::now()->addDays(10); //get hardcoded number of days from conf/settings
         $city = Company::where('id', Auth::user()->company_id)->pluck('city');
-        //$invoice_number = Invoice::whereYear('invoice_date', date("Y"))->count()+1;
         $companies = Company::all();
         $clients = Auth::user()->is_admin ? Client::all() : Client::where('company_id', Auth::user()->company_id)->get();
         $remarks = Auth::user()->is_admin ? Remark::all() : Remark::where('company_id', Auth::user()->company_id)->get();
