@@ -28,6 +28,7 @@ class TaxController extends Controller
     {
 
         $data = array();
+        $data['year'] = $year;
         $data['company'] = Company::find(Auth::user()->company_id);
 
         $data['invoice'][1] = Invoice::whereCompanyId(Auth::user()->company_id)->whereBetween('paid', [Carbon::create($year, 1, 0), Carbon::create($year, 3, 31)])->get()->sum('total_price');

@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <td style="padding: 0 150px; text-align: center; font-weight: bold;">
-                IZVJEŠĆE O PAUŠALNOM DOHOTKU OD SAMOSTALNE DJELATNOSTI I UPLAĆENOM PAUŠALNOM POREZU NA DOHODAK I PRIREZU POREZA NA DOHODAK U 2018. GODINI
+                IZVJEŠĆE O PAUŠALNOM DOHOTKU OD SAMOSTALNE DJELATNOSTI I UPLAĆENOM PAUŠALNOM POREZU NA DOHODAK I PRIREZU POREZA NA DOHODAK U {{ $data['year'] }}. GODINI
             </td>
         </tr>
     </table>
