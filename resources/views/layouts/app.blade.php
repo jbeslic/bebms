@@ -61,6 +61,7 @@
                                     <a class="dropdown-item" href="{{ route('invoice.index') }}">Računi</a>
                                     <a class="dropdown-item" href="{{ route('offer.index') }}">Ponude</a>
 									<a class="dropdown-item" href="{{ route('memo.index') }}">Dopisi</a>
+									<a class="dropdown-item" href="{{ route('expense.index') }}">Troškovi</a>
                                     <a class="dropdown-item" href="{{ route('tax.index') }}">Porezi</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
