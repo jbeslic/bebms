@@ -15,11 +15,13 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('associates', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('company_id');
             $table->string('name');
             $table->timestamps();
         });
         Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('company_id');
             $table->string('name');
             $table->timestamps();
         });
