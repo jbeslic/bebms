@@ -22,6 +22,7 @@
                             <div class="form-group col-md-6">
                                 {{ Form::label('associate', 'Suradnik:') }}
                                 <select name="associate_id" class="form-control">
+                                    <option value="">--</option>
                                     @foreach ($associates as $associate)
                                         <option value="{{ $associate->id }}">{{ $associate->name }} [{{ $associate->company->name }}]</option>
                                     @endforeach
@@ -36,6 +37,7 @@
                                 <select name="currency" class="form-control">
                                     <option value="HRK">HRK</option>
                                     <option value="EUR">EURO</option>
+                                    <option value="USD">USD</option>
                                 </select>
                             </div>
                         </div>

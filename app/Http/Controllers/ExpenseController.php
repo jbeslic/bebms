@@ -96,9 +96,9 @@ class ExpenseController extends Controller
 
 
 
-        if($request->currency == 'EUR'){
+        if($request->currency != 'HRK'){
             $client = new \GuzzleHttp\Client();
-            $req = $client->get('http://api.hnb.hr/tecajn/v1?valuta=EUR');
+            $req = $client->get('http://api.hnb.hr/tecajn/v1?valuta='.$request->currency);
             $response = $req->getBody();
             $data = json_decode($response, true);
 

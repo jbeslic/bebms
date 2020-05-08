@@ -43,7 +43,7 @@ class Expense extends Model
     public function getTotalHrkPriceAttribute()
     {
         $exchange_rate = 1;
-        if($this->currency == 'EUR'){
+        if($this->currency != 'HRK'){
             $exchange_rate = $this->hnb_middle_exchange;
         }
         return $this->total_price*$exchange_rate;
