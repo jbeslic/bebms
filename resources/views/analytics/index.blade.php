@@ -11,9 +11,6 @@
     </div>
 </div>
 <script>
-    var labels = JSON.parse({!! $labels !!});
-    var income = JSON.parse({!! $invoices !!});
-    var expense = JSON.parse({!! $expenses !!});
 
     var ctx = document.getElementById('analytics-1').getContext('2d');
     var myChart = new Chart(ctx, {

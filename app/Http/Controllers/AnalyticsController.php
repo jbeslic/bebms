@@ -64,18 +64,18 @@ class AnalyticsController extends Controller
 
             $expenses[$m] = $expenses[$m] + $taxes[$m];
         }
-
-        $expenses = collect($expenses)->toJson();
-        $invoices = collect($invoices)->toJson();
-        $labels = collect($labels)->toJson();
+        ksort($expenses);
+        ksort($invoices);
+        ksort($labels);
+        $expenses = collect(array_values ($expenses))->toJson();
+        $invoices = collect(array_values ($invoices))->toJson();
+        $labels = collect(array_values ($labels))->toJson();
 
         $data = compact(
             'labels',
             'expenses',
             'invoices'
         );
-
-        dd($data);
 
         return view('analytics.index', $data);
     }
