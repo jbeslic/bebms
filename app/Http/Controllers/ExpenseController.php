@@ -43,7 +43,7 @@ class ExpenseController extends Controller
         if(!Auth::user()->is_admin){
             $query = $query->where('projects.company_id', Auth::user()->company_id);
         }
-        $expenses = $query->get();
+        $expenses = $query->orderBy('expenses.expense_date')->get();
 
         return view('expense.index')->with('expenses', $expenses);
     }
