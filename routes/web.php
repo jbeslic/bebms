@@ -23,6 +23,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/offer/{id}/pdf', 'OfferController@createPdf')->name('offer.pdf');
     Route::get('/offer/{id}/invoice', 'OfferController@createInvoice')->name('offer.invoice');
     Route::get('/po-sd/{year}/pdf', 'TaxController@posd')->name('tax.pdf');
+    Route::get('analytics', 'AnalyticsController@index')->name('analytics.index');
 });
 
 Route::get('/', function () {
