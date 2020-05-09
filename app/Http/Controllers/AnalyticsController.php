@@ -34,7 +34,9 @@ class AnalyticsController extends Controller
             ->groupBy('invoice_month')
             ->transform(function ($invoices) {
                 return $invoices->sum('total_hrk_price');
-            })->toArray();
+            });
+        $invoiceSum = $invoices->sum();
+            $invoices = $invoices->toArray();
 
         $taxes = Tax::select('*', DB::raw('MONTH(paid_date) as paid_month'));
         if (Auth::user()->is_admin) {
@@ -48,7 +50,9 @@ class AnalyticsController extends Controller
             ->groupBy('paid_month')
             ->transform(function ($taxes) {
                 return $taxes->sum('amount');
-            })->toArray();
+            });
+        $taxSum = $taxes->sum();
+        $taxes = $taxes->toArray();
 
 
         $expenses = Expense::select('expenses.*', DB::raw('MONTH(expenses.expense_date) as expense_month'))
@@ -64,7 +68,9 @@ class AnalyticsController extends Controller
             ->groupBy('expense_month')
             ->transform(function ($expenses) {
                 return $expenses->sum('total_hrk_price');
-            })->toArray();
+            });
+        $expenseSum = $expenses->sum() + $taxSum;
+        $expenses = $expenses->toArray();
 
         for ($m = 1; $m <= 12; ++$m) {
             $labels[] = date('F', mktime(0, 0, 0, $m, 1));
@@ -90,7 +96,9 @@ class AnalyticsController extends Controller
         $data = compact(
             'labels',
             'expenses',
-            'invoices'
+            'invoices',
+            'expenseSum',
+            'invoiceSum'
         );
 
         return view('analytics.index', $data);

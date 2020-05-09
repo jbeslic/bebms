@@ -6,6 +6,9 @@
         <div class="col-md-12">
             <div class="card">
                 <canvas id="analytics-1"></canvas>
+                <div>
+                    Total profit: {{ $invoiceSum }} - {{ $expenseSum }} = {{ $invoiceSum - $expenseSum }}
+                </div>
             </div>
         </div>
     </div>
