@@ -6,6 +6,7 @@ use App\Company;
 use App\Expense;
 use App\Invoice;
 use App\Tax;
+use App\Unit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class AnalyticsController extends Controller
                 return $invoices->sum('total_hrk_price');
             });
         $invoiceSum = $invoices->sum();
-            $invoices = $invoices->toArray();
+        $invoices = $invoices->toArray();
 
         $taxes = Tax::select('*', DB::raw('MONTH(paid_date) as paid_month'));
         if (Auth::user()->is_admin) {
@@ -44,8 +45,7 @@ class AnalyticsController extends Controller
         } else {
             $taxes->where('company_id', Auth::user()->company_id);
         }
-        $taxes = $taxes->where('company_id', Auth::user()->company_id)
-            ->whereYear('paid_date', $year)
+        $taxes = $taxes->whereYear('paid_date', $year)
             ->get()
             ->groupBy('paid_month')
             ->transform(function ($taxes) {
@@ -59,18 +59,48 @@ class AnalyticsController extends Controller
             ->leftJoin('projects', 'projects.id', '=', 'expenses.project_id')
             ->whereYear('expenses.expense_date', $year);
         if (Auth::user()->is_admin) {
-            $expenses->whereIn('company_id', [Company::BEDEV, Company::NIMU]);
+            $expenses->whereIn('projects.company_id', [Company::BEDEV, Company::NIMU]);
         } else {
-            $expenses->where('company_id', Auth::user()->company_id);
+            $expenses->where('projects.company_id', Auth::user()->company_id);
         }
-        $expenses = $expenses->where('projects.company_id', Auth::user()->company_id)
-            ->get()
+        $expenses = $expenses->get()
             ->groupBy('expense_month')
             ->transform(function ($expenses) {
                 return $expenses->sum('total_hrk_price');
             });
         $expenseSum = $expenses->sum() + $taxSum;
         $expenses = $expenses->toArray();
+
+
+        $hours = Expense::select(
+            'associates.name as associate_name',
+            DB::raw('SUM(expenses.amount) as sum'),
+            DB::raw('MONTH(expenses.expense_date) as expense_month')
+        )
+            ->leftJoin('associates', 'associates.id', '=', 'expenses.associate_id')
+            ->leftJoin('projects', 'projects.id', '=', 'expenses.project_id')
+            ->whereYear('expenses.expense_date', $year)
+            ->where('projects.company_id', Auth::user()->company_id)
+            ->where('expenses.unit_id', Unit::HOUR)
+            ->whereNotNull('expenses.associate_id')
+            ->groupBy(['expense_month', 'associate_name'])
+            ->get()
+            ->groupBy('associate_name')
+            ->transform(function ($associate) {
+                $return =  $associate
+                    ->keyBy('expense_month')
+                    ->transform(function ($item) {
+                        return $item->sum;
+                    })
+                    ->toArray();
+                for ($m = 1; $m <= 12; ++$m) {
+                    if (!isset($return[$m])) {
+                        $return[$m] = 0;
+                    }
+                }
+                ksort($return);
+                return array_values($return);
+            })->toJson();
 
         for ($m = 1; $m <= 12; ++$m) {
             $labels[] = date('F', mktime(0, 0, 0, $m, 1));
@@ -98,7 +128,8 @@ class AnalyticsController extends Controller
             'expenses',
             'invoices',
             'expenseSum',
-            'invoiceSum'
+            'invoiceSum',
+            'hours'
         );
 
         return view('analytics.index', $data);

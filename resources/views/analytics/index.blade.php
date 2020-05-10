@@ -12,6 +12,13 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <canvas id="analytics-2"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
 
@@ -34,6 +41,41 @@
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var hours = {!! $hours !!};
+    var datasets = [];
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+    }
+    Object.keys(hours).forEach(function(key) {
+        console.log(key, hours[key]);
+        var dataset = {
+            label: key,
+            data: hours[key],
+            backgroundColor: random_rgba(),
+            borderColor: random_rgba(),
+            borderWidth: 1
+        }
+        datasets.push(dataset);
+    });
+    var ctx2 = document.getElementById('analytics-2').getContext('2d');
+    var myChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: {!! $labels !!},
+            datasets: datasets
         },
         options: {
             scales: {
