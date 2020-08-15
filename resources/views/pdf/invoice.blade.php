@@ -278,7 +278,7 @@
     <p style="position:fixed; bottom:15px; color: gray;  font-size: 10px; vertical-align:bottom; border-top: 1px solid grey; text-align: center;">
         {{ $data['company']->name }}, @if($data['company']->type == 'FO') vl.{{ $data['company']->owner }},@endif {{ $data['company']->address }}, {{ $data['company']->zip_code }} {{ $data['company']->city }},OIB {{ $data['company']->oib }} @if($data['company']->type == 'PO'),  {{ $data['company']->commercial_court }}@endif<br />
         Žiro račun IBAN {{ $data['company']->iban }} otvoren u {{ $data['company']->bank_info }}
-        Temeljni kapital u iznosu od {{ $data['company']->share_capital }} kn uplaćen u cijelosti @if($data['company']->type == 'PO')Članovi uprave: {{ $data['company']->owner }}, direktor@endif
+        Temeljni kapital u iznosu od {{ $data['company']->share_capital }} kn uplaćen u cijelosti @if($data['company']->type == 'PO')Članovi uprave: {{ $data['company']->owner }}, direktor @endif
     </p>
 
 </body>
