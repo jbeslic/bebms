@@ -131,7 +131,7 @@
                     JM <br/>
                     (UM)
                 </td>
-                <td>
+                <td width="20px">
                     Količina<br/>
                     (Quantity)
                 </td>
