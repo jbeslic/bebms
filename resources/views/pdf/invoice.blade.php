@@ -176,7 +176,7 @@
                     {{ $item['discount'] }}%
                 </td>
                 <td style="text-align: right;">
-                    {{ number_format(($item['total_price'], 2, ',', '.') }} {{ $data['currency'] }}
+                    {{ number_format($item['total_price'], 2, ',', '.') }} {{ $data['currency'] }}
                     @if($data['currency'] == 'EUR')
                         <br/>{{ number_format((float) $item['total_price'] * (float) $data['hnb_middle_exchange'], 2, ',', '.') }} HRK
                     @endif
