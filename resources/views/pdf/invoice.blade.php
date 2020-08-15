@@ -139,7 +139,7 @@
                     Cijena<br/>
                     (Price)
                 </td>
-                <td>
+                <td width="30px">
                     Popust<br/>
                     (Discount)
                 </td>
