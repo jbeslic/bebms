@@ -120,7 +120,7 @@
 
         <table>
             <tr class="heading">
-                <td>
+                <td width="5%">
                     #
                 </td>
                 <td width="30%">
@@ -131,7 +131,7 @@
                     JM <br/>
                     (UM)
                 </td>
-                <td width="20px">
+                <td width="5%">
                     Količina<br/>
                     (Quantity)
                 </td>
@@ -139,7 +139,7 @@
                     Cijena<br/>
                     (Price)
                 </td>
-                <td width="30px">
+                <td width="5%">
                     Popust<br/>
                     (Discount)
                 </td>
