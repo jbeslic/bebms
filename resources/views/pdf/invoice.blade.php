@@ -196,7 +196,7 @@
                 <td colspan="2" style="text-align: right;">
                     {{ number_format($data['discount_price'], 2, ',', '.') }} {{ $data['currency'] }}
                     @if($data['currency'] == 'EUR')
-                        <br/>{{ number_format((float) $item['discount_price'] * (float) $data['hnb_middle_exchange'], 2, ',', '.') }} HRK
+                        <br/>{{ number_format((float) $data['discount_price'] * (float) $data['hnb_middle_exchange'], 2, ',', '.') }} HRK
                     @endif
                 </td>
             </tr>
@@ -211,7 +211,7 @@
                 <td colspan="2" style="text-align: right;">
                     {{ number_format($data['total_price'], 2, ',', '.') }} {{ $data['currency'] }}
                     @if($data['currency'] == 'EUR')
-                        <br/>{{ number_format((float) $item['total_price'] * (float) $data['hnb_middle_exchange'], 2, ',', '.') }} HRK
+                        <br/>{{ number_format((float) $data['total_price'] * (float) $data['hnb_middle_exchange'], 2, ',', '.') }} HRK
                     @endif
                 </td>
             </tr>
@@ -278,7 +278,7 @@
     <p style="position:fixed; bottom:15px; color: gray;  font-size: 10px; vertical-align:bottom; border-top: 1px solid grey; text-align: center;">
         {{ $data['company']->name }}, @if($data['company']->type == 'FO') vl.{{ $data['company']->owner }},@endif {{ $data['company']->address }}, {{ $data['company']->zip_code }} {{ $data['company']->city }},OIB {{ $data['company']->oib }} @if($data['company']->type == 'PO'),  {{ $data['company']->commercial_court }}@endif<br />
         Žiro račun IBAN {{ $data['company']->iban }} otvoren u {{ $data['company']->bank_info }}
-        Temeljni kapital u iznosu od {{ $data['company']->share_capital }} kn uplaćen u cijelosti @if($data['company']->type == 'PO')Članovi uprave: {{ $data['company']->owner }}, direktor @endif
+        @if($data['company']->type == 'PO')Temeljni kapital u iznosu od {{ $data['company']->share_capital }} kn uplaćen u cijelosti, Članovi uprave: {{ $data['company']->owner }}, direktor @endif
     </p>
 
 </body>
