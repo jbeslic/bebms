@@ -31,10 +31,10 @@ class TaxController extends Controller
         $data['year'] = $year;
         $data['company'] = Company::find(Auth::user()->company_id);
 
-        $data['invoice'][1] = Invoice::whereCompanyId(Auth::user()->company_id)->whereBetween('paid', [Carbon::create($year, 1, 0), Carbon::create($year, 3, 31)])->get()->sum('total_price');
-        $data['invoice'][2] = Invoice::whereCompanyId(Auth::user()->company_id)->whereBetween('paid', [Carbon::create($year, 4, 0), Carbon::create($year, 6, 30)])->get()->sum('total_price');
-        $data['invoice'][3] = Invoice::whereCompanyId(Auth::user()->company_id)->whereBetween('paid', [Carbon::create($year, 7, 0), Carbon::create($year, 9, 30)])->get()->sum('total_price');
-        $data['invoice'][4] = Invoice::whereCompanyId(Auth::user()->company_id)->whereBetween('paid', [Carbon::create($year, 10, 0), Carbon::create($year, 12, 31)])->get()->sum('total_price');
+        $data['invoice'][1] = Invoice::whereCompanyId(Auth::user()->company_id)->whereBetween('paid', [Carbon::create($year, 1, 0), Carbon::create($year, 3, 31)])->get()->sum('total_hrk_price');
+        $data['invoice'][2] = Invoice::whereCompanyId(Auth::user()->company_id)->whereBetween('paid', [Carbon::create($year, 4, 0), Carbon::create($year, 6, 30)])->get()->sum('total_hrk_price');
+        $data['invoice'][3] = Invoice::whereCompanyId(Auth::user()->company_id)->whereBetween('paid', [Carbon::create($year, 7, 0), Carbon::create($year, 9, 30)])->get()->sum('total_hrk_price');
+        $data['invoice'][4] = Invoice::whereCompanyId(Auth::user()->company_id)->whereBetween('paid', [Carbon::create($year, 10, 0), Carbon::create($year, 12, 31)])->get()->sum('total_hrk_price');
 
         $data['invoice']['sum'] = collect($data['invoice'])->sum();
 
