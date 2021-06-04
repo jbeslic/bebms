@@ -154,7 +154,6 @@
                     {{ $key+1 }}
                 </td>
                 <td width="30%">
-                    {{ $item['product']->description }}
                     {!! $item['description'] !!}
                 </td>
                 <td>
