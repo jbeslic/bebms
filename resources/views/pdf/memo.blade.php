@@ -64,7 +64,9 @@
     <table cellpadding="0" cellspacing="0">
         <tr class="top">
             <td class="title text" style="width: 460px;" colspan="4">
-                <img src="{{ asset('storage/'.$data['company']->logo_path) }}" style="width: 150px;">
+                @if(!is_null($data['company']->logo_path))
+                    <img src="{{ asset('storage/'.$data['company']->logo_path) }}" style="width: 150px;">
+                @endif
             </td>
             <td class="text" colspan="3">
                 <strong>{{ $data['company']->name }}</strong> <br/>
